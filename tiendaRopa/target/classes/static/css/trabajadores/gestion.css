@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+body>*{
+    font-family: 'Poppins', sans-serif;
+}
+
+main{
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ min-height: calc(100vh - 57px);
+}
+
+/* Filtros */
+main div:first-of-type div:first-of-type{
+    margin: 20px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+main div:first-of-type div:first-of-type select{
+    width: 15%;
+
+    font-family: Poppins;
+    background-color: #6161DB;
+    color: #fff;
+    padding: 8px 15px;
+
+    border-radius: 10px;
+    border: 0;
+}
+main div:first-of-type div:first-of-type input{
+    width: 35%;
+    background-color: #27272c34;
+    font-weight: bold;
+    color: black;
+    padding: 8px 15px;
+
+    border-radius: 3px 10px 3px 3px;
+    border: 0;
+}
+main div:first-of-type div:first-of-type button{
+    font-family: Poppins;
+    
+    background-color: #6161DB;
+    color: white;
+    padding: 8px 24px;
+
+    border: 2px solid #6161DB;
+    border-radius: 15px;
+}
+main div:first-of-type div:first-of-type button:hover{
+    background-color: #27272c;
+    color: white;
+}
+
+table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-collapse: collapse;
+}
+table tr th{
+    padding: 10px 20px;
+    background-color: #27272c;  
+    color: #ffffff;
+}
+table tr:nth-of-type(2n + 1){
+    background-color: #c8c8c8;
+}
+table tr th:first-of-type{
+    border-radius: 10px 0px 0 0;
+}
+table tr th:last-of-type{
+    border-radius: 0 10px 0 0;
+}
+table td{
+	padding: 15px 10px;
+    text-align: center;
+}
+table td a{
+    cursor: pointer;
+}
+table td a img{
+    cursor: pointer;
+}
+
+main div:last-of-type{
+    margin: 20px 0;
+}
+
+main div:last-of-type{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+main div:last-of-type a{
+    background-color: #6161DB;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+main div:last-of-type a:hover{
+    background-color: #27272c;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+a{
+	text-decoration: none;
+}

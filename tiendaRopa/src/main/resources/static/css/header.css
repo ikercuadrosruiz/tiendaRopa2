@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* Header ---------------------------------------*/
+header {
+    font-family: 'Poppins', sans-serif;
+}
+header nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header nav ul{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+}
+header nav ul li{
+    cursor: pointer;
+}
+
+header nav p{
+    text-align: center;
+    width: 40%;
+}
+header nav > div{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    list-style: none;
+}
+header nav div div img{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+header nav div #btnLogin{
+    display: flex;
+}
+header nav div div{
+    padding: 0 20px;
+}

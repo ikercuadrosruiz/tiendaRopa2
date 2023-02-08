@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Dentro de <html>: xmlns:th="http://www.thymeleaf.org" --> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/trabajadores/gestion.css">
+    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
+
+    <title>Gestión Categorias</title>
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <ul>
+                <li>Inicio</li>
+                <li>Productos</li>
+                <li>Mis Pedidos</li>
+            </ul>
+
+            <p><b>Frutti di Vestitti</b></p>
+
+            <div>
+                <div id="btnLogin">
+                    <img src="../../../images/header/user.png" alt="Imagen login">
+                    <p></p>
+                </div>
+
+                <div id="favoritos">
+                    <img src="../../../images/header/guardados.png" alt="Imagen guardados">
+                </div>
+
+                <div id="carrito">
+                    <img src="../../../images/header/carrito.png" alt="Imagen carrito">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
+
+    <main>
+        <h2 id="NoCat">No hay Categorias</h2> <!-- Dentro de <h2>: 'th:if="${listaCategoriasDTO.isEmpty()}"'  -->
+
+        <div id="contenido"> <!-- Dentro de <div>: 'th:if="${!listaCategoriasDTO.isEmpty()}"'  -->
+            <h2>Gestión de Categorias</h2>
+
+            <div id="filtrosCategorias">
+                <select name="opcionesCategorias" id="opcionesCategorias">
+                    <option value=""  selected hidden disabled>Atributos de las categorias</option>
+                    <!-- Seria poner la busqueda por campos de las categorias-->
+                </select>
+
+                <input id="txtBusqueda"  type="text" placeholder="Buscar..." />
+
+                <button id="btnBusqueda">Buscar</button>
+            </div>
+            <table id="tabla">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr> <!-- Dentro de <tr>: 'th:each="CategoriasDTO : ${listaCategoriasDTO}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${categoriaDTO.id}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${categoriaDTO.nombre}"'  -->
+                    <td>
+                        <a><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
+                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/editar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                    </td>
+                    <td>
+                        <a><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
+                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/eliminar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--Enlaces para volver atrás-->
+        <div id="botones1">
+            <a th:href="@{/tiendaRopa}">Volver al inicio</a>
+
+            <a th:href="@{/tiendaRopa/Categorias/Add}">Alta Categoría</a>
+        </div>
+      
+    </main>
+
+    <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
+    <hr>
+
+    <footer>
+        <p>2ºDAW</p>
+    </footer>
+
+    <script src="js/sweetAlert/sweetalert2.all.min.js"></script>
+</body>
+
+</html>
