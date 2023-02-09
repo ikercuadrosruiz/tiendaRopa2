@@ -8,4 +8,8 @@ public interface PedidoService {
 
 	List<PedidoDTO> findAllByUsuario(Long idUsuario);
 
+	List<PedidoDTO> findAll();
+
+	void deleteById(Long idPedido);
+
 }

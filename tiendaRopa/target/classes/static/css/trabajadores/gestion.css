@@ -63,11 +63,14 @@ table{
 }
 table tr th{
     padding: 10px 20px;
-    background-color: #27272c;  
+    background-color: #27272c;
     color: #ffffff;
 }
 table tr:nth-of-type(2n + 1){
     background-color: #c8c8c8;
+}
+table tr:first-of-type{
+	background-color: #fff;
 }
 table tr th:first-of-type{
     border-radius: 10px 0px 0 0;

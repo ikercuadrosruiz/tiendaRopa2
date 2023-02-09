@@ -26,6 +26,20 @@ public class PedidoController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@GetMapping("/trabajadores/pedidos")
+	public ModelAndView findAll(){
+		
+		log.info("PedidoController - FindAllByCliente: Encontramos todos los pedidos");
+		
+		List<PedidoDTO> listaPedidosDTO = pedidoService.findAll();
+		
+		ModelAndView mav = new ModelAndView("trabajadores/gestion/gestionPedidos");
+		mav.addObject("listaPedidosDTO", listaPedidosDTO);
+		mav.addObject("fromUsuarios", false);
+		return mav;
+		
+	}
+	
 	@GetMapping("/trabajadores/usuarios/{idUsuario}/pedidos")
 	public ModelAndView findAllByCliente(@PathVariable Long idUsuario) {
 		
@@ -38,6 +52,17 @@ public class PedidoController {
 		mav.addObject("listaPedidosDTO", listaPedidosDTO);
 		mav.addObject("usuarioDTO", usuarioDTO);
 		mav.addObject("fromUsuarios", true); // Indica al html que viene de la previa pagina de usuarios
+		return mav;
+	}
+	
+	@GetMapping("/trabajadores/pedidos/delete/{idPedido}")
+	public ModelAndView delete(@PathVariable Long idPedido) {
+		
+		log.info("PedidoController - delete: Borramos el pedido del usuario " + idPedido);
+		
+		pedidoService.deleteById(idPedido);
+		
+		ModelAndView mav = new ModelAndView("redirect:/trabajadores/pedidos");
 		return mav;
 		
 	}

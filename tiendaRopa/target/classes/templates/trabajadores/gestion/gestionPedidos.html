@@ -82,10 +82,10 @@
                     <td th:text=${pedidoDTO.usuarioDTO.nombre}>Diego</td>
                     <td th:text=${pedidoDTO.estado}>En curso</td>
                     <td>
-                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/pedidos/{idPedido}/update (idUsuario=${pedidoDTO.usuarioDTO.id}, idPedido=${pedidoDTO.id})}"><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
+                        <a th:href="@{/trabajadores/pedidos/{idPedido}/update (idPedido=${pedidoDTO.id})}"><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
                     </td>
                     <td>
-                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/pedidos/delete/{idPedido} (idUsuario=${pedidoDTO.usuarioDTO.id}, idPedido=${pedidoDTO.id})}"><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
+                        <a th:href="@{/trabajadores/pedidos/delete/{idPedido} (idPedido=${pedidoDTO.id})}"><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
                     </td>
                 </tr>
             </table>
