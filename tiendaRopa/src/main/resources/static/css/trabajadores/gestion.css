@@ -11,14 +11,14 @@ main{
 }
 
 /* Filtros */
-main div:first-of-type div:first-of-type{
+main div:first-of-type form{
     margin: 20px 0;
 
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
-main div:first-of-type div:first-of-type select{
+main div:first-of-type form select{
     width: 15%;
 
     font-family: Poppins;
@@ -29,7 +29,7 @@ main div:first-of-type div:first-of-type select{
     border-radius: 10px;
     border: 0;
 }
-main div:first-of-type div:first-of-type input{
+main div:first-of-type form input{
     width: 35%;
     background-color: #27272c34;
     font-weight: bold;
@@ -39,7 +39,7 @@ main div:first-of-type div:first-of-type input{
     border-radius: 3px 10px 3px 3px;
     border: 0;
 }
-main div:first-of-type div:first-of-type button{
+main div:first-of-type form button{
     font-family: Poppins;
     
     background-color: #6161DB;
@@ -49,7 +49,7 @@ main div:first-of-type div:first-of-type button{
     border: 2px solid #6161DB;
     border-radius: 15px;
 }
-main div:first-of-type div:first-of-type button:hover{
+main div:first-of-type form button:hover{
     background-color: #27272c;
     color: white;
 }

@@ -1,0 +1,42 @@
+footer {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: #27272c;
+}
+
+footer img:first-of-type{
+    border-radius: 15px;
+}
+
+
+footer div {
+    height: 40%;
+    width: 25%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: #f8f6ee;
+    border-radius: 5px;
+}
+
+#div1fot {
+    position: relative;
+    right: 50px;
+}
+
+#div2fot {
+    position: relative;
+    padding-top: 0.4%;
+    padding-bottom: 0.4%;
+}
+
+footer div article a {
+    margin: 15px;
+}

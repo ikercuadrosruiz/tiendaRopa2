@@ -36,6 +36,17 @@ public class UsuarioController {
 		return mav;
 	}
 	
+	@GetMapping("/trabajadores/usuarios/delete/{idUsuario}")
+	public ModelAndView delete(@PathVariable Long idUsuario){
+		 
+		log.info("UsuarioController - delete: Borramos el usuario " + idUsuario);
+		
+		usuarioService.deleteById(idUsuario);
+		
+		ModelAndView mav = new ModelAndView("redirect:/trabajadores/usuarios");
+		return mav;
+		
+	}
 	
 	@GetMapping("/trabajadores/usuarios/{idUsuario}/update")
 	public ModelAndView update(@PathVariable Long idUsuario) {

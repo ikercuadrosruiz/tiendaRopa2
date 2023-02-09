@@ -1,7 +1,6 @@
-/*
 package com.example.demo.repository.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -51,7 +50,6 @@ public class Pedido {
 	@JoinColumn(name = "idcliente")
 	@ToString.Exclude
 	private Usuario usuario;
-	*/
 	
 	/*
 	@OneToMany(
@@ -61,7 +59,7 @@ public class Pedido {
 	@ToString.Exclude
 	private Set<PedidoProducto> listaPedidoProducto;
 	*/
-	/*
+	
 	// Equals ---------------------------------------
 	@Override
 	public boolean equals(Object obj) {
@@ -81,4 +79,3 @@ public class Pedido {
 	}
 	
 }
-*/

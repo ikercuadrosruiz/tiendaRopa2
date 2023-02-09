@@ -19,7 +19,7 @@
         <nav>
 
             <ul>
-                <li>Inicio</li>
+                <li><a th:href="@{/}">Inicio</a></li>
                 <li>Productos</li>
                 <li>Mis Pedidos</li>
             </ul>
@@ -50,20 +50,25 @@
         <div th:if="${!listaUsuariosDTO.isEmpty()}">
             <h2>Gestión de Clientes</h2>
 
-            <div>
+            <form>
                 <select name="opcionesClientes">
                     <option value="" selected hidden disabled>Atributos del cliente</option>
-                    <!-- Seria poner la busqueda por campos del cliente-->
+                    <option value="id">Id</option>
+                    <option value="nif">NIF</option>
+                    <option value="nombre">Nombre</option>
+                    <option value="apellido1">Apellido</option>
+                    <option value="correo">Correo</option>
                 </select>
 
                 <input type="text" placeholder="Buscar..." />
 
                 <button>Buscar</button>
-            </div>
+            </form>
 
             <table>
                 <tr>
                     <th>ID</th>
+                    <th>Nif</th>
                     <th>Nombre</th>
                     <th>Primer apellido</th>
                     <th>Correo</th>
@@ -73,6 +78,7 @@
                 </tr>
                 <tr th:each = "usuarioDTO : ${listaUsuariosDTO}">
                     <td th:text=${usuarioDTO.id}>1</td>
+                    <td th:text=${usuarioDTO.nif}>46075461K</td>
                     <td th:text=${usuarioDTO.nombre}>David</td>
                     <td th:text=${usuarioDTO.apellido1}>Martinez</td>
                     <td th:text=${usuarioDTO.correo}>David@iescamp.es</td>
@@ -83,7 +89,7 @@
                         <a th:href="@{/trabajadores/usuarios/{idUsuario}/update (idUsuario=${usuarioDTO.id})}"><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
                     </td>
                     <td>
-                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/delete (idUsuario=${usuarioDTO.id})}"><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
+                        <a th:href="@{/trabajadores/usuarios/delete/{idUsuario} (idUsuario=${usuarioDTO.id})}"><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
                     </td>
                 </tr>
             </table>

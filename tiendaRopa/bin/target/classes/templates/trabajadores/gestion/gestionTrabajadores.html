@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Dentro de <html>: xmlns:th="http://www.thymeleaf.org" -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/trabajadores/gestion.css">
+    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
+
+    <title>Gestión Trabajadores</title>
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <ul>
+                <li>Inicio</li>
+                <li>Productos</li>
+                <li>Mis Pedidos</li>
+            </ul>
+
+            <p><b>Frutti di Vestitti</b></p>
+
+            <div>
+                <div id="btnLogin">
+                    <img src="../../../images/header/user.png" alt="Imagen login">
+                    <p></p>
+                </div>
+
+                <div id="favoritos">
+                    <img src="../../../images/header/guardados.png" alt="Imagen guardados">
+                </div>
+
+                <div id="carrito">
+                    <img src="../../../images/header/carrito.png" alt="Imagen carrito">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
+
+    <main>
+        <h2 id="NoCat">No hay Trabajadores</h2> <!-- Dentro de <h2>: 'th:if="${listaTrabajadoresDTO.isEmpty()}"'  -->
+
+        <div id="contenido"> <!-- Dentro de <div>: 'th:if="${!listaTrabajadoresDTO.isEmpty()}"'  -->
+            <h2>Gestión de Trabajadores</h2>
+
+            <div id="filtrosTrabajadores">
+                <select name="opcionesTrabajadores" id="opciones">
+                    <option value="" selected hidden disabled>Atributos del trabajador</option>
+                    <!-- Seria poner la busqueda por campos del trabajador-->
+                </select>
+
+                <input id="txtBusqueda" type="text" placeholder="Buscar..." />
+
+                <button id="btnBusqueda">Buscar</button>
+            </div>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>Tipo</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr> <!-- Dentro de <tr>: 'th:each="trabajadorDTO : ${listaTrabajadoresDTO}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${trabajadorDTO.id}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${trabajadorDTO.nombre}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${trabajadorDTO.apellidos}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${trabajadorDTO.correo}"'  -->
+                    <td></td> <!-- Dentro de <td>: 'th:text = "${trabajadorDTO.tipo}"'  -->
+                    <td>
+                        <a><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
+                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/editar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                    </td>
+                    <td>
+                        <a><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
+                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/eliminar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--Enlaces para volver atrás-->
+        <div id="botones1">
+            <a th:href="@{/tiendaRopa}">Volver al inicio</a>
+
+            <a th:href="@{/tiendaRopa/Trabajadores/Add}">Alta Trabajador</a>
+        </div>
+
+    </main>
+
+    <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
+    <hr>
+
+    <footer>
+        <p>2ºDAW</p>
+    </footer>
+
+    <script src="js/sweetAlert/sweetalert2.all.min.js"></script>
+</body>
+
+</html>

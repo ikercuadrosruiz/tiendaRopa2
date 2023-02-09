@@ -10,4 +10,6 @@ public interface UsuarioService {
 
 	UsuarioDTO findById(Long idUsuario);
 
+	void deleteById(Long idUsuario);
+
 }

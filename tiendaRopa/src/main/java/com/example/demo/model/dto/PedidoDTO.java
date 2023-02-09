@@ -1,28 +1,14 @@
-/*
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.example.demo.repository.entity.Pedido;
-import com.example.demo.repository.entity.PedidoProducto;
-import com.example.demo.repository.entity.Usuario;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.ToString;
 
@@ -35,12 +21,12 @@ public class PedidoDTO implements Serializable{
 	private String numeroFactura;
 	private Float precio;
 	private String estado;
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date fechaEmision;
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date fechaEntrega;
 	@ToString.Exclude
-	private List<UsuarioDTO> listaClientesDTO;
+	private UsuarioDTO usuarioDTO;
 	// @ToString.Exclude
 	// private Set<PedidoProducto> listaPedidoProductoDTO;
 	
@@ -57,6 +43,7 @@ public class PedidoDTO implements Serializable{
 		pedidoDTO.setEstado(pedido.getEstado());
 		pedidoDTO.setFechaEmision(pedido.getFechaEmision());
 		pedidoDTO.setFechaEntrega(pedido.getFechaEntrega());
+		pedidoDTO.setUsuarioDTO(UsuarioDTO.convertToDTO(pedido.getUsuario()));
 		
 		
 		return pedidoDTO;
@@ -64,4 +51,3 @@ public class PedidoDTO implements Serializable{
 	}
 	
 }
-*/

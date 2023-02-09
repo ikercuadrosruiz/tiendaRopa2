@@ -24,6 +24,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public List<UsuarioDTO> findAll() {
 		
+		log.info("UsuarioServiceImpl - FindAll: Encontramos todos los Usuario");
+		
 		List<Usuario> listaUsuarios = usuarioRepository.findAll();
 		
 		List<UsuarioDTO> listaUsuariosDTO = new ArrayList<UsuarioDTO>();
@@ -36,6 +38,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public UsuarioDTO findById(Long idUsuario) {
+		
+		log.info("UsuarioServiceImpl - findById: Encontramos el Usuario por id");
+		
 		Optional<Usuario> opUsuario = usuarioRepository.findById(idUsuario);
 		if (opUsuario.isPresent()) {
 			UsuarioDTO usuarioDTO = UsuarioDTO.convertToDTO(opUsuario.get());
@@ -43,6 +48,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}else {
 			return null;
 		}
+	}
+
+	@Override
+	public void deleteById(Long idUsuario) {
+		
+		log.info("UsuarioServiceImpl - deleteById: Borramos el Usuario " + idUsuario );
+		
+		usuarioRepository.deleteById(idUsuario);
+		
 	}
 	
 }

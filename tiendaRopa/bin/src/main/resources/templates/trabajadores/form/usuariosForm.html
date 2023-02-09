@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/trabajadores/form.css">
+    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
+
+    <title>Gestión Usuarios</title>
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li>Inicio</li>
+                <li>Productos</li>
+                <li>Mis Pedidos</li>
+            </ul>
+
+            <p><b>Frutti di Vestitti</b></p>
+
+            <div>
+                <div id="btnLogin">
+                    <img src="../../../images/header/user.png" alt="Imagen login">
+                    <p></p>
+                </div>
+
+                <div id="favoritos">
+                    <img src="../../../images/header/guardados.png" alt="Imagen guardados">
+                </div>
+
+                <div id="carrito">
+                    <img src="../../../images/header/carrito.png" alt="Imagen carrito">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
+
+    <main>
+        <div id="contenido">
+            <h2 th:text="${mod} ? 'Modificar Cliente' : 'Visualizar Cliente'"></h2>
+        </div>
+
+        <form th:action = "@{/trabajadores/usuarios/save}"
+        		th:object = "${usuarioDTO}"
+        		method = "POST">
+            <h3>Datos del Cliente</h3>
+
+            <div>
+                <div id="cont1">
+                    <p>Id</p>
+                    <input th:field="*{id}" type="text" />
+                </div>
+                
+                <div id="cont2">
+                    <p>Correo</p>
+                    <input th:field="*{correo}" type="email" />
+                </div>
+
+                <div id="cont3">
+                    <p>Nombre</p>
+                    <input th:field="*{nombre}" type="text" />
+                </div>
+
+                <div id="cont4">
+                    <p>Fecha de Nacimiento</p>
+                    <input th:field="*{fechaNacimiento}" type="date" />
+                </div>
+
+                <div id="cont5">
+                    <p>Primer apellido</p>
+                    <input th:field="*{apellido1}" type="text" />
+                </div>
+
+                <div id="cont6">
+                    <p>Segundo apellido</p>
+                    <input th:field="*{apellido2}" type="text" />
+                </div>
+
+                <div id="cont7">
+                    <p>Dirección</p>
+                    <input th:field="*{direccion}" type="text" />
+                </div>
+
+                <div id="cont8">
+                    <p>Población</p>
+                    <input th:field="*{poblacion}" type="text" />
+                </div>
+
+                <div id="cont9">
+                    <p>Código Postal</p>
+                    <input th:field="*{cp}"type="number" />
+                </div>
+            </div>
+
+            <!--Enlaces para volver atrás-->
+            <div>
+                <a th:href="@{/trabajadores/usuarios}">Volver a Usuarios</a>
+                <button th:if="${mod}">Modificar</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
+    <hr>
+
+    <footer>
+        <p>2ºDAW</p>
+    </footer>
+
+    <script src="js/sweetAlert/sweetalert2.all.min.js"></script>
+</body>
+
+</html>

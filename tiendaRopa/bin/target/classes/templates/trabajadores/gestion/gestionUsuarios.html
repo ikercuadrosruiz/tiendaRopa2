@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Dentro de <html>: xmlns:th="http://www.thymeleaf.org" --> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/trabajadores/gestion.css">
+    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
+
+    <title>Gestión de Clientes</title>
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <ul>
+                <li>Inicio</li>
+                <li>Productos</li>
+                <li>Mis Pedidos</li>
+            </ul>
+
+            <p><b>Frutti di Vestitti</b></p>
+
+            <div>
+                <div id="btnLogin">
+                    <img src="../../../images/header/user.png" alt="Imagen login">
+                    <p></p>
+                </div>
+
+                <div id="favoritos">
+                    <img src="../../../images/header/guardados.png" alt="Imagen guardados">
+                </div>
+
+                <div id="carrito">
+                    <img src="../../../images/header/carrito.png" alt="Imagen carrito">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
+
+    <main>
+        <h2 th:if="${listaUsuariosDTO.isEmpty()}">No hay Clientes</h2>
+
+        <div th:if="${!listaUsuariosDTO.isEmpty()}">
+            <h2>Gestión de Clientes</h2>
+
+            <div>
+                <select name="opcionesClientes">
+                    <option value="" selected hidden disabled>Atributos del cliente</option>
+                    <!-- Seria poner la busqueda por campos del cliente-->
+                </select>
+
+                <input type="text" placeholder="Buscar..." />
+
+                <button>Buscar</button>
+            </div>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Correo</th>
+                    <th>Pedidos</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr th:each = "usuarioDTO : ${listaUsuariosDTO}">
+                    <td th:text=${usuarioDTO.id}>1</td>
+                    <td th:text=${usuarioDTO.nombre}>David</td>
+                    <td th:text=${usuarioDTO.apellido1}>Martinez</td>
+                    <td th:text=${usuarioDTO.correo}>David@iescamp.es</td>
+                    <td>
+                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/pedidos (idUsuario=${usuarioDTO.id})}">Pedidos</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/update (idUsuario=${usuarioDTO.id})}"><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/delete (idUsuario=${usuarioDTO.id})}"><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--Enlaces para volver atrás-->
+        <div>
+            <a th:href="@{/}">Volver al inicio</a>
+        </div>
+    </main>
+
+    <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
+    <hr>
+
+    <footer>
+        <p>2ºDAW</p>
+    </footer>
+
+    <script src="js/sweetAlert/sweetalert2.all.min.js"></script>
+</body>
+
+</html>

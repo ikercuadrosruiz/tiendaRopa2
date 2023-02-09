@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+body > *{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Login ---------------------------------------*/
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 20px 0;
+    padding: 15px 30px 30px 30px;
+    border-radius: 8px;
+    background-color: #1e1e1ee4;
+    border: 2px solid #1e1e1e;
+
+    width: 25%;
+}
+
+form h3 {
+    position: absolute;
+
+    padding: 5px 40px;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+    border: 2px solid #1e1e1e;
+    transform: translateY(-130%);
+    color: #fff;
+    text-align: center;
+}
+
+form p {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+form div{
+    width: 100%;
+}
+form div p{
+    text-align: center;
+}
+form div input {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+}
+
+form button {
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #6161DB;
+    color: #f2f2f2;
+    border-radius: 10px;
+    border: 2px solid #1e1e1e;
+    padding: 10px 30px;
+    margin-top: 20px;
+
+    cursor: pointer;
+}
+
+form a:link{
+    cursor: pointer;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+form a:visited{
+    cursor: pointer;
+    color: #6161DB;
+    text-decoration: none;
+}

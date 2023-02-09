@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Dentro de <html>: xmlns:th="http://www.thymeleaf.org" -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
         <nav>
 
             <ul>
-                <li>Inicio</li>
+                <li><a th:href="@{/}">Inicio</a></li>
                 <li>Productos</li>
                 <li>Mis Pedidos</li>
             </ul>
@@ -45,52 +45,56 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 id="NoCat">No hay Pedidos</h2> <!-- Dentro de <h2>: 'th:if="${listaPedidosDTO.isEmpty()}"'  -->
+        <h2 th:if="${listaPedidosDTO.isEmpty()}">No hay Pedidos</h2>
 
-        <div id="contenido"> <!-- Dentro de <div>: 'th:if="${!listaPedidosDTO.isEmpty()}"'  -->
-            <h2>Gestión de Pedidos</h2>
+        <div th:if="${!listaPedidosDTO.isEmpty()}">
+            <h2 th:text="${fromUsuarios} ? 'Gestión de Pedidos de '+${usuarioDTO.nombre} : 'Gestión de Pedidos' "></h2>
 
-            <div id="filtrosProductos">
-                <select name="opcionesPedidos" id="opciones">
+            <form>
+                <select name="opcionesClientes">
                     <option value="" selected hidden disabled>Atributos del pedido</option>
-                    <!-- Seria poner la busqueda por campos del pedido-->
+                    <option value="id">Id</option>
+                    <option value="numeroFactura">Numero Factura</option>
+                    <option value="fechaEmision">Fecha de Emision</option>
+                    <option value="usuarioDTO.nombre">Nombre del Cliente</option>
+                    <option value="estado">Estado</option>
                 </select>
 
-                <input id="txtBusqueda" type="text" placeholder="Buscar..." />
+                <input type="text" placeholder="Buscar..." />
 
-                <button id="btnBusqueda">Buscar</button>
-            </div>
-            <table id="tabla">
+                <button>Buscar</button>
+            </form>
+
+            <table>
                 <tr>
                     <th>ID</th>
-                    <th>Numero factura</th>
-                    <th>Fecha emisión</th>
-                    <th>Cliente</th>
+                    <th>Numero de Factura</th>
+                    <th>Fecha de Emision</th>
+                    <th>Nombre del cliente</th>
                     <th>Estado</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
-                <tr> <!-- Dentro de <tr>: 'th:each="pedidoDTO : ${listaPedidosDTO}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${pedidoDTO.id}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${pedidoDTO.numeroFactura}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${pedidoDTO.fechaEmision}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${pedidoDTO.cliente.nombre}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${pedidoDTO.estado}"'  -->
+                <tr th:each = "pedidoDTO : ${listaPedidosDTO}">
+                    <td th:text=${pedidoDTO.id}>1</td>
+                    <td th:text=${pedidoDTO.numeroFactura}>2313312</td>
+                    <td th:text=${pedidoDTO.fechaEmision}>2023-12-14 12:23:12</td>
+                    <td th:text=${pedidoDTO.usuarioDTO.nombre}>Diego</td>
+                    <td th:text=${pedidoDTO.estado}>En curso</td>
                     <td>
-                        <a><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
-                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/editar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/pedidos/{idPedido}/update (idUsuario=${pedidoDTO.usuarioDTO.id}, idPedido=${pedidoDTO.id})}"><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
                     </td>
                     <td>
-                        <a><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
-                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/eliminar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                        <a th:href="@{/trabajadores/usuarios/{idUsuario}/pedidos/delete/{idPedido} (idUsuario=${pedidoDTO.usuarioDTO.id}, idPedido=${pedidoDTO.id})}"><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
                     </td>
                 </tr>
             </table>
         </div>
 
         <!--Enlaces para volver atrás-->
-        <div id="botones1">
-            <a th:href="@{/tiendaRopa}">Volver al inicio</a>
+        <div>
+            <a th:if="${fromUsuarios}" th:href="@{/trabajadores/usuarios}">Volver a los Usuarios</a>
+            <a th:href="@{/}">Volver al Inicio</a>
         </div>
     </main>
 

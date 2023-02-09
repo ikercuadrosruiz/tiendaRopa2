@@ -35,7 +35,8 @@ public class UsuarioDTO implements Serializable{
 	private int esCliente;
 	private int esTrabajador;
 	private int esAdministrador;
-	
+	@ToString.Exclude
+	private List<PedidoDTO> listaPedidosDTO;
 	@ToString.Exclude
 	private List<CarritoDTO> listaCarritosDTO;
 	
@@ -87,12 +88,6 @@ public class UsuarioDTO implements Serializable{
 		usuario.setEsCliente(usuarioDTO.getEsCliente());
 		usuario.setEsTrabajador(usuarioDTO.getEsTrabajador());
 		usuario.setEsAdministrador(usuarioDTO.getEsAdministrador());
-		
-		List<CarritoDTO> listaCarritosDTO = new ArrayList<CarritoDTO>(usuarioDTO.getListaCarritosDTO());
-		for (int i = 0; i < listaCarritosDTO.size(); i++) {
-			Carrito carrito = CarritoDTO.convertToEntity(listaCarritosDTO.get(i), usuario);
-			usuario.getListaCarritos().add(carrito);
-		}
 		
 		return usuario;
 	}
