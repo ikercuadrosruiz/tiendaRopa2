@@ -1,4 +1,3 @@
-/*
 package com.example.demo.repository.entity;
 
 import java.util.Objects;
@@ -50,17 +49,21 @@ public class Producto {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name = "idcategoria")
 	@ToString.Exclude
 	private Categoria categoria;
+	*/
 	
+	/*
 	@OneToMany(
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			mappedBy = "producto")
 	@ToString.Exclude
 	private Set<CarritoProducto> listaCarritoProducto;
+	*/
 	
 	@OneToMany(
 			fetch = FetchType.LAZY,
@@ -69,6 +72,7 @@ public class Producto {
 	@ToString.Exclude
 	private Set<PedidoProducto> listaPedidoProducto;
 	
+	/*
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinTable(
 			name = "imagenproducto",//Nombre de la tabla
@@ -77,7 +81,7 @@ public class Producto {
 	)
 	@ToString.Exclude
 	private Set<Imagen> listaImagenes;
-
+	*/
 	
 	// Equals -------------------------------------------------
 	@Override
@@ -97,4 +101,3 @@ public class Producto {
 		return Objects.hash(id);
 	}
 }
-*/

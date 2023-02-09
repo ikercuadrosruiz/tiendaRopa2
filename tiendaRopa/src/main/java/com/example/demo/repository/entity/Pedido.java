@@ -51,14 +51,12 @@ public class Pedido {
 	@ToString.Exclude
 	private Usuario usuario;
 	
-	/*
 	@OneToMany(
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			mappedBy = "pedido")
 	@ToString.Exclude
 	private Set<PedidoProducto> listaPedidoProducto;
-	*/
 	
 	// Equals ---------------------------------------
 	@Override

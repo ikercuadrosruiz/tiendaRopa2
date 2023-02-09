@@ -3,8 +3,6 @@ package com.example.demo.model.dto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,8 +25,8 @@ public class PedidoDTO implements Serializable{
 	private Date fechaEntrega;
 	@ToString.Exclude
 	private UsuarioDTO usuarioDTO;
-	// @ToString.Exclude
-	// private Set<PedidoProducto> listaPedidoProductoDTO;
+	@ToString.Exclude
+	private ArrayList<PedidoDTO> listaPedidoDTO;
 	
 	// --------------------------------------
 	// ConvertToDTO
@@ -49,5 +47,10 @@ public class PedidoDTO implements Serializable{
 		return pedidoDTO;
 		
 	}
-	
+
+	public PedidoDTO() {
+		super();
+		this.usuarioDTO = new UsuarioDTO();
+		this.listaPedidoDTO = new ArrayList<PedidoDTO>();
+	}
 }

@@ -91,5 +91,10 @@ public class UsuarioDTO implements Serializable{
 		
 		return usuario;
 	}
-	
+
+	public UsuarioDTO() {
+		super();
+		this.listaPedidosDTO = new ArrayList<PedidoDTO>();
+		this.listaCarritosDTO = new ArrayList<CarritoDTO>();
+	}
 }
