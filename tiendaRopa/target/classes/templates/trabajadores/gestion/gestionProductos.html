@@ -17,19 +17,23 @@
 
     <header>
         <nav>
+            <div>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Mis Pedidos</a></li>
+                    <img src="../../../images/header/cerrar.png" alt="Img menu">
+                </ul>
+            </div>
+            <img src="../../../images/header/menu.png" alt="Img menu">
+        </nav>
 
-            <ul>
-                <li><a th:href="@{/}">Inicio</a></li>
-                <li>Productos</li>
-                <li>Mis Pedidos</li>
-            </ul>
+        <p><b>Frutti di Vestiti</b></p>
 
-            <p><b>Frutti di Vestitti</b></p>
-
+        <nav>
             <div>
                 <div id="btnLogin">
                     <img src="../../../images/header/user.png" alt="Imagen login">
-                    <p></p>
                 </div>
 
                 <div id="favoritos">
@@ -105,7 +109,8 @@
         <p>2ºDAW</p>
     </footer>
 
-    <script src="js/sweetAlert/sweetalert2.all.min.js"></script>
+    <script src="../../../js/jquery/jquery-3.6.3.min.js"></script>
+    <script src="../../../js/scriptHeader.js"></script>
 </body>
 
 </html>

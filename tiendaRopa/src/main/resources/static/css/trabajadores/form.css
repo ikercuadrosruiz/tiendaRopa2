@@ -35,6 +35,8 @@ main form{
     
 }
 main form > div:first-of-type{
+    width: 90%;
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
@@ -56,6 +58,11 @@ main form input{
     background-color: #27272c34;
     border-radius: 5px;
     border: 0;
+}
+
+.err{
+    color: red;
+    font-size: .9em;
 }
 
 form > div:last-of-type{

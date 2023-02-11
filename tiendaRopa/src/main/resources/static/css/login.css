@@ -3,39 +3,47 @@
 body > *{
     font-family: 'Poppins', sans-serif;
 }
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Login ---------------------------------------*/
 
 main{
+    height: calc(100vh - 55px);
+    
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 form {
-    position: relative;
+    max-width: 500px;
+
+    overflow: scroll;
+    scrollbar-width: none;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
 
-    margin: 20px 0;
-    padding: 15px 30px 30px 30px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 10px;
     background-color: #1e1e1ee4;
     border: 2px solid #1e1e1e;
 
-    width: 25%;
+    width: 60%;
+    height: 50%;
 }
 
 form h3 {
-    position: absolute;
-
     padding: 5px 40px;
     border-radius: 10px;
     background-color: #1e1e1e;
     border: 2px solid #1e1e1e;
-    transform: translateY(-130%);
     color: #fff;
     text-align: center;
 }
@@ -43,17 +51,18 @@ form h3 {
 form p {
     color: #ffffff;
     font-weight: 500;
+    margin-left: 0px;
 }
 
 form div{
     width: 100%;
 }
-form div p{
+form > p{
     text-align: center;
 }
 form div input {
     width: 100%;
-    height: 30px;
+    height: 25px;
     padding-left: 5px;
 }
 
