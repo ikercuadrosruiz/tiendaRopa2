@@ -12,4 +12,6 @@ public interface UsuarioService {
 
 	void deleteById(Long idUsuario);
 
+	void save(UsuarioDTO usuarioDTO);
+
 }

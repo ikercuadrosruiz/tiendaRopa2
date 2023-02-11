@@ -77,6 +77,7 @@ public class UsuarioDTO implements Serializable{
 		
 		usuario.setId(usuarioDTO.getId());
 		usuario.setNif(usuarioDTO.getNif());
+		usuario.setNombre(usuarioDTO.getNombre());
 		usuario.setApellido1(usuarioDTO.getApellido1());
 		usuario.setApellido2(usuarioDTO.getApellido2());
 		usuario.setFechaNacimiento(usuarioDTO.getFechaNacimiento());

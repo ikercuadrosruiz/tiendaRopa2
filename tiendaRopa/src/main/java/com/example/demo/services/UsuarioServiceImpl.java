@@ -58,5 +58,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioRepository.deleteById(idUsuario);
 		
 	}
+
+	@Override
+	public void save(UsuarioDTO usuarioDTO) {
+		
+		log.info("UsuarioServiceImpl - save: Guardamos los datos del usuario " + usuarioDTO.getId() );
+		
+		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
+		usuarioRepository.save(usuario);
+	}
 	
 }

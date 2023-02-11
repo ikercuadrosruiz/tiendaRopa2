@@ -67,6 +67,9 @@ public class UsuarioController {
 		
 		log.info("UsuarioController - save: Guardamos el usuario");
 		
-		return new ModelAndView();
+		usuarioService.save(usuarioDTO);
+		
+		ModelAndView mav = new ModelAndView("redirect:/trabajadores/usuarios");
+		return mav;
 	}
 }
