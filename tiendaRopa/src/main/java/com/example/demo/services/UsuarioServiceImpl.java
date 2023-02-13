@@ -37,6 +37,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
+	public List<UsuarioDTO> findAllTrabajadores() {
+		log.info("UsuarioServiceImpl - findAllTrabajadores: Encontramos todos los Trabajadores");
+		
+		List<Usuario> lt = usuarioRepository.findAllTrabajadores();
+		
+		List<UsuarioDTO> ltDTO = new ArrayList<UsuarioDTO>();
+		for (Usuario u : lt) {
+			ltDTO.add(UsuarioDTO.convertToDTO(u));
+		}
+		
+		return ltDTO;
+	}
+	
+	@Override
 	public UsuarioDTO findById(Long idUsuario) {
 		
 		log.info("UsuarioServiceImpl - findById: Encontramos el Usuario por id");
@@ -67,5 +81,4 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
 		usuarioRepository.save(usuario);
 	}
-	
 }

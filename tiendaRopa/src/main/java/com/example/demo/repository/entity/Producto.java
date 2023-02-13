@@ -49,12 +49,10 @@ public class Producto {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
-	/*
 	@ManyToOne
 	@JoinColumn(name = "idcategoria")
 	@ToString.Exclude
 	private Categoria categoria;
-	*/
 	
 	/*
 	@OneToMany(

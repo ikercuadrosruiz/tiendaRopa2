@@ -12,7 +12,7 @@ public class IndexController {
 	
 	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
 	
-	@GetMapping("/")
+	@GetMapping("/trabajadores")
 	public ModelAndView index() {
 		
 		log.info("IndexController - IniciarAplicacion: Comienza la aplicacion (apartado de trabajadores)");

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.example.demo.repository.entity.Categoria;
 import com.example.demo.repository.entity.PedidoProducto;
 import com.example.demo.repository.entity.Producto;
 
@@ -24,6 +25,8 @@ public class ProductoDTO implements Serializable{
 	private String talla;
 	private String color;
 	private String descripcion;
+	@ToString.Exclude
+	private Categoria categoria;
 	@ToString.Exclude
 	private List<PedidoProductoDTO> listaPedidoProductoDTO;
 	
@@ -65,6 +68,7 @@ public class ProductoDTO implements Serializable{
 	public ProductoDTO() {
 		super();
 		this.listaPedidoProductoDTO = new ArrayList<PedidoProductoDTO>();
+		this.categoria = new Categoria();
 	}
 	
 	

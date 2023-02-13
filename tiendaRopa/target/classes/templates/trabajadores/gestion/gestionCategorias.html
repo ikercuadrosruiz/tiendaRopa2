@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Dentro de <html>: xmlns:th="http://www.thymeleaf.org" --> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../css/header.css">
-    <link rel="stylesheet" href="../../../css/trabajadores/gestion.css">
-    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
-
-    <title>Gestión Categorias</title>
-
+    <title>Gestión de Categorias</title>
+    <link rel="stylesheet" th:href="@{../css/header.css}">
+    <link rel="stylesheet" th:href="@{../css/footer.css}">
+    <link rel="stylesheet" th:href="@{../css/trabajadores/gestion.css}">
 </head>
 
 <body>
@@ -19,13 +17,13 @@
         <nav>
             <div>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
+                    <li><a th:href="@{/trabajadores}">Inicio</a></li>
                     <li><a href="#">Productos</a></li>
                     <li><a href="#">Mis Pedidos</a></li>
-                    <img src="../../../images/header/cerrar.png" alt="Img menu">
+                    <img th:src="@{../images/header/cerrar.png}" alt="Img menu" />
                 </ul>
             </div>
-            <img src="../../../images/header/menu.png" alt="Img menu">
+            <img th:src="@{../images/header/menu.png}" alt="Img menu" />
         </nav>
 
         <p><b>Frutti di Vestiti</b></p>
@@ -33,15 +31,15 @@
         <nav>
             <div>
                 <div id="btnLogin">
-                    <img src="../../../images/header/user.png" alt="Imagen login">
+                    <img th:src="@{../images/header/user.png}" alt="Imagen login">
                 </div>
 
                 <div id="favoritos">
-                    <img src="../../../images/header/guardados.png" alt="Imagen guardados">
+                    <img th:src="@{../images/header/guardados.png}" alt="Imagen guardados">
                 </div>
 
                 <div id="carrito">
-                    <img src="../../../images/header/carrito.png" alt="Imagen carrito">
+                    <img th:src="@{../images/header/carrito.png}" alt="Imagen carrito">
                 </div>
             </div>
         </nav>
@@ -49,61 +47,81 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 id="NoCat">No hay Categorias</h2> <!-- Dentro de <h2>: 'th:if="${listaCategoriasDTO.isEmpty()}"'  -->
+        <h2 th:if="${listaCategoriasDTO.isEmpty()}">No hay Categorias</h2>
 
-        <div id="contenido"> <!-- Dentro de <div>: 'th:if="${!listaCategoriasDTO.isEmpty()}"'  -->
+        <div th:if="${!listaCategoriasDTO.isEmpty()}">
             <h2>Gestión de Categorias</h2>
 
-            <div id="filtrosCategorias">
-                <select name="opcionesCategorias" id="opcionesCategorias">
-                    <option value=""  selected hidden disabled>Atributos de las categorias</option>
-                    <!-- Seria poner la busqueda por campos de las categorias-->
+            <form>
+                <select name="opcionesCategorias">
+                    <option value="" selected hidden disabled>Atributos de Categoria</option>
+                    <option value="id">Id</option>
+                    <option value="nombre">Nombre</option>
                 </select>
 
-                <input id="txtBusqueda"  type="text" placeholder="Buscar..." />
+                <input type="text" placeholder="Buscar..." />
 
-                <button id="btnBusqueda">Buscar</button>
-            </div>
-            <table id="tabla">
+                <button>Buscar</button>
+            </form>
+
+            <table>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
-                <tr> <!-- Dentro de <tr>: 'th:each="CategoriasDTO : ${listaCategoriasDTO}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${categoriaDTO.id}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${categoriaDTO.nombre}"'  -->
+                <tr th:each = "cDTO : ${listaCategoriasDTO}">
+                    <td th:text=${cDTO.id}>1</td>
+                    <td th:text=${cDTO.nombre}>David</td>
                     <td>
-                        <a><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
-                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/editar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                        <a th:href="@{/trabajadores/categorias/{idCategoria}/update (idCategoria=${cDTO.id})}"><img alt="lapiz" th:src="@{../images/trabajadores/edit.png}" width="20px"></a>
                     </td>
                     <td>
-                        <a><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
-                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/eliminar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                        <a th:href="@{/trabajadores/categorias/delete/{idCategoria} (idCategoria=${cDTO.id})}"><img alt="papelera" th:src="@{../images/trabajadores/delete.png}" width="20px"></a>
                     </td>
                 </tr>
             </table>
         </div>
 
         <!--Enlaces para volver atrás-->
-        <div id="botones1">
-            <a th:href="@{/tiendaRopa}">Volver al inicio</a>
-
-            <a th:href="@{/tiendaRopa/Categorias/Add}">Alta Categoría</a>
+        <div>
+            <a th:href="@{/trabajadores}">Volver al inicio</a>
         </div>
-      
     </main>
 
     <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
-    <hr>
-
     <footer>
-        <p>2ºDAW</p>
+        <img alt="logo" th:src="@{../images/footer/tiendaRopaLogo.png}">
+
+        <div>
+            <h3>Contáctanos</h3>
+            <p>Tlf +34 666666666</p>
+            <p>correo@sitioweb.com</p>
+            <article>
+                <a href=""><img th:src="@{../images/footer/insta.png}" alt="logo insta" width="20px"></a>
+                <a href=""><img th:src="@{../images/footer/facebooklogo.png}" alt="logo insta" width="20px"></a>
+                <a href=""><img th:src="@{../images/footer/twitterlogo.png}" alt="logo insta" width="25px"></a>
+            </article>
+
+        </div>
+
+
+        <div>
+            <h3>Política</h3>
+            <p>Política de privacidad</p>
+            <p>Métodos de Pago</p>
+            <article>
+                <a href=""><img th:src="@{../images/footer/pay pal.webp}" alt="logo paypal" width="50px"></a>
+                <a href=""><img th:src="@{../images/footer/master card.png}" alt="logo mastercard" width="50px"></a>
+                <a href=""><img th:src="@{../images/footer/VISA.jpg}" alt="logo visa" width="55px"></a>
+            </article>
+        </div>
+
     </footer>
 
-    <script src="../../../js/jquery/jquery-3.6.3.min.js"></script>
-    <script src="../../../js/scriptHeader.js"></script>
+	<script th:src="@{../js/jquery/jquery-3.6.3.min.js}"></script>
+    <script th:src="@{../js/scriptHeader.js}"></script>
 </body>
 
 </html>
