@@ -19,7 +19,7 @@
         <nav>
             <div>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
+                    <li><a th:href="@{/}">Inicio</a></li>
                     <li><a href="#">Productos</a></li>
                     <li><a href="#">Mis Pedidos</a></li>
                     <img src="../../../images/header/cerrar.png" alt="Img menu">
@@ -49,12 +49,12 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 th:if="${listaProductosDTO.isEmpty()}">No hay Productos</h2> <!-- Dentro de <h2>: ''  -->
+        <h2 th:if="${listaProductosDTO.isEmpty()}">No hay Productos</h2>
 
-        <div th:if="${!listaProductosDTO.isEmpty()}"> <!-- Dentro de <div>: 'th:if="${!listaProductosDTO.isEmpty()}"'  -->
+        <div th:if="${!listaProductosDTO.isEmpty()}">
             <h2>Gestión de Productos</h2>
 
-            <div>
+            <form>
                 <select name="opcionesProductos">
                     <option value="" selected hidden disabled>Atributos del producto</option>
                     <!-- Seria poner la busqueda por campos del producto-->
@@ -66,7 +66,7 @@
                 <input type="text" placeholder="Buscar..." />
 
                 <button>Buscar</button>
-            </div>
+            </form>
             <table>
                 <tr>
                     <th>ID</th>
@@ -86,12 +86,12 @@
                     <td th:text="${pDTO.stock}"></td>
                     <td th:text="${pDTO.precio}"></td>
                     <td>
-                        <a><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
-                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/editar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                        <a th:href = "@{/trabajadores/productos/update/{idProducto} (idProducto=${pDTO.id})}">
+                        	<img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
                     </td>
                     <td>
-                        <a><img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
-                        <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/eliminar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
+                        <a th:href = "@{/trabajadores/productos/delete/{idProducto} (idProducto=${pDTO.id})}">
+                        	<img alt="papelera" src="../../../images/trabajadores/delete.png" width="20px"></a>
                     </td>
                 </tr>
             </table>
@@ -100,7 +100,7 @@
         <!--Enlaces para volver atrás-->
         <div>
             <a th:href="@{/}">Volver al inicio</a>
-            <a th:href="@{/tiendaRopa/productos/add}">Alta producto</a>
+            <a th:href="@{/trabajadores/productos/add}">Alta producto</a>
         </div>
 
     </main>
