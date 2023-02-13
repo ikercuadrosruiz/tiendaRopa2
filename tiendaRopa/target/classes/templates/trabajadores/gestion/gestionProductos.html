@@ -49,39 +49,42 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 id="NoCat">No hay Productos</h2> <!-- Dentro de <h2>: 'th:if="${listaProductosDTO.isEmpty()}"'  -->
+        <h2 th:if="${listaProductosDTO.isEmpty()}">No hay Productos</h2> <!-- Dentro de <h2>: ''  -->
 
-        <div id="contenido"> <!-- Dentro de <div>: 'th:if="${!listaProductosDTO.isEmpty()}"'  -->
+        <div th:if="${!listaProductosDTO.isEmpty()}"> <!-- Dentro de <div>: 'th:if="${!listaProductosDTO.isEmpty()}"'  -->
             <h2>Gestión de Productos</h2>
 
-            <div id="filtrosProductos">
-                <select name="opcionesProductos" id="opciones">
+            <div>
+                <select name="opcionesProductos">
                     <option value="" selected hidden disabled>Atributos del producto</option>
                     <!-- Seria poner la busqueda por campos del producto-->
+                    <option value="id">Id</option>
+                    <option value="numeroProducto">Número de Productod</option>
+                    <option value="nombre">Nombre</option>
                 </select>
 
-                <input id="txtBusqueda" type="text" placeholder="Buscar..." />
+                <input type="text" placeholder="Buscar..." />
 
-                <button id="btnBusqueda">Buscar</button>
+                <button>Buscar</button>
             </div>
-            <table id="tabla">
+            <table>
                 <tr>
                     <th>ID</th>
                     <th>Nº Producto</th>
                     <th>Nombre</th>
-                    <th>Categorías</th>
+                    <!-- <th>Categoria</th> -->
                     <th>Stock</th>
                     <th>Precio</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
-                <tr> <!-- Dentro de <tr>: 'th:each="productoDTO : ${listaProductosDTO}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${productoDTO.id}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${productoDTO.numeroProducto}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${productoDTO.nombre}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${productoDTO.categoria}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${productoDTO.stock}"'  -->
-                    <td></td> <!-- Dentro de <td>: 'th:text = "${productoDTO.precio}"'  -->
+                <tr th:each = "pDTO : ${listaProductosDTO}">
+                    <td th:text="${pDTO.id}"></td>
+                    <td th:text="${pDTO.numeroProducto}"></td>
+                    <td th:text="${pDTO.nombre}"></td>
+                    <!-- <td th:text="${pDTO.categoria.nombre}"></td> -->
+                    <td th:text="${pDTO.stock}"></td>
+                    <td th:text="${pDTO.precio}"></td>
                     <td>
                         <a><img alt="lapiz" src="../../../images/trabajadores/edit.png" width="20px"></a>
                         <!-- Dentro de <a>: 'th:href = "@{/tiendaRopa/clientes/editar/{idCliente} (idCliente=${clienteDTO.id})}"'  -->
@@ -95,8 +98,8 @@
         </div>
 
         <!--Enlaces para volver atrás-->
-        <div id="botones1">
-            <a th:href="@{/tiendaRopa}">Volver al inicio</a>
+        <div>
+            <a th:href="@{/}">Volver al inicio</a>
             <a th:href="@{/tiendaRopa/productos/add}">Alta producto</a>
         </div>
 
