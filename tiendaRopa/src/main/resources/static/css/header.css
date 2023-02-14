@@ -70,7 +70,8 @@ body nav:first-of-type div ul > img{
         position: absolute;
         z-index: 1;
         top: 0;
-        left: 0;
+        left: -100%;
+        width: 100%;
 
         display: flex;
         flex-direction: column;
@@ -79,7 +80,7 @@ body nav:first-of-type div ul > img{
         
         background-color: #27272ce8;
         backdrop-filter: blur(15px);
-        width: 0;
+        /* width: 0; */
         opacity: 0;
         height: 100vh;
     }
