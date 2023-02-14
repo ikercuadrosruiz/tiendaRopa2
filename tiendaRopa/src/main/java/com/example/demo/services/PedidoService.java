@@ -12,4 +12,6 @@ public interface PedidoService {
 
 	void deleteById(Long idPedido);
 
+	PedidoDTO findById(Long idPedido);
+
 }

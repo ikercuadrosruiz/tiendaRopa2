@@ -2,11 +2,14 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.repository.entity.Pedido;
+import com.example.demo.repository.entity.PedidoProducto;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,14 +22,14 @@ public class PedidoDTO implements Serializable{
 	private String numeroFactura;
 	private Float precio;
 	private String estado;
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date fechaEmision;
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date fechaEntrega;
 	@ToString.Exclude
 	private UsuarioDTO usuarioDTO;
 	@ToString.Exclude
-	private ArrayList<PedidoDTO> listaPedidoDTO;
+	private ArrayList<PedidoProductoDTO> listaPedidoProductoDTO;
 	
 	// --------------------------------------
 	// ConvertToDTO
@@ -43,6 +46,19 @@ public class PedidoDTO implements Serializable{
 		pedidoDTO.setFechaEntrega(pedido.getFechaEntrega());
 		pedidoDTO.setUsuarioDTO(UsuarioDTO.convertToDTO(pedido.getUsuario()));
 		
+		Float pt = 0.0f;
+		for (PedidoProducto pp : pedido.getListaPedidoProducto()) {
+			
+			PedidoProductoDTO ppDTO = new PedidoProductoDTO();
+			
+			ppDTO.setId(pp.getId());
+			ppDTO.setProductoDTO(ProductoDTO.convertToDTO(pp.getProducto()));
+			
+			pedidoDTO.getListaPedidoProductoDTO().add(ppDTO);
+			
+			pt += pp.getCantidad() * pp.getPedido().getPrecio();
+		}
+		pedidoDTO.setPrecio(pt);
 		
 		return pedidoDTO;
 		
@@ -51,6 +67,6 @@ public class PedidoDTO implements Serializable{
 	public PedidoDTO() {
 		super();
 		this.usuarioDTO = new UsuarioDTO();
-		this.listaPedidoDTO = new ArrayList<PedidoDTO>();
+		this.listaPedidoProductoDTO = new ArrayList<PedidoProductoDTO>();
 	}
 }
