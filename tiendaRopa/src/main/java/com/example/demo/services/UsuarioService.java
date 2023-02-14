@@ -14,4 +14,6 @@ public interface UsuarioService {
 
 	void save(UsuarioDTO usuarioDTO);
 
+	List<UsuarioDTO> findAllTrabajadores();
+
 }
