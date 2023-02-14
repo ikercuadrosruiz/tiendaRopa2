@@ -70,7 +70,6 @@ public class Producto {
 	@ToString.Exclude
 	private Set<PedidoProducto> listaPedidoProducto;
 	
-	/*
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinTable(
 			name = "imagenproducto",//Nombre de la tabla
@@ -79,7 +78,6 @@ public class Producto {
 	)
 	@ToString.Exclude
 	private Set<Imagen> listaImagenes;
-	*/
 	
 	// Equals -------------------------------------------------
 	@Override

@@ -1,4 +1,3 @@
-/*
 package com.example.demo.repository.entity;
 import java.util.Objects;
 import java.util.Set;
@@ -54,4 +53,3 @@ public class Imagen {
 		
 		
 }
-*/
