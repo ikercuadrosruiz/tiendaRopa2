@@ -54,14 +54,12 @@ public class Producto {
 	@ToString.Exclude
 	private Categoria categoria;
 	
-	/*
 	@OneToMany(
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			mappedBy = "producto")
 	@ToString.Exclude
 	private Set<CarritoProducto> listaCarritoProducto;
-	*/
 	
 	@OneToMany(
 			fetch = FetchType.LAZY,
@@ -74,7 +72,7 @@ public class Producto {
 	@JoinTable(
 			name = "imagenproducto",//Nombre de la tabla
 			joinColumns = @JoinColumn(name = "idproducto"),
-			inverseJoinColumns = @JoinColumn(name = "iddireccion")
+			inverseJoinColumns = @JoinColumn(name = "idimagen")
 	)
 	@ToString.Exclude
 	private Set<Imagen> listaImagenes;
@@ -96,4 +94,11 @@ public class Producto {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+	// Constructor -------------------------------------------------
+	public Producto() {
+		super();
+		this.categoria = new Categoria();
+	}
+
 }

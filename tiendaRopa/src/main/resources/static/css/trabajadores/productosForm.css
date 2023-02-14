@@ -1,0 +1,125 @@
+@charset "ISO-8859-1";@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body>*{
+    font-family: 'Poppins', sans-serif;
+}
+
+main{
+    height: calc(100vh - 57px);
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+main > div:first-of-type{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+main form{
+    width: 80%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+main form > div:first-of-type{
+    width: 90%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+#cont9{
+    grid-column: 1/-1;
+}
+#cont9 input{
+    width: 100%;
+}
+
+#cont6 input{
+	padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+
+	transform: translateX(50%);
+	
+    background-color: #fff;
+    width: 50%;
+    height: 30px;
+}
+#cont6 input::-webkit-color-swatch, #cont6 input::-moz-color-swatch{
+    border-radius: 5px;
+    border: none;
+}
+
+#cont10{
+    grid-column: 1/-1;
+}
+.contenedor_imagenes{
+	display: flex;
+	flex-wrap: wrap;
+}
+.imagen{
+	margin: 5px 10px;
+}
+.imagen img{
+	width: 150px;
+	height: 200px;
+	
+	border-radius: 10px;
+	object-fit: cover;
+}
+
+
+main form input{
+	font-family: 'Poppins', sans-serif;
+	padding: 0px 0px 0px 10px;
+	
+    width: 100%;
+    height: 30px;
+
+    background-color: #27272c34;
+    border-radius: 5px;
+    border: 0;
+}
+
+.err{
+    color: red;
+    font-size: .9em;
+}
+
+form > div:last-of-type{
+    margin: 50px 0;
+    width: 39%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+form > div:last-of-type > a{
+    text-decoration: none;
+}
+form > div:last-of-type button{
+	background-color: #6161DB;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 0px;
+    
+    cursor: pointer;
+}
