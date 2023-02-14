@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/clientes/index.css">
-    <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/index.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
     <title>LogIn - Iker Cuadros</title>
@@ -20,13 +20,13 @@
         <nav>
             <div>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
+                    <li><a th:href="@{/trabajadores}">Inicio</a></li>
                     <li><a href="#">Productos</a></li>
                     <li><a href="#">Mis Pedidos</a></li>
-                    <img src="../../images/header/cerrar.png" alt="Img menu">
+                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
                 </ul>
             </div>
-            <img src="../../images/header/menu.png" alt="Img menu">
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
         </nav>
 
         <p><b>Frutti di Vestiti</b></p>
@@ -34,15 +34,15 @@
         <nav>
             <div>
                 <div id="btnLogin">
-                    <img src="../../images/header/user.png" alt="Imagen login">
+                    <img th:src="@{/images/header/user.png}" alt="Imagen login">
                 </div>
 
                 <div id="favoritos">
-                    <img src="../../images/header/guardados.png" alt="Imagen guardados">
+                    <img th:src="@{/images/header/guardados.png}" alt="Imagen guardados">
                 </div>
 
                 <div id="carrito">
-                    <img src="../../images/header/carrito.png" alt="Imagen carrito">
+                    <img th:src="@{/images/header/carrito.png}" alt="Imagen carrito">
                 </div>
             </div>
         </nav>
@@ -50,40 +50,38 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
+        <!-- Imagen de fondo -->
+        <img th:src="@{/images/clienteindex/tiendaindex.jpg}" alt="Imagen de Inicio">
         <div>
-            <!-- Imagen de fondo -->
-            <img src="../images/clienteindex/tiendaindex.jpg" alt="Imagen de Inicio">
-            <div>
-                <article>
-                    <h2>Bienvenido a Tienda de Ropa</h2>
-                    <p>Nuestra web de ropa es un espacio en línea lleno de estilo y moda.
-                        Ofrecemos una amplia variedad de prendas para hombres, mujeres y niños,
-                        desde ropa casual hasta ropa formal. Contamos con una gran selección de
-                        productos de alta calidad, diseñados con las últimas tendencias en mente.
-                        Además, nuestra página web es fácil de navegar y hacer compras en línea,
-                        con opciones seguras de pago y envíos a todas partes del mundo. Ofrecemos
-                        también un servicio al cliente excepcional y políticas de devolución flexibles.
-                        Si estás buscando ropa de calidad y estilo, ¡(Tienda de Ropa) web es el lugar
-                        ideal para ti!</p>
-                </article>
+            <article>
+                <h2>Bienvenido a Frutti di Vestiti</h2>
+                <p>Nuestra web de ropa es un espacio en línea lleno de estilo y moda.
+                    Ofrecemos una amplia variedad de prendas para hombres, mujeres y niños,
+                    desde ropa casual hasta ropa formal. Contamos con una gran selección de
+                    productos de alta calidad, diseñados con las últimas tendencias en mente.
+                    Además, nuestra página web es fácil de navegar y hacer compras en línea,
+                    con opciones seguras de pago y envíos a todas partes del mundo. Ofrecemos
+                    también un servicio al cliente excepcional y políticas de devolución flexibles.
+                    Si estás buscando ropa de calidad y estilo, ¡Frutti di Vestiti web es el lugar
+                    ideal para ti!</p>
+            </article>
 
-                <button>Comprar ahora</button>
-            </div>
+            <button>Comprar ahora</button>
         </div>
     </main>
 
     <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
     <footer>
-        <img alt="logo" src="../../images/footer/tiendaRopaLogo.png">
+        <img alt="logo" th:src="@{/images/footer/tiendaRopaLogo.png}">
 
         <div>
             <h3>Contáctanos</h3>
             <p>Tlf +34 666666666</p>
             <p>correo@sitioweb.com</p>
             <article>
-                <a href=""><img src="../../images/footer/insta.png" alt="logo insta" width="20px"></a>
-                <a href=""><img src="../../images/footer/facebooklogo.png" alt="logo insta" width="20px"></a>
-                <a href=""><img src="../../images/footer/twitterlogo.png" alt="logo insta" width="25px"></a>
+                <a href=""><img th:src="@{/images/footer/insta.png}" alt="logo insta" width="20px"></a>
+                <a href=""><img th:src="@{/images/footer/facebooklogo.png}" alt="logo insta" width="20px"></a>
+                <a href=""><img th:src="@{/images/footer/twitterlogo.png}" alt="logo insta" width="25px"></a>
             </article>
 
         </div>
@@ -94,16 +92,16 @@
             <p>Política de privacidad</p>
             <p>Métodos de Pago</p>
             <article>
-                <a href=""><img src="../../images/footer/pay pal.webp" alt="logo paypal" width="50px"></a>
-                <a href=""><img src="../../images/footer/master card.png" alt="logo mastercard" width="50px"></a>
-                <a href=""><img src="../../images/footer/VISA.jpg" alt="logo visa" width="55px"></a>
+                <a href=""><img th:src="@{/images/footer/pay pal.webp}" alt="logo paypal" width="50px"></a>
+                <a href=""><img th:src="@{/images/footer/master card.png}" alt="logo mastercard" width="50px"></a>
+                <a href=""><img th:src="@{/images/footer/VISA.jpg}" alt="logo visa" width="55px"></a>
             </article>
         </div>
 
     </footer>
 
-    <script src="../../js/jquery/jquery-3.6.3.min.js"></script>
-    <script src="../../js/scriptHeader.js"></script>
+	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
+    <script th:src="@{/js/scriptHeader.js}"></script>
 </body>
 
 </html>
