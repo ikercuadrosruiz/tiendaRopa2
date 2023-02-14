@@ -1,4 +1,3 @@
-/*
 package com.example.demo.repository.entity;
 
 import java.util.Objects;
@@ -54,4 +53,3 @@ public class CarritoProducto {
 		return Objects.hash(id);
 	}
 }
-*/

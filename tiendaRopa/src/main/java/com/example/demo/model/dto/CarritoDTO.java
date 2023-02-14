@@ -41,29 +41,26 @@ public class CarritoDTO implements Serializable {
 	// --------------------------------------
 	// ConvertToDTO
 	// Pasamos de un Carrito a CarritoDTO
-	public static CarritoDTO convertToDTO(Carrito carrito, UsuarioDTO usuarioDTO) {
+	public static CarritoDTO convertToDTO(Carrito carrito) {
 
 		CarritoDTO carritoDTO = new CarritoDTO();
 
 		carritoDTO.setId(carrito.getId());
 		carritoDTO.setFechageneracion(carrito.getFechageneracion());
 		carritoDTO.setEstado(carrito.getEstado());
-		
-		carritoDTO.setUsuarioDTO(usuarioDTO);
 
 		return carritoDTO;
 	}
 
 	// ConvertToEntity
 	// Pasamos de UsuarioDTO a Usuario
-	public static Carrito convertToEntity(CarritoDTO carritoDTO, Usuario usuario) {
+	public static Carrito convertToEntity(CarritoDTO carritoDTO) {
 
 		Carrito carrito = new Carrito();
 
 		carrito.setId(carritoDTO.getId());
-		// carrito.setFechageneracion(carritoDTO.getFechageneracion());
+		carrito.setFechageneracion(carritoDTO.getFechageneracion());
 		carrito.setEstado(carritoDTO.getEstado());
-		carrito.setUsuario(usuario);
 
 		return carrito;
 	}
