@@ -74,7 +74,7 @@ public class Producto {
 	@JoinTable(
 			name = "imagenproducto",//Nombre de la tabla
 			joinColumns = @JoinColumn(name = "idproducto"),
-			inverseJoinColumns = @JoinColumn(name = "iddireccion")
+			inverseJoinColumns = @JoinColumn(name = "idimagen")
 	)
 	@ToString.Exclude
 	private Set<Imagen> listaImagenes;
