@@ -77,5 +77,14 @@ public class PedidoServiceImpl implements PedidoService{
 		
 	}
 
+	@Override
+	public void save(PedidoDTO pDTO) {
+			
+		Pedido p = PedidoDTO.convertToEntity(pDTO);
+		
+		pedidoRepository.save(p);
+	}
+	
+
 	
 }

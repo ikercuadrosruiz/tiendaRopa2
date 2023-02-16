@@ -74,13 +74,13 @@
                 
                 <div id="cont3">
                     <p>Fecha de Emision</p>
-                    <input th:field="*{fechaEmision}" th:value="${#dates.format(fechaEmision, 'dd/MM/yyyy')}" type="date" name="fechaEmision" readonly/>
+                    <input th:field="*{fechaEmision}" th:value="${#dates.format(fechaEmision, 'dd/MM/yyyy')}" type="datetime" name="fechaEmision" readonly/>
                     <p id="errFechaEmision" class="err"></p>
                 </div>
                 
                 <div id="cont4">
                     <p>Fecha de Entrega Prevista</p>
-                    <input th:field="*{fechaEntrega}" th:value="${#dates.format(fechaEntrega, 'dd/MM/yyyy')}" type="date" name="fechaEntrega"/>
+                    <input th:field="*{fechaEntrega}" th:value="${#dates.format(fechaEntrega, 'dd/MM/yyyy')}" type="datetime" name="fechaEntrega"/>
                     <p id="errFechaEntrega" class="err"></p>
                 </div>
 
@@ -110,7 +110,7 @@
             <!--Enlaces para volver atrás-->
             <div>
                 <a th:href="@{/trabajadores/pedidos}">Volver a Pedidos</a>
-                <button th:if="${mod}">Modificar</button>
+                <a th:if="${mod}" th:href="@{/trabajadores/pedidos/save}">Modificar</a>
             </div>
         </form>
     </main>
