@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/trabajadores/form.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/usuariosForm.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
@@ -124,6 +124,11 @@
                     <input th:field="*{cp}"type="number" name="cp"/>
                     <p id="errCp" class="err"></p>
                 </div>
+                
+                <input th:field="*{esCliente}" type="text" hidden/>
+                <input th:field="*{esTrabajador}" type="text" hidden/>
+                <input th:field="*{esAdministrador}" type="text" hidden/>
+                
             </div>
 
             <!--Enlaces para volver atrás-->

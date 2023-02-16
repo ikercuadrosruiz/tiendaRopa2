@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.example.demo.repository.entity.Categoria;
+import com.example.demo.repository.entity.Imagen;
 import com.example.demo.repository.entity.PedidoProducto;
 import com.example.demo.repository.entity.Producto;
 
@@ -29,6 +30,8 @@ public class ProductoDTO implements Serializable{
 	private Categoria categoria;
 	@ToString.Exclude
 	private List<PedidoProductoDTO> listaPedidoProductoDTO;
+	@ToString.Exclude
+	private List<ImagenDTO> listaImagenesDTO;
 	
 	// Convert to DTO
 	public static ProductoDTO convertToDTO(Producto p) {
@@ -43,6 +46,19 @@ public class ProductoDTO implements Serializable{
 		pDTO.setTalla(p.getTalla());
 		pDTO.setColor(p.getColor());
 		pDTO.setDescripcion(p.getDescripcion());
+		pDTO.getCategoria().setNombre(p.getCategoria().getNombre());
+		pDTO.getCategoria().setId(p.getCategoria().getId());
+		
+		List<Imagen> listaImagenes = new ArrayList<Imagen>(p.getListaImagenes());
+		for (Imagen i : listaImagenes) {
+			ImagenDTO iDTO = new ImagenDTO();
+			
+			iDTO.setId(i.getId());
+			iDTO.setNombre(i.getNombre());
+			iDTO.setUrl(i.getUrl());
+			
+			pDTO.getListaImagenesDTO().add(iDTO);
+		}
 		
 		return pDTO;
 	}
@@ -60,6 +76,7 @@ public class ProductoDTO implements Serializable{
 			p.setTalla(pDTO.getTalla());
 			p.setColor(pDTO.getColor());
 			p.setDescripcion(pDTO.getDescripcion());
+			p.getCategoria().setId(pDTO.getCategoria().getId());
 			
 			return p;
 		}
@@ -69,6 +86,7 @@ public class ProductoDTO implements Serializable{
 		super();
 		this.listaPedidoProductoDTO = new ArrayList<PedidoProductoDTO>();
 		this.categoria = new Categoria();
+		this.listaImagenesDTO = new ArrayList<ImagenDTO>();
 	}
 	
 	

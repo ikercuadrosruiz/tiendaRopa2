@@ -54,14 +54,12 @@ public class Producto {
 	@ToString.Exclude
 	private Categoria categoria;
 	
-	/*
 	@OneToMany(
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			mappedBy = "producto")
 	@ToString.Exclude
 	private Set<CarritoProducto> listaCarritoProducto;
-	*/
 	
 	@OneToMany(
 			fetch = FetchType.LAZY,
@@ -96,4 +94,11 @@ public class Producto {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+	// Constructor -------------------------------------------------
+	public Producto() {
+		super();
+		this.categoria = new Categoria();
+	}
+
 }

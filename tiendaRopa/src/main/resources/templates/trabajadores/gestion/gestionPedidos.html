@@ -87,7 +87,7 @@
                     <td th:text=${pedidoDTO.usuarioDTO.nombre}>Diego</td>
                     <td th:text=${pedidoDTO.estado}>En curso</td>
                     <td>
-                        <a th:href="@{/trabajadores/pedidos/{idPedido}/update (idPedido=${pedidoDTO.id})}"><img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>
+                        <a th:href="@{/trabajadores/pedidos/update/{idPedido} (idPedido=${pedidoDTO.id})}"><img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>
                     </td>
                     <td>
                         <a th:href="@{/trabajadores/pedidos/delete/{idPedido} (idPedido=${pedidoDTO.id})}"><img alt="papelera" th:src="@{/images/trabajadores/delete.png}" width="20px"></a>

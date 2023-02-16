@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.PedidoDTO;
+import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.services.PedidoService;
 import com.example.demo.services.UsuarioService;
@@ -65,5 +66,19 @@ public class PedidoController {
 		ModelAndView mav = new ModelAndView("redirect:/trabajadores/pedidos");
 		return mav;
 		
+	}
+	
+	@GetMapping("/trabajadores/pedidos/update/{idPedido}")
+	public ModelAndView update(@PathVariable Long idPedido) {
+		
+		log.info("PedidoController - update: Procedemos a modificar el pedido " + idPedido);
+		
+		PedidoDTO pDTO = pedidoService.findById(idPedido);
+		
+		ModelAndView mav = new ModelAndView("trabajadores/form/pedidosForm");
+		mav.addObject("pedidoDTO", pDTO);
+		mav.addObject("mod", true);
+		
+		return mav;
 	}
 }
