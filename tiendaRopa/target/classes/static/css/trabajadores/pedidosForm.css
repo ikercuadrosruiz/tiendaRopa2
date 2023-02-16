@@ -11,7 +11,7 @@ body>*{
 }
 
 main{
-    height: calc(100vh - 57px);
+    min-height: calc(100vh - 57px);
     width: 100%;
 
     display: flex;
@@ -88,6 +88,7 @@ form > div:last-of-type{
 }
 form > div:last-of-type > a{
     text-decoration: none;
+    
     
 }
 form > div:last-of-type button{

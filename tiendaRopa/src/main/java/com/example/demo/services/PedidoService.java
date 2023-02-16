@@ -14,4 +14,6 @@ public interface PedidoService {
 
 	PedidoDTO findById(Long idPedido);
 
+	void save(PedidoDTO pDTO);
+
 }
