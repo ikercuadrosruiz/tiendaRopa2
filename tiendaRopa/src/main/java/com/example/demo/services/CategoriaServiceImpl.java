@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,21 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 		categoriaRepository.deleteById(idCategoria);
 
+	}
+
+	@Override
+	public CategoriaDTO findById(Long idCategoria) {
+		
+		log.info("CategoriaServiceImpl - findById: Encontramos la categoria por id " + idCategoria);
+		
+		Optional<Categoria> c = categoriaRepository.findById(idCategoria);
+		if (c.isPresent()) {
+			CategoriaDTO cDTO = CategoriaDTO.convertToDTO(c.get());
+			return cDTO;
+		} else {
+			return new CategoriaDTO();
+		}
+		
 	}
 
 }

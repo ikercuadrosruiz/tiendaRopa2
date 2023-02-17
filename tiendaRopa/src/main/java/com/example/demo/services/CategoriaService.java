@@ -10,4 +10,6 @@ public interface CategoriaService {
 
 	void deleteById(Long idCategoria);
 
+	CategoriaDTO findById(Long idCategoria);
+
 }

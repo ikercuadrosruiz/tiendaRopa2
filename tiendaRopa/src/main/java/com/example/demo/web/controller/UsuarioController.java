@@ -48,7 +48,7 @@ public class UsuarioController {
 		
 	}
 	
-	@GetMapping("/trabajadores/usuarios/{idUsuario}/update")
+	@GetMapping("/trabajadores/usuarios/update/{idUsuario}")
 	public ModelAndView update(@PathVariable Long idUsuario) {
 		
 		log.info("UsuarioController - update: Actualizamos el usuario");

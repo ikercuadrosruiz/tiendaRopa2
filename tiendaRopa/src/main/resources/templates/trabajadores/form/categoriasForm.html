@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Categorias</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/categoriasForm.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/trabajadores/gestion.css}">
+    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
+
+    <title>Gestión Categorias</title>
+
 </head>
 
 <body>
 
-   <header>
+    <header>
         <nav>
             <div>
                 <ul>
@@ -47,47 +50,34 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 th:if="${listaCategoriasDTO.isEmpty()}">No hay Categorias</h2>
-
-        <div th:if="${!listaCategoriasDTO.isEmpty()}">
-            <h2>Gestión de Categorias</h2>
-
-            <form>
-                <select name="opcionesCategorias">
-                    <option value="" selected hidden disabled>Atributos de Categoria</option>
-                    <option value="id">Id</option>
-                    <option value="nombre">Nombre</option>
-                </select>
-
-                <input type="text" placeholder="Buscar..." />
-
-                <button>Buscar</button>
-            </form>
-
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                <tr th:each = "cDTO : ${listaCategoriasDTO}">
-                    <td th:text=${cDTO.id}>1</td>
-                    <td th:text=${cDTO.nombre}>David</td>
-                    <td>
-                        <a th:href="@{/trabajadores/categorias/update/{idCategoria} (idCategoria=${cDTO.id})}"><img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>
-                    </td>
-                    <td>
-                        <a th:href="@{/trabajadores/categorias/delete/{idCategoria} (idCategoria=${cDTO.id})}"><img alt="papelera" th:src="@{/images/trabajadores/delete.png}" width="20px"></a>
-                    </td>
-                </tr>
-            </table>
+        <div id="contenido">
+            <h2 th:text="${mod} ? 'Modificar Categoria' : 'Visualizar Categoria'"></h2>
         </div>
 
-        <!--Enlaces para volver atrás-->
-        <div>
-            <a th:href="@{/trabajadores}">Volver al inicio</a>
-        </div>
+        <form th:action = "@{/trabajadores/categorias/save}"
+        		th:object = "${categoriaDTO}"
+        		method = "POST">
+            <h3>Datos de la Categoría</h3>
+
+            <div>
+                <div id="cont1">
+                    <p>Id</p>
+                    <input th:field="*{id}" type="text" readonly/>
+                </div>
+
+                <div id="cont2">
+                    <p>Nombre</p>
+                    <input th:field="*{nombre}" type="text" name="nombre"/>
+                    <p id="errNombre" class="err"></p>
+                </div>
+            </div>
+
+            <!--Enlaces para volver atrás-->
+            <div>
+                <a th:href="@{/trabajadores/categorias}">Volver a Categorias</a>
+                <button th:if="${mod}">Modificar</button>
+            </div>
+        </form>
     </main>
 
     <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->

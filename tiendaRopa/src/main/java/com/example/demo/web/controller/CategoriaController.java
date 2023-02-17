@@ -48,5 +48,18 @@ public class CategoriaController {
 		return mav;
 	}
 	
+	@GetMapping("/trabajadores/categorias/update/{idCategoria}")
+	public ModelAndView update(@PathVariable Long idCategoria) {
+		
+		log.info("CategoriaController - update: Modificamos la categoria " + idCategoria);
+		
+		CategoriaDTO cDTO = categoriaService.findById(idCategoria);
+		
+		ModelAndView mav = new ModelAndView("trabajadores/form/categoriasForm");
+		mav.addObject("categoriaDTO", cDTO);
+		mav.addObject("mod", true);
+		return mav;
+	}
+	
 	
 }
