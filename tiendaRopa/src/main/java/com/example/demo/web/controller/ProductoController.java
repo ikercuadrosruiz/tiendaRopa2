@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.services.ProductoService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class ProductoController {
@@ -75,13 +78,17 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/trabajadores/productos/save")
-	public ModelAndView save(@ModelAttribute ProductoDTO pDTO) {
+	public ModelAndView save(@Valid @ModelAttribute ProductoDTO pDTO, BindingResult result) {
 		
 		log.info("ProductoController - save: Guardamos el producto");
 		
-		productoService.save(pDTO);
-		
-		ModelAndView mav = new ModelAndView("redirect:/trabajadores/productos");
+		ModelAndView mav;
+		if (result.hasErrors()) {
+			mav = new ModelAndView("trabajadores/form/productosForm");
+		}else {
+			productoService.save(pDTO);
+			mav = new ModelAndView("redirect:/trabajadores/productos");
+		}
 		return mav;
 	}
 	

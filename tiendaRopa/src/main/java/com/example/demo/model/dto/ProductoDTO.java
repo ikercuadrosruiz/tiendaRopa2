@@ -10,6 +10,7 @@ import com.example.demo.repository.entity.Imagen;
 import com.example.demo.repository.entity.PedidoProducto;
 import com.example.demo.repository.entity.Producto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,6 +20,7 @@ public class ProductoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotEmpty(message="El campo numero de Producto no puede estar vacío")
 	private String numeroProducto;
 	private String nombre;
 	private int stock;

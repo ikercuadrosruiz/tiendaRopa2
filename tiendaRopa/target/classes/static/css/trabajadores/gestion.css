@@ -9,6 +9,9 @@ main{
  flex-direction: column;
  min-height: calc(100vh - 57px);
 }
+main div h2{
+    text-align: center;
+}
 
 /* Filtros */
 main div:first-of-type form{
@@ -112,4 +115,18 @@ main div:last-of-type a:hover{
 }
 a{
 	text-decoration: none;
+}
+
+@media (max-width: 1000px) {
+
+    main {
+        display: block;
+        margin: 15px;
+    }
+
+    table{
+        display: block;
+        overflow: scroll;
+        scrollbar-width: none;
+    }
 }

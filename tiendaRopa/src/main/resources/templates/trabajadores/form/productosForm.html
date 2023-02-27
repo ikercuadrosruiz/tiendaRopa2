@@ -68,13 +68,13 @@
                 <div id="cont2">
                     <p>Numero de Producto</p>
                     <input th:field="*{numeroProducto}" type="text"/>
-               		<p id="errNumProducto" class="err"></p>
+               		<p id="errNumProducto" class="err" th:if="${#fields.hasErrors('numeroProducto')}" th:errors="*{numeroProducto}"></p>
                 </div>
                 
                 <div id="cont3">
                     <p>Nombre</p>
-                    <input th:field="*{nombre}" type="text" name="nombre"/>
-                    <p id="errNombre" class="err"></p>
+                    <input th:field="*{nombre}" type="text" name="nombre" id="nombre"/>
+                    <p id="errNombre" class="err" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
                 </div>
                 
                 <div id="cont4">

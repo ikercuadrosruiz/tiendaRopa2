@@ -105,12 +105,14 @@
 		                </tr>
                     </table>
                 </div>
+                
+                <input th:field="*{id}" type="text" readonly hidden/>
             </div>
 
             <!--Enlaces para volver atrás-->
             <div>
                 <a th:href="@{/trabajadores/pedidos}">Volver a Pedidos</a>
-                <a th:if="${mod}" th:href="@{/trabajadores/pedidos/save}">Modificar</a>
+                <button th:if="${mod}" th:href="@{/trabajadores/pedidos/save}">Modificar</button>
             </div>
         </form>
     </main>
