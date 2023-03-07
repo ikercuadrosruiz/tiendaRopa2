@@ -13,7 +13,7 @@ main {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 57px);
+    height: calc(100vh - 96px);
 
 }
 

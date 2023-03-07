@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
     <link rel="stylesheet" th:href="@{/css/trabajadores/pedidosForm.css}">
     <link rel="stylesheet" th:href="@{/css/trabajadores/gestion.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
     <title>Gestión Pedidos</title>
@@ -18,35 +17,23 @@
 <body>
 
     <header>
+        <p><b><a th:href="@{/trabajadores}">FRUTTI DI VESTITI</a></b></p>
+
         <nav>
             <div>
                 <ul>
-                    <li><a th:href="@{/trabajadores}">Inicio</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Mis Pedidos</a></li>
+                    <li><a th:href="@{/trabajadores/usuarios}">Clientes</a></li>
+                    <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
+                    <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
+                    <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
+                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
                     <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
                 </ul>
             </div>
             <img th:src="@{/images/header/menu.png}" alt="Img menu" />
         </nav>
 
-        <p><b>Frutti di Vestiti</b></p>
-
-        <nav>
-            <div>
-                <div id="btnLogin">
-                    <img th:src="@{/images/header/user.png}" alt="Imagen login">
-                </div>
-
-                <div id="favoritos">
-                    <img th:src="@{/images/header/guardados.png}" alt="Imagen guardados">
-                </div>
-
-                <div id="carrito">
-                    <img th:src="@{/images/header/carrito.png}" alt="Imagen carrito">
-                </div>
-            </div>
-        </nav>
+        <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
     </header>
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
@@ -116,36 +103,6 @@
             </div>
         </form>
     </main>
-
-    <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
-    <footer>
-        <img alt="logo" th:src="@{/images/footer/tiendaRopaLogo.png}">
-
-        <div>
-            <h3>Contáctanos</h3>
-            <p>Tlf +34 666666666</p>
-            <p>correo@sitioweb.com</p>
-            <article>
-                <a href=""><img th:src="@{/images/footer/insta.png}" alt="logo insta" width="20px"></a>
-                <a href=""><img th:src="@{/images/footer/facebooklogo.png}" alt="logo insta" width="20px"></a>
-                <a href=""><img th:src="@{/images/footer/twitterlogo.png}" alt="logo insta" width="25px"></a>
-            </article>
-
-        </div>
-
-
-        <div>
-            <h3>Política</h3>
-            <p>Política de privacidad</p>
-            <p>Métodos de Pago</p>
-            <article>
-                <a href=""><img th:src="@{/images/footer/pay pal.webp}" alt="logo paypal" width="50px"></a>
-                <a href=""><img th:src="@{/images/footer/master card.png}" alt="logo mastercard" width="50px"></a>
-                <a href=""><img th:src="@{/images/footer/VISA.jpg}" alt="logo visa" width="55px"></a>
-            </article>
-        </div>
-
-    </footer>
 
 	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
     <script th:src="@{/js/scriptHeader.js}"></script>

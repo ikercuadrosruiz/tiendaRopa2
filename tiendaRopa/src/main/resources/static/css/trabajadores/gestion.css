@@ -7,7 +7,7 @@ main{
  display: flex;
  align-items: center;
  flex-direction: column;
- min-height: calc(100vh - 57px);
+ min-height: calc(100vh - 96px);
 }
 main div h2{
     text-align: center;
