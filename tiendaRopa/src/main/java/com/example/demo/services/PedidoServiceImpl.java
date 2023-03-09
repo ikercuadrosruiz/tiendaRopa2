@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.PedidoDTO;
-import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.dao.PedidoRepository;
 import com.example.demo.repository.entity.Pedido;
-import com.example.demo.web.controller.PedidoController;
 
 @Service
 public class PedidoServiceImpl implements PedidoService{

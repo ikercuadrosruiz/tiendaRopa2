@@ -44,7 +44,6 @@
         <form th:action = "@{/trabajadores/productos/save}"
         		th:object = "${productoDTO}"
         		method = "POST">
-            <h3>Datos del Trabajador</h3>
 
             <div>
                 <div th:if="${mod}" id="cont1">
@@ -104,7 +103,7 @@
                 <div id="cont10">
                     <p>Imagenes</p>
                     <div class="contenedor_imagenes">
-                    	<div class="imagen" th:each="imagen : *{listaImagenesDTO}">
+                    	<div class="imagen" th:each="imagen : ${listaImagenesDTO}">
                     		<input type="file" name="imagen" hidden/>
                     		<img alt="Imagen" th:src="@{'/images/productos/' + ${imagen.url}}" />
                     	</div>

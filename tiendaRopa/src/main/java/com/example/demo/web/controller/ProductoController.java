@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.CategoriaDTO;
+import com.example.demo.model.dto.ImagenDTO;
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.model.dto.UsuarioDTO;
+import com.example.demo.services.ImagenService;
 import com.example.demo.services.ProductoService;
 
 import jakarta.validation.Valid;
@@ -27,6 +29,9 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private ImagenService imagenService;
 	
 	@GetMapping("/trabajadores/productos")
 	public ModelAndView findAll() {
@@ -69,16 +74,19 @@ public class ProductoController {
 		log.info("ProductoController - update: Procedems a modificar el producto " + idProducto);
 		
 		ProductoDTO pDTO = productoService.findById(idProducto);
+		List<ImagenDTO> listaImagenesDTO = imagenService.findAllImagesByProducto(idProducto);
 		
 		ModelAndView mav = new ModelAndView("trabajadores/form/productosForm");
 		mav.addObject("productoDTO", pDTO);
+		mav.addObject("listaImagenesDTO", listaImagenesDTO);
 		mav.addObject("mod", true);
 		
 		return mav;
 	}
 	
 	@PostMapping("/trabajadores/productos/save")
-	public ModelAndView save(@Valid @ModelAttribute ProductoDTO pDTO, BindingResult result) {
+	public ModelAndView save(@Valid @ModelAttribute ProductoDTO pDTO, BindingResult result, 
+			@ModelAttribute("listaImagenesDTO") List<ImagenDTO>listaImagenesDTO) {
 		
 		log.info("ProductoController - save: Guardamos el producto");
 		

@@ -31,8 +31,6 @@ public class ProductoDTO implements Serializable{
 	@ToString.Exclude
 	private Categoria categoria;
 	@ToString.Exclude
-	private List<PedidoProductoDTO> listaPedidoProductoDTO;
-	@ToString.Exclude
 	private List<ImagenDTO> listaImagenesDTO;
 	
 	// Convert to DTO
@@ -80,13 +78,23 @@ public class ProductoDTO implements Serializable{
 			p.setDescripcion(pDTO.getDescripcion());
 			p.getCategoria().setId(pDTO.getCategoria().getId());
 			
+			List<ImagenDTO> listaImagenesDTO = pDTO.getListaImagenesDTO();
+			for (ImagenDTO iDTO : listaImagenesDTO) {
+				Imagen i = new Imagen();
+				
+				i.setId(iDTO.getId());
+				i.setNombre(iDTO.getNombre());
+				i.setUrl(iDTO.getUrl());
+				
+				p.getListaImagenes().add(i);
+			}
+			
 			return p;
 		}
 	
 	// Constructores 
 	public ProductoDTO() {
 		super();
-		this.listaPedidoProductoDTO = new ArrayList<PedidoProductoDTO>();
 		this.categoria = new Categoria();
 		this.listaImagenesDTO = new ArrayList<ImagenDTO>();
 	}
