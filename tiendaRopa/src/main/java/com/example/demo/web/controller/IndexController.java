@@ -32,14 +32,26 @@ public class IndexController {
 		return mav;
 	}
 	
-	@GetMapping("/index/login")
+	@GetMapping("/login")
 	public ModelAndView login() {
 		
-		log.info("IndexController - LogIn: Mostramos el login");
+		log.info("IndexController - LogIn: Mostramos el formulario de login");
 		
 		ModelAndView mav = new ModelAndView("login");
 		
 		return mav;
 	}
+	
+	/*
+	@GetMapping("/registro")
+	public ModelAndView registro() {
+		
+		log.info("IndexController - Registro: Mostramos el formulario de registro");
+		
+		ModelAndView mav = new ModelAndView("registro");
+		
+		return mav;
+	}
+	*/
 
 }

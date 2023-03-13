@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.CategoriaDTO;
+import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.dao.CategoriaRepository;
 import com.example.demo.repository.dao.UsuarioRepository;
 import com.example.demo.repository.entity.Categoria;
 import com.example.demo.repository.entity.Usuario;
+
+import jakarta.validation.Valid;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
@@ -59,6 +62,14 @@ public class CategoriaServiceImpl implements CategoriaService {
 			return new CategoriaDTO();
 		}
 		
+	}
+
+	@Override
+	public void save(@Valid CategoriaDTO cDTO) {
+		
+		log.info("CategoriaServiceImpl - save: Guardamos los datos de la categoria " + cDTO.getId() );
+		
+		categoriaRepository.save(CategoriaDTO.convertToEntity(cDTO));
 	}
 
 }

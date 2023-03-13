@@ -1,5 +1,6 @@
 package com.example.demo.repository.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -99,6 +100,7 @@ public class Producto {
 	public Producto() {
 		super();
 		this.categoria = new Categoria();
+		this.listaImagenes = new HashSet<Imagen>();
 	}
 
 }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.services.CategoriaService;
 import com.example.demo.services.ProductoService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class CategoriaController {
@@ -58,6 +61,36 @@ public class CategoriaController {
 		ModelAndView mav = new ModelAndView("trabajadores/form/categoriasForm");
 		mav.addObject("categoriaDTO", cDTO);
 		mav.addObject("mod", true);
+		return mav;
+	}
+	
+	@GetMapping("/trabajadores/categorias/add")
+	public ModelAndView add() {
+		
+		log.info("CategoriaController - add: Añadimos una nueva categoria");
+		
+		CategoriaDTO cDTO = new CategoriaDTO();
+		
+		ModelAndView mav = new ModelAndView("trabajadores/form/categoriasForm");
+		mav.addObject("categoriaDTO", cDTO);
+		mav.addObject("mod", false);
+		mav.addObject("add", true);
+		
+		return mav;
+	}
+	
+	@PostMapping("/trabajadores/categorias/save")
+	public ModelAndView save(@Valid @ModelAttribute("categoriaDTO") CategoriaDTO cDTO, BindingResult result) {
+		
+		log.info("CategoriaController - save: Guardamos la categoria");
+		
+		ModelAndView mav;
+		if (result.hasErrors()) {
+			mav = new ModelAndView("trabajadores/form/categoriasForm");
+		}else {
+			categoriaService.save(cDTO);
+			mav = new ModelAndView("redirect:/trabajadores/categorias");
+		}
 		return mav;
 	}
 	

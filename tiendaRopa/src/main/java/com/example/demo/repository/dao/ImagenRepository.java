@@ -2,6 +2,7 @@ package com.example.demo.repository.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface ImagenRepository {
+public interface ImagenRepository extends JpaRepository<Imagen, Long>{
 
 	@Query(value = "SELECT distinct i.* FROM imagenes i "
 			+ "INNER JOIN imagenproducto ip ON i.id = ip.id "

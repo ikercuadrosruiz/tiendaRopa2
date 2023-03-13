@@ -33,7 +33,8 @@
         </nav>
 
         <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
-    </header>---------------------NO CAMBIAR - ARRIBA------------------------------ -->
+    </header>
+    <!-- ---------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
         <div id="contenido">
@@ -46,7 +47,7 @@
             <h3>Datos de la Categoría</h3>
 
             <div>
-                <div id="cont1">
+                <div th:if="${mod}" id="cont1">
                     <p>Id</p>
                     <input th:field="*{id}" type="text" readonly/>
                 </div>
@@ -62,6 +63,7 @@
             <div>
                 <a th:href="@{/trabajadores/categorias}">Volver a Categorias</a>
                 <button th:if="${mod}">Modificar</button>
+                <button th:if="${add}">Añadir</button>
             </div>
         </form>
     </main>

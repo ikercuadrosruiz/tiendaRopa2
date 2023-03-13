@@ -17,7 +17,6 @@ public class CategoriaDTO implements Serializable{
 	
 	private Long id;
 	private String nombre;
-	private List<ProductoDTO> listaProductosDTO;
 	
 	// Convert to DTO
 	public static CategoriaDTO convertToDTO(Categoria c) {
@@ -44,7 +43,6 @@ public class CategoriaDTO implements Serializable{
 	// Constructor ------------------------------
 	public CategoriaDTO() {
 		super();
-		this.listaProductosDTO = new ArrayList<ProductoDTO>();
 	}
 	
 }

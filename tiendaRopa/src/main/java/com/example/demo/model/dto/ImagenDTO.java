@@ -25,8 +25,6 @@ public class ImagenDTO implements Serializable {
 	private Long id;
 	private String nombre;
 	private String url;
-	@ToString.Exclude
-	private List<ProductoDTO> listaProductosDTO;
 
 	// Convert to DTO
 	public static ImagenDTO convertToDTO(Imagen i) {
@@ -55,7 +53,6 @@ public class ImagenDTO implements Serializable {
 	// Constructor
 	public ImagenDTO() {
 		super();
-		this.listaProductosDTO = new ArrayList<ProductoDTO>();
 	}
 
 }

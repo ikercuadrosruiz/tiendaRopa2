@@ -94,6 +94,7 @@ public class PedidoController {
 		pDTO.setFechaEmision(pedidoDTO.getFechaEmision());
 		pDTO.setFechaEntrega(pedidoDTO.getFechaEntrega());
 		pDTO.setPrecio(pedidoDTO.getPrecio());
+		pDTO.setEstado(pedidoDTO.getEstado());
 		
 		pedidoService.save(pDTO);
 		

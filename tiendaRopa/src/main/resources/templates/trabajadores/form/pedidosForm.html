@@ -50,7 +50,10 @@
             <div>
                 <div id="cont1">
                     <p>Estado</p>
-                    <input th:field="*{estado}" type="text" readonly/>
+                    <select name="selectEstado" th:field="*{estado}">
+                    	<option th:value="'en curso'">En curso</option>
+                    	<option th:value="'entregado'">Entregado</option>
+                    </select>
                 </div>
                 
                 <div id="cont2">

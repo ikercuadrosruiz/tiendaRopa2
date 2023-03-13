@@ -1,5 +1,6 @@
 package com.example.demo.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ImagenDTO;
 import com.example.demo.model.dto.ProductoDTO;
-import com.example.demo.model.dto.UsuarioDTO;
+import com.example.demo.services.CategoriaService;
 import com.example.demo.services.ImagenService;
 import com.example.demo.services.ProductoService;
 
@@ -32,6 +34,9 @@ public class ProductoController {
 	
 	@Autowired
 	private ImagenService imagenService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 	
 	@GetMapping("/trabajadores/productos")
 	public ModelAndView findAll() {
@@ -61,8 +66,11 @@ public class ProductoController {
 		
 		log.info("ProductoController - add: Procedems a añadir un nuevo producto");
 		
+		List<CategoriaDTO> listaCategoriasDTO = categoriaService.findAll();
+		
 		ModelAndView mav = new ModelAndView("trabajadores/form/productosForm");
 		mav.addObject("productoDTO", new ProductoDTO());
+		mav.addObject("listaCategoriasDTO", listaCategoriasDTO);
 		mav.addObject("mod", false);
 		
 		return mav;
@@ -74,19 +82,18 @@ public class ProductoController {
 		log.info("ProductoController - update: Procedems a modificar el producto " + idProducto);
 		
 		ProductoDTO pDTO = productoService.findById(idProducto);
-		List<ImagenDTO> listaImagenesDTO = imagenService.findAllImagesByProducto(idProducto);
+		List<CategoriaDTO> listaCategoriasDTO = categoriaService.findAll();
 		
 		ModelAndView mav = new ModelAndView("trabajadores/form/productosForm");
 		mav.addObject("productoDTO", pDTO);
-		mav.addObject("listaImagenesDTO", listaImagenesDTO);
+		mav.addObject("listaCategoriasDTO", listaCategoriasDTO);
 		mav.addObject("mod", true);
 		
 		return mav;
 	}
 	
 	@PostMapping("/trabajadores/productos/save")
-	public ModelAndView save(@Valid @ModelAttribute ProductoDTO pDTO, BindingResult result, 
-			@ModelAttribute("listaImagenesDTO") List<ImagenDTO>listaImagenesDTO) {
+	public ModelAndView save(@Valid @ModelAttribute("productoDTO") ProductoDTO pDTO, BindingResult result) {
 		
 		log.info("ProductoController - save: Guardamos el producto");
 		

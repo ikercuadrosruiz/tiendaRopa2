@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
     <link rel="icon" type="image/x-icon" href="../images/imagenFavicon.png">
 
@@ -50,27 +50,32 @@
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
+		<div>
+            <img th:src="@{/images/login/imagenLogin.jpg}" alt="Imagen login">
+        </div>
 
-        <form id="formLogIn">
-            <h3>LogIn</h3>
+        <div>
+            <form id="formLogIn">
+                <h3>LogIn</h3>
 
-            <div>
-                <p>Email</p>
-                <input type="email" id="email" name="email" />
-                <p class="err" id="errEmail"></p>
-            </div>
+                <div>
+                    <p>Email</p>
+                    <input type="email" id="email" name="email" />
+                    <p class="err" id="errEmail"></p>
+                </div>
 
-            <div>
-                <p>Password</p>
-                <input type="password" id="password" name="password" />
-                <p class="err" id="errPassword"></p>
-            </div>
+                <div>
+                    <p>Password</p>
+                    <input type="password" id="password" name="password" />
+                    <p class="err" id="errPassword"></p>
+                </div>
 
-            <button id="enviarRegistro" type="submit">Acceder</button>
+                <button id="enviarRegistro" type="submit">Acceder</button>
 
-            <p>¿Todavía no se encuentra registrado?</p>
-            <a href="">Registrese aquí</a> <!--th:href = "@{tiendaRopa/registro}"-->
-        </form>
+                <p>¿Todavía no se encuentra registrado?</p>
+                <a href="">Registrese aquí</a> <!--th:href = "@{tiendaRopa/registro}"-->
+            </form>
+        </div>
 
     </main>
 

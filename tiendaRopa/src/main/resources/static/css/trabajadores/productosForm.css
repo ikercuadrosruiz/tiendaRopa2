@@ -67,6 +67,15 @@ main form > div:first-of-type{
     border: none;
 }
 
+#cont8 select{
+    width: 100%;
+    padding-left: 1.5em;
+    height: 30px;
+    background-color: #d3d3d4;
+    border-radius: 5px;
+    border: 0;
+}
+
 #cont10{
     grid-column: 1/-1;
 }
@@ -122,4 +131,3 @@ form > div:last-of-type button{
     border: 0px;
     
     cursor: pointer;
-}

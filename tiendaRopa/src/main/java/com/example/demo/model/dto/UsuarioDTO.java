@@ -25,7 +25,7 @@ public class UsuarioDTO implements Serializable{
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
-	@DateTimeFormat(iso = ISO.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
 	private String direccion;
 	private String poblacion;
