@@ -55,25 +55,28 @@
         </div>
 
         <div>
-            <form id="formLogIn">
+            <form id="formLogIn"
+            		th:action = "@{/login/check}"
+            		th:object="${usuarioDTO}"
+            		method = "POST">
                 <h3>LogIn</h3>
 
                 <div>
                     <p>Email</p>
-                    <input type="email" id="email" name="email" />
-                    <p class="err" id="errEmail"></p>
+                    <input type="text" id="email" name="email" th:field="*{correo}"/>
+                    <p class="err" id="errEmail" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
                 </div>
 
                 <div>
                     <p>Password</p>
-                    <input type="password" id="password" name="password" />
-                    <p class="err" id="errPassword"></p>
+                    <input type="password" id="password" name="password" th:field=*{password} />
+                    <p class="err" id="errPassword" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                 </div>
 
                 <button id="enviarRegistro" type="submit">Acceder</button>
 
                 <p>¿Todavía no se encuentra registrado?</p>
-                <a href="">Registrese aquí</a> <!--th:href = "@{tiendaRopa/registro}"-->
+                <a th:href = "@{/registro}">Registrese aquí</a>
             </form>
         </div>
 

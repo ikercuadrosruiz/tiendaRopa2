@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.example.demo.model.dto.UsuarioDTO;
 
+import jakarta.validation.Valid;
+
 public interface UsuarioService {
 
 	List<UsuarioDTO> findAll();
@@ -15,5 +17,7 @@ public interface UsuarioService {
 	void save(UsuarioDTO usuarioDTO);
 
 	List<UsuarioDTO> findAllTrabajadores();
+
+	UsuarioDTO findByEmailAndPassword(@Valid UsuarioDTO uDTO);
 
 }

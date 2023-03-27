@@ -8,6 +8,10 @@ body{
     padding: 0;
     box-sizing: border-box;
 }
+.err{
+    color: red;
+    font-size: .9em;
+}
 
 /* Login ---------------------------------------*/
 
@@ -123,3 +127,5 @@ form > p{
         border-radius: 0 0 20px 20px;
     }
 }
+
+

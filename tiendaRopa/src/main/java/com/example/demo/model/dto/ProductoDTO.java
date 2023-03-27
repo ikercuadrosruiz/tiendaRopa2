@@ -3,11 +3,9 @@ package com.example.demo.model.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.example.demo.repository.entity.Categoria;
 import com.example.demo.repository.entity.Imagen;
-import com.example.demo.repository.entity.PedidoProducto;
 import com.example.demo.repository.entity.Producto;
 
 import jakarta.validation.constraints.NotEmpty;

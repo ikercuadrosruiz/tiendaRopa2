@@ -12,6 +12,10 @@ import com.example.demo.repository.entity.Carrito;
 // import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.Usuario;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.ToString;
 
@@ -21,17 +25,45 @@ public class UsuarioDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	/**/
 	private Long id;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-HJNPW-Z0-9]{1}[0-9]{7}[A-HJNPW-Z0-9]{1}$", message = "El nif no tiene el formato correcto. Ej: 12345678A")
 	private String nif;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-Za-z]+$", message = "El nombre solo puede contener letras")
 	private String nombre;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-Za-z]+$", message = "El apellido solo puede contener letras")
 	private String apellido1;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-Za-z]+$", message = "El apellido solo puede contener letras")
 	private String apellido2;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
 	private String direccion;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ -][A-Za-zÀ-ÖØ-öø-ÿ]+)*$", message = "La población no es válida")
 	private String poblacion;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,}$", message = "El correo electrónico ingresado no es válido")
 	private String correo;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z]).+$", message = "La contraseña debe tener al menos una minúscula y un número")
 	private String password;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[0-9]{5}$", message = "El código postal debe contener 5 números")
 	private String cp;
+	
 	private int esCliente;
 	private int esTrabajador;
 	private int esAdministrador;

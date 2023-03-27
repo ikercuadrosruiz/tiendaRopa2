@@ -13,6 +13,8 @@ import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.dao.UsuarioRepository;
 import com.example.demo.repository.entity.Usuario;
 
+import jakarta.validation.Valid;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -80,5 +82,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
 		usuarioRepository.save(usuario);
+	}
+
+	@Override
+	public UsuarioDTO findByEmailAndPassword(UsuarioDTO uDTO) {
+		
+		log.info("UsuarioServiceImpl - findByEmailAndPassword: Buscamos el usuario por email y contraseña" );
+		
+		List<Usuario> lu = usuarioRepository.findByEmailAndPassword(uDTO.getCorreo(), uDTO.getPassword());
+		
+		if (lu.size() > 0) {
+			return UsuarioDTO.convertToDTO(lu.get(0));
+		}else {
+			return null;
+		}
+		
 	}
 }

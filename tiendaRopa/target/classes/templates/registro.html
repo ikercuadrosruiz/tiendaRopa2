@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/registro.css}">
+    <link rel="icon" type="image/x-icon" href="../images/imagenFavicon.png">
+
+    <title>LogIn - Iker Cuadros</title>
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div>
+                <ul>
+                    <li><a th:href="@{/trabajadores}">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Mis Pedidos</a></li>
+                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                </ul>
+            </div>
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+        </nav>
+
+        <p><b>Frutti di Vestiti</b></p>
+
+        <nav>
+            <div>
+                <div id="btnLogin">
+                    <img th:src="@{/images/header/user.png}" alt="Imagen login">
+                </div>
+
+                <div id="favoritos">
+                    <img th:src="@{/images/header/guardados.png}" alt="Imagen guardados">
+                </div>
+
+                <div id="carrito">
+                    <img th:src="@{/images/header/carrito.png}" alt="Imagen carrito">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
+
+    <main>
+        <div>
+            <img th:src="@{/images/registro/fondoRegistro-c.jpg}" alt="Imagen registro 1" />
+            <img th:src="@{/images/registro/fondoRegistro-bw.jpg}" alt="Imagen registro 2" />
+            <img th:src="@{/images/registro/fondoRegistro3.jpg}" alt="Imagen registro 3">
+        </div>
+
+        <div>
+            <form id="formRegistro"
+            	th:action = "@{/registro/save}"
+            	th:object = "${usuarioDTO}"
+            	method = "POST">
+                <h3>Registro</h3>
+
+                <div id="cont1">
+                    <p>Nombre</p>
+                    <input th:field="*{nombre}" type="text" name="nombre" />
+                    <p class="err" id="errNombre" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+                </div>
+
+                <div id="cont2">
+                    <p>Primer Apellido</p>
+                    <input th:field="*{apellido1}" type="text" name="Ap1" />
+                    <p class="err" id="errAp1" th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></p>
+                </div>
+
+                <div id="cont3">
+                    <p>Segundo Apellido</p>
+                    <input th:field="*{apellido2}" type="text" name="Ap2" />
+                    <p class="err" id="errAp2" th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}"></p>
+                </div>
+                
+                <div id="cont34">
+                    <p>NIF</p>
+                    <input th:field="*{nif}" type="text" name="nif" />
+                    <p class="err" id="errNif" th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}"></p>
+                </div>
+
+                <div id="cont4">
+                    <p>Email</p>
+                    <input type="text" id="email" name="email" th:field="*{correo}"/>
+                    <p class="err" id="errEmail" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
+                </div>
+
+                <div id="cont5">
+                    <p>Fecha de Nacimiento</p>
+                    <input th:field="*{fechaNacimiento}" type="date" name="fecNacimiento" />
+                    <p class="err" id="errFecNacimiento"></p>
+                </div>
+
+                <div id="cont6">
+                    <p>Población</p>
+                    <input th:field="*{poblacion}" type="text" name="poblacion" />
+                    <p id="errPoblacion" class="err" th:if="${#fields.hasErrors('poblacion')}" th:errors="*{poblacion}"></p>
+                </div>
+
+                <div id="cont7">
+                    <p>Dirección</p>
+                    <input th:field="*{direccion}" type="text" name="direccion" />
+                    <p id="errDireccion" class="err" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></p>
+                </div>
+
+                <div id="cont8">
+                    <p>Código Postal</p>
+                    <input th:field="*{cp}" type="text" name="cp" />
+                    <p id="errCp" class="err" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></p>
+                </div>
+
+                <div id="cont9">
+                    <p>Contraseña</p>
+                    <input type="password" id="password" name="password" th:field=*{password} />
+                    <p class="err" id="errPassword" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
+
+                <div id="cont10">
+                    <p>Repita la Contraseña</p>
+                    <input type="password" name="password2" />
+                    <p class="err" id="errPassword2"></p>
+                </div>
+                
+                <input th:field="*{esCliente}" type="text" hidden/>
+                <input th:field="*{esTrabajador}" type="text" hidden/>
+                <input th:field="*{esAdministrador}" type="text" hidden/>
+
+                <button id="enviarRegistro" type="submit">Registrarse</button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
+   <footer>
+        <img alt="logo" th:src="@{/images/footer/tiendaRopaLogo.png}">
+
+        <div>
+            <h3>Contáctanos</h3>
+            <p>Tlf +34 666666666</p>
+            <p>correo@sitioweb.com</p>
+            <article>
+                <a href=""><img th:src="@{/images/footer/insta.png}" alt="logo insta" width="20px"></a>
+                <a href=""><img th:src="@{/images/footer/facebooklogo.png}" alt="logo insta" width="20px"></a>
+                <a href=""><img th:src="@{/images/footer/twitterlogo.png}" alt="logo insta" width="25px"></a>
+            </article>
+
+        </div>
+
+
+        <div>
+            <h3>Política</h3>
+            <p>Política de privacidad</p>
+            <p>Métodos de Pago</p>
+            <article>
+                <a href=""><img th:src="@{/images/footer/pay pal.webp}" alt="logo paypal" width="50px"></a>
+                <a href=""><img th:src="@{/images/footer/master card.png}" alt="logo mastercard" width="50px"></a>
+                <a href=""><img th:src="@{/images/footer/VISA.jpg}" alt="logo visa" width="55px"></a>
+            </article>
+        </div>
+
+    </footer>
+
+	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
+    <script th:src="@{/js/scriptHeader.js}"></script>
+</body>
+
+</html>
