@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Frutti di Vestiti</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div>
+                <ul>
+                    <li><a th:href="@{/trabajadores}">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Mis Pedidos</a></li>
+                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                </ul>
+            </div>
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+        </nav>
+
+        <p><b>Frutti di Vestiti</b></p>
+
+        <nav>
+            <div>
+                <div id="btnLogin">
+                    <a th:href="@{/login}"><img th:src="@{/images/header/user.png}" alt="Imagen login" /></a>
+                </div>
+
+                <div id="favoritos">
+                    <a><img th:src="@{/images/header/guardados.png}" alt="Imagen guardados" /></a>
+                </div>
+
+                <div id="carrito">
+                    <a><img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <div id="div--busqueda"></div>
+
+        <div id="div--filtros"></div>
+
+        <div id="div--productos">
+            <p>Productos</p>
+            <div id="cont--productos">
+                <div id="cont--producto">
+                    <img src="images/heart.png" alt="like" class="like--icon">
+                    <img src="images/gorra.jpg" alt="gorra" class="dress--icon">
+                    <div>
+                        <p>[Tipo categoría]</p>
+                        <p>Nombre producto</p>
+                        <div>
+                            <p>19.99€</p>
+                            <div class="buy--icon">
+                                <img src="images/shopping bag.png" alt="Ir al carrito">
+                            </div>
+                            <div class="view--icon">
+                                <img src="images/ver producto.png" alt="Ver producto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cont--producto">
+                    <img src="images/heart.png" alt="like" class="like--icon">
+                    <img src="images/gorra.jpg" alt="gorra" class="dress--icon">
+                    <div>
+                        <p>[Tipo categoría]</p>
+                        <p>Nombre producto</p>
+                        <div>
+                            <p>19.99€</p>
+                            <div class="buy--icon">
+                                <img src="images/shopping bag.png" alt="Ir al carrito">
+                            </div>
+                            <div class="view--icon">
+                                <img src="images/ver producto.png" alt="Ver producto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cont--producto">
+                    <img src="images/heart.png" alt="like" class="like--icon">
+                    <img src="images/gorra.jpg" alt="gorra" class="dress--icon">
+                    <div>
+                        <p>[Tipo categoría]</p>
+                        <p>Nombre producto</p>
+                        <div>
+                            <p>19.99€</p>
+                            <div class="buy--icon">
+                                <img src="images/shopping bag.png" alt="Ir al carrito">
+                            </div>
+                            <div class="view--icon">
+                                <img src="images/ver producto.png" alt="Ver producto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
