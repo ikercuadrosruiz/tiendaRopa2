@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
-    <link rel="stylesheet" th:href="@{/css/clientes/tienda.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/mostrarArticulo.css}">
     <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
-    <title>Frutti di Vestiti</title>
+    <title>Página artículo</title>
 </head>
-
 <body>
     <header>
         <nav>
@@ -45,57 +43,49 @@
     </header>
     
     <!-- ***************************************** -->
-
+    
     <main>
-        <div id="div--buscador">
-            <div><img th:src="@{/images/tienda/imgLupa.png}" alt="Busqueda"></div>
-            <input type="text"  placeholder="Busque un artículo..."/>
-        </div>
+        <img th:src="@{/images/productos/{imagen} (imagen=${productoDTO.listaImagenesDTO[0].url})}" alt="Imagen del artículo">
 
-        <div id="div--filtros">
-            <p>Filtros</p>
+        <div id="div--producto">
+            <a th:href="@{/tienda}">&lt;-- Back to the home page</a>
             <div>
-                <select name="categorias" id="selec-cat">
-                    <option value="" hidden selected disabled>Categorías</option>
-                    <option th:each = "cDTO : ${listaCategoriasDTO}" th:text=${cDTO.nombre}></option>
-                </select>
-                <a href="">Precio de + a -</a>
-                <a href="">Precio de - a +</a>
+                <p th:text = ${productoDTO.nombre}>Nombre producto</p>
+                <img th:src="@{/images/tienda/heart.png}" alt="like">
             </div>
-        </div>
+            <p th:text = ${productoDTO.precio}>19.99€</p>
 
-        <div id="div--productos">
-            <p>Productos</p>
-            <div id="cont--productos">
-                <div id="cont--producto" th:each = "pDTO : ${listaProductosDTO}">
-                    <img th:src="@{/images/tienda/heart.png}" alt="like" class="like--icon">
-                    <img th:src="@{/images/productos/{imagen} (imagen=${pDTO.listaImagenesDTO[0].url})}" alt="gorra" class="dress--icon">
-                    <div>
-                        <p th:text = ${pDTO.categoria.nombre}>[Tipo categoría]</p>
-                        <p th:text = ${pDTO.nombre}>Nombre producto</p>
-                        <div>
-                            <p th:text = ${pDTO.precio}>19.99€</p>
-                            
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <a th:href="@{/tienda/producto/addCarrito/{idProducto} (idProducto=${pDTO.id})}">
-                            	<div class="buy--icon">
-                                	<img th:src="@{/images/tienda/shopping-bag.png}" alt="Ir al carrito">
-                            	</div>
-                            </a>
-                            
-                            <a th:href="@{/tienda/producto/{idProducto} (idProducto=${pDTO.id})}">
-	                            <div class="view--icon">
-	                                <img th:src="@{/images/tienda/ver-producto.png}" alt="Ver producto">
-	                            </div>
-                            </a>
-                        </div>
-                    </div>
+            <!--Debería hacerlo grid el div--masDatos-->
+            <div id="div--masDatos">
+                <div>
+                    <p>Descripción</p>
+                    <p th:text = ${productoDTO.descripcion}>La gorra es un accesorio de moda que se utiliza
+                    en la cabeza para protegerse del sol, el viento
+                    o la lluvia. Generalmente, está hecha de tela y 
+                    tiene una visera que cubre los ojos. Las gorras 
+                    pueden ser utilizadas por hombres y mujeres, y 
+                    son ideales para complementar cualquier look casual 
+                    o deportivo.
+                    </p>
                 </div>
 
+                <div>
+                    <p>Color</p>
+                    <input type="color" th:value=${productoDTO.color} disabled/>
+                </div>
+                
+                <div>
+                    <p>Categoría</p>
+                    <p th:text = ${productoDTO.categoria.nombre}>Gorras</p>
+                </div>
+                
+                <div>
+                    <p>Talla</p>
+                    <p th:text=${productoDTO.talla}>L</p>
+                </div>
             </div>
+
+            <a th:href="@{/tienda/producto/addCarrito/{idProducto} (idProducto=${productoDTO.id})}">Añadir al carrito</a>
         </div>
     </main>
     
@@ -130,5 +120,4 @@
 
     </footer>
 </body>
-
 </html>

@@ -75,12 +75,22 @@
                         <p th:text = ${pDTO.nombre}>Nombre producto</p>
                         <div>
                             <p th:text = ${pDTO.precio}>19.99€</p>
-                            <div class="buy--icon">
-                                <img th:src="@{/images/tienda/shopping-bag.png}" alt="Ir al carrito">
-                            </div>
-                            <div class="view--icon">
-                                <img th:src="@{/images/tienda/ver-producto.png}" alt="Ver producto">
-                            </div>
+                            
+                            <!-- Al darle click aqui debe añAadirse al carrito -->
+                            <!-- Al darle click aqui debe añAadirse al carrito -->
+                            <!-- Al darle click aqui debe añAadirse al carrito -->
+                            <!-- Al darle click aqui debe añAadirse al carrito -->
+                            <a th:href="@{/tienda/producto/addCarrito/{idProducto} (idProducto=${pDTO.id})}">
+                            	<div class="buy--icon">
+                                	<img th:src="@{/images/tienda/shopping-bag.png}" alt="Ir al carrito">
+                            	</div>
+                            </a>
+                            
+                            <a th:href="@{/tienda/producto/{idProducto} (idProducto=${pDTO.id})}">
+	                            <div class="view--icon">
+	                                <img th:src="@{/images/tienda/ver-producto.png}" alt="Ver producto">
+	                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
