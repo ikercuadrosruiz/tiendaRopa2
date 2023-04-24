@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.example.demo.repository.entity.Carrito;
 // import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.Usuario;
+import com.example.demo.repository.entity.UsuarioRol;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -64,9 +65,8 @@ public class UsuarioDTO implements Serializable{
 	@Pattern(regexp = "^[0-9]{5}$", message = "El código postal debe contener 5 números")
 	private String cp;
 	
-	private int esCliente;
-	private int esTrabajador;
-	private int esAdministrador;
+	@ToString.Exclude
+	private List<UsuarioRolDTO> listUsuarioRolDTO;
 	@ToString.Exclude
 	private List<PedidoDTO> listaPedidosDTO;
 	@ToString.Exclude
@@ -94,9 +94,6 @@ public class UsuarioDTO implements Serializable{
 		usuarioDTO.setCorreo(usuario.getCorreo());
 		usuarioDTO.setPassword(usuario.getPassword());
 		usuarioDTO.setCp(usuario.getCp());
-		usuarioDTO.setEsCliente(usuario.getEsCliente());
-		usuarioDTO.setEsTrabajador(usuario.getEsTrabajador());
-		usuarioDTO.setEsAdministrador(usuario.getEsAdministrador());
 		
 		return usuarioDTO;
 	}
@@ -118,9 +115,6 @@ public class UsuarioDTO implements Serializable{
 		usuario.setCorreo(usuarioDTO.getCorreo());
 		usuario.setPassword(usuarioDTO.getPassword());
 		usuario.setCp(usuarioDTO.getCp());
-		usuario.setEsCliente(usuarioDTO.getEsCliente());
-		usuario.setEsTrabajador(usuarioDTO.getEsTrabajador());
-		usuario.setEsAdministrador(usuarioDTO.getEsAdministrador());
 		
 		return usuario;
 	}
@@ -129,5 +123,6 @@ public class UsuarioDTO implements Serializable{
 		super();
 		this.listaPedidosDTO = new ArrayList<PedidoDTO>();
 		this.listaCarritosDTO = new ArrayList<CarritoDTO>();
+		this.listUsuarioRolDTO = new ArrayList<UsuarioRolDTO>();
 	}
 }

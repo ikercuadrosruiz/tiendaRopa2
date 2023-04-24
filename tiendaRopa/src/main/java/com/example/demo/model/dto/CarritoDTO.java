@@ -34,9 +34,8 @@ public class CarritoDTO implements Serializable {
 	private String estado;
 	@ToString.Exclude
 	private UsuarioDTO usuarioDTO;
-	/*
-	 * @ToString.Exclude private List<CarritoProducto> listaCarritoProducto;
-	 */
+	@ToString.Exclude 
+	private List<CarritoProductoDTO> listaCarritoProductoDTO;
 
 	// --------------------------------------
 	// ConvertToDTO

@@ -57,6 +57,10 @@
         </div>
 
         <div>
+        	<div th:if="${param.exito}">
+        		<p>✔ Se ha registrado correctamente a la aplicación (Editar estilo de la alerta)</p>
+        	</div>
+        	
             <form id="formRegistro"
             	th:action = "@{/registro/save}"
             	th:object = "${usuarioDTO}"
@@ -128,10 +132,6 @@
                     <input type="password" name="password2" />
                     <p class="err" id="errPassword2"></p>
                 </div>
-                
-                <input th:field="*{esCliente}" type="text" hidden/>
-                <input th:field="*{esTrabajador}" type="text" hidden/>
-                <input th:field="*{esAdministrador}" type="text" hidden/>
 
                 <button id="enviarRegistro" type="submit">Registrarse</button>
             </form>

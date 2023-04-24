@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
-    <link rel="stylesheet" th:href="@{/css/clientes/tienda.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/carrito.css}">
     <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
-    <title>Frutti di Vestiti</title>
+    <title>Carrito</title>
 </head>
 
 <body>
@@ -43,64 +43,67 @@
             </div>
         </nav>
     </header>
-    
+
     <!-- ***************************************** -->
 
     <main>
-        <div id="div--buscador">
-            <div><img th:src="@{/images/tienda/imgLupa.png}" alt="Busqueda"></div>
-            <input type="text"  placeholder="Busque un artículo..."/>
-        </div>
+        <div id="cont--productos">
+            <div id="cont--producto" th:each="pDTO : ${listaProductosDTO}">
+                <a th:href="@{/tienda/producto/{idProducto} (idProducto=${pDTO.id})}">
+                	<img th:src="@{/images/productos/{imagen} (imagen=${pDTO.listaImagenesDTO[0].url})}" alt="gorra">
+                </a>
 
-        <div id="div--filtros">
-            <p>Filtros</p>
-            <div>
-                <select name="categorias" id="selec-cat">
-                    <option value="" hidden selected disabled>Categorías</option>
-                    <option th:each = "cDTO : ${listaCategoriasDTO}" th:text=${cDTO.nombre}></option>
-                </select>
-                <a href="">Precio de + a -</a>
-                <a href="">Precio de - a +</a>
+                <!--Debería hacerlo grid el div--masDatos-->
+                <div id="div--masDatos">
+                    <p th:text=${pDTO.nombre}>Nombre producto</p>
+
+                    <div>
+                        <p>Color</p>
+                        <input type="color" th:value=${pDTO.color} disabled />
+                    </div>
+
+                    <div>
+                        <p>Talla</p>
+                        <p th:text=${pDTO.talla}>L</p>
+                    </div>
+
+                    <div>
+                        <p>Cantidad</p>
+                        <p>-</p>
+                    </div>
+
+                    <p th:text=${pDTO.precio}>19.99€</p>
+                </div>
             </div>
         </div>
-
-        <div id="div--productos">
-            <p>Productos</p>
-            <div id="cont--productos">
-                <div id="cont--producto" th:each = "pDTO : ${listaProductosDTO}">
-                    <img th:src="@{/images/tienda/heart.png}" alt="like" class="like--icon">
-                    <img th:src="@{/images/productos/{imagen} (imagen=${pDTO.listaImagenesDTO[0].url})}" alt="gorra" class="dress--icon">
-                    <div>
-                        <p th:text = ${pDTO.categoria.nombre}>[Tipo categoría]</p>
-                        <p th:text = ${pDTO.nombre}>Nombre producto</p>
-                        <div>
-                            <p th:text = ${pDTO.precio}>19.99€</p>
-                            
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <!-- Al darle click aqui debe añAadirse al carrito -->
-                            <a th:href="@{/tienda/producto/addCarrito/{idProducto} (idProducto=${pDTO.id})}">
-                            	<div class="buy--icon">
-                                	<img th:src="@{/images/tienda/shopping-bag.png}" alt="Ir al carrito">
-                            	</div>
-                            </a>
-                            
-                            <a th:href="@{/tienda/producto/{idProducto} (idProducto=${pDTO.id})}">
-	                            <div class="view--icon">
-	                                <img th:src="@{/images/tienda/ver-producto.png}" alt="Ver producto">
-	                            </div>
-                            </a>
-                        </div>
-                    </div>
+        <div id="div--ticket">
+            <img th:src="@{/images/header/logoSimple.png}" alt="logo fruttidivestiti">
+            <p>Resumen</p>
+          
+            <div id="div--precios">
+                <div>
+                    <p>Subtotal:</p>
+                    <p>-€</p>
                 </div>
 
+                <div>
+                    <p>Gastos de envios:</p>
+                    <p>2.99€</p>
+                </div>
+
+                <hr>
+
+                <div>
+                    <p>Total:</p>
+                    <p>-€</p>
+                </div>
             </div>
+
+            <a href="">Comprar</a>
         </div>
     </main>
-    
+
     <!-- ***************************************** -->
-    
     <footer>
         <img alt="logo" th:src="@{/images/footer/tiendaRopaLogo.png}">
 
@@ -127,7 +130,6 @@
                 <a href=""><img th:src="@{/images/footer/VISA.jpg}" alt="logo visa" width="55px"></a>
             </article>
         </div>
-
     </footer>
 </body>
 

@@ -56,19 +56,17 @@ public class PagArticulosController {
 		return mav;
 	}
 	
-	/*
-	@GetMapping("/trabajadores/categorias/delete/{idCategoria}")
-	public ModelAndView addCart(@PathVariable Long idCategoria) {
+	
+	@GetMapping("/tienda/carrito")
+	public ModelAndView verCarrito() {
+
+		log.info("PagArticulosController - verCarrito: Pasamos a la página de ver el carrito");
+
+		List<ProductoDTO> lpDTO = ps.findAll();
 		
-		log.info("PagArticulosController - addCart: Añadimos el producto al carrito");
+		ModelAndView mav = new ModelAndView("clientes/vistaCarrito");
+		mav.addObject("listaProductosDTO", lpDTO);
 		
-		//Añadir producto al carrito ************* falta por hacer
-		List<CarritoProductoDTO>
-		
-		categoriaService.deleteById(idCategoria);
-		
-		ModelAndView mav = new ModelAndView("redirect:/trabajadores/categorias");
 		return mav;
 	}
-	*/
 }

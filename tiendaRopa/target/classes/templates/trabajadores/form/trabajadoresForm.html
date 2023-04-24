@@ -54,8 +54,7 @@
                 
                 <div id="cont2">
                     <p>Tipo</p>
-                    <input th:if="*{esAdministrador == 1}" th:value="Administrador" type="text" readonly/>
-                    <input th:unless="*{esAdministrador == 1}" th:value="Trabajador" type="text" readonly/>
+                    <p th:each="usuarioRolDTO : ${usuarioDTO.listUsuarioRolDTO}" th:text="${usuarioRolDTO.rolDTO.rol}"></p>
                 </div>
                 
                 <div id="cont3">
@@ -98,9 +97,6 @@
                 <input th:field="*{direccion}" type="text" hidden/>
                 <input th:field="*{poblacion}" type="text" hidden/>
                 <input th:field="*{password}" type="password" hidden/>
-                <input th:field="*{esCliente}" type="text" hidden/>
-                <input th:field="*{esTrabajador}" type="text" hidden/>
-                <input th:field="*{esAdministrador}" type="text" hidden/>
             </div>
 
             <!--Enlaces para volver atrás-->

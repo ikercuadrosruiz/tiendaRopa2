@@ -41,14 +41,12 @@ public class Carrito {
 	@ToString.Exclude
 	private Usuario usuario;
 	
-	/*
 	@OneToMany(
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			mappedBy = "carrito")
 	@ToString.Exclude
 	private Set<CarritoProducto> listaCarritoProducto;
-	*/
 
 	// Equals ------------------------------------------
 	@Override

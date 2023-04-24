@@ -60,14 +60,12 @@ public class Usuario {
 	@Column(name = "cp")
 	private String cp;
 	
-	@Column(name = "escliente")
-	private int esCliente;
-	
-	@Column(name = "estrabajador")
-	private int esTrabajador;
-	
-	@Column(name = "esadministrador")
-	private int esAdministrador;
+	@OneToMany(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL,
+			mappedBy = "usuario")
+	@ToString.Exclude
+	private Set<UsuarioRol> listaUsuarioRol;
 	
 	@OneToMany(
 			fetch = FetchType.LAZY,

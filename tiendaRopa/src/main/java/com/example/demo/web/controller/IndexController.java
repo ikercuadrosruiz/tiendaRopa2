@@ -64,24 +64,6 @@ public class IndexController {
 
 		ModelAndView mav = new ModelAndView();
 
-		if (result.hasErrors()) {
-			mav = new ModelAndView("login");
-
-		} else {
-
-			uDTO = usuarioService.findByEmailAndPassword(uDTO);
-
-			if (uDTO.getEsAdministrador() == 1 || uDTO.getEsTrabajador() == 1) {
-				mav = new ModelAndView("redirect:/trabajadores");
-				// Es posible que tenga que añadir el usuario al MODELO a partir de aqui
-
-			} else {
-				mav = new ModelAndView("redirect:/index");
-				// Es posible que tenga que añadir el usuario al MODELO a partir de aqui
-
-			}
-		}
-
 		return mav;
 
 	}
@@ -101,24 +83,10 @@ public class IndexController {
 	public ModelAndView registrarUsuario(@Valid @ModelAttribute("usuarioDTO") UsuarioDTO uDTO, BindingResult result) {
 
 		log.info("IndexController - RegistrarUsuario: Añadimos el usuario a la BD");
-
-		ModelAndView mav = new ModelAndView();
 		
-		if (result.hasErrors()) {
-			mav = new ModelAndView("registro");
+		usuarioService.save(uDTO);
 
-		} else {
-			// Rellenamos los datos que no se dan y ponemos unos valores por defecto
-			uDTO.setEsCliente(1);
-			uDTO.setEsTrabajador(0);
-			uDTO.setEsAdministrador(0);
-
-			usuarioService.save(uDTO);
-
-			mav = new ModelAndView("redirect:/index");
-			
-		}
-
+		ModelAndView mav = new ModelAndView("redirect:/registro?exito");
 		return mav;
 	}
 }

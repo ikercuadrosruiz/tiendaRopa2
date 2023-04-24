@@ -48,6 +48,16 @@ main form > div:first-of-type{
     width: 100%;
 }
 
+#cont2 > p:not(:first-of-type){
+	width: 18%;
+	margin: 2px 0;
+	padding: 1px 2px;
+	background-color: #6161dbc3;
+	color: #fff;
+	border-radius: 15px;
+	border: 2px solid #6161db;
+}
+
 #cont5{
     grid-column: 1;
     grid-row: 3;
