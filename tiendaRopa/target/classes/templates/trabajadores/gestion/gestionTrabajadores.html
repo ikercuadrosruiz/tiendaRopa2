@@ -74,7 +74,7 @@
                     <td th:text="${usuarioDTO.apellido1} + ' ' + ${usuarioDTO.apellido2}"></td>
                     <td th:text=${usuarioDTO.correo}></td>
                     <td>
-                    	<p th:each="usuarioRolDTO : ${usuarioDTO.listUsuarioRolDTO}" th:text="${usuarioRolDTO.rolDTO.rol}"></p>
+                    	<p th:each="rolDTO : ${usuarioDTO.listaRolesDTO}" th:text="${rolDTO.rol}"></p>
                     </td>
                     <td>
                         <a th:href="@{/trabajadores/trabajadores/{idUsuario}/update (idUsuario=${usuarioDTO.id})}"><img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>

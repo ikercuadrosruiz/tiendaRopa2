@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.example.demo.repository.entity.Carrito;
+import com.example.demo.repository.entity.Rol;
 // import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.Usuario;
-import com.example.demo.repository.entity.UsuarioRol;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -66,7 +67,7 @@ public class UsuarioDTO implements Serializable{
 	private String cp;
 	
 	@ToString.Exclude
-	private List<UsuarioRolDTO> listUsuarioRolDTO;
+	private List<RolDTO> listaRolesDTO;
 	@ToString.Exclude
 	private List<PedidoDTO> listaPedidosDTO;
 	@ToString.Exclude
@@ -121,8 +122,8 @@ public class UsuarioDTO implements Serializable{
 
 	public UsuarioDTO() {
 		super();
+		this.listaRolesDTO = new ArrayList<RolDTO>();
 		this.listaPedidosDTO = new ArrayList<PedidoDTO>();
 		this.listaCarritosDTO = new ArrayList<CarritoDTO>();
-		this.listUsuarioRolDTO = new ArrayList<UsuarioRolDTO>();
 	}
 }

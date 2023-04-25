@@ -36,6 +36,10 @@
                 <div id="btnLogin">
                     <img th:src="@{/images/header/user.png}" alt="Imagen login">
                 </div>
+                
+                <div sec:authorize="isAuthenticated()">
+                	<a th:href="@{/logout}">LogOut</a>
+                </div>
 
                 <div id="favoritos">
                     <img th:src="@{/images/header/guardados.png}" alt="Imagen guardados">
@@ -55,22 +59,27 @@
         </div>
 
         <div>
+        	<div th:if="${param.error}">
+        		<p>❌ El login no ha sido correcto (Editar estilo de la alerta)</p>
+        	</div>
+        	
+        	<div th:if="${param.logout}">
+        		<p>✔ Ha cerrado sesión exitosamente (Editar estilo de la alerta)</p>
+        	</div>
+        
             <form id="formLogIn"
-            		th:action = "@{/login/check}"
-            		th:object="${usuarioDTO}"
+            		th:action = "@{/login}"
             		method = "POST">
                 <h3>LogIn</h3>
 
                 <div>
                     <p>Email</p>
-                    <input type="text" id="email" name="email" th:field="*{correo}"/>
-                    <p class="err" id="errEmail" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
+                    <input type="text" id="email" name="username"/>
                 </div>
 
                 <div>
                     <p>Password</p>
-                    <input type="password" id="password" name="password" th:field=*{password} />
-                    <p class="err" id="errPassword" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                    <input type="password" id="password" name="password" />
                 </div>
 
                 <button id="enviarRegistro" type="submit">Acceder</button>

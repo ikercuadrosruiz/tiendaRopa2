@@ -44,6 +44,7 @@ public class IndexController {
 		return mav;
 	}
 
+	/*
 	@GetMapping("/login")
 	public ModelAndView login() {
 
@@ -55,6 +56,7 @@ public class IndexController {
 		return mav;
 	}
 
+	
 	@PostMapping("/login/check")
 	public ModelAndView comprobarDatosLogin(@Valid @ModelAttribute("usuarioDTO") UsuarioDTO uDTO,
 			BindingResult result) {
@@ -67,6 +69,7 @@ public class IndexController {
 		return mav;
 
 	}
+	*/
 
 	@GetMapping("/registro")
 	public ModelAndView registro() {

@@ -1,25 +1,37 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.configuration.EncriptaPassword;
+import com.example.demo.model.dto.RolDTO;
 import com.example.demo.model.dto.UsuarioDTO;
-import com.example.demo.model.dto.UsuarioRolDTO;
+import com.example.demo.repository.dao.RolRepository;
 import com.example.demo.repository.dao.UsuarioRepository;
-import com.example.demo.repository.dao.UsuarioRolRepository;
+import com.example.demo.repository.entity.Rol;
 import com.example.demo.repository.entity.Usuario;
-import com.example.demo.repository.entity.UsuarioRol;
 
 import jakarta.validation.Valid;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
 	private static final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
@@ -27,7 +39,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	private UsuarioRolRepository usuarioRolRepository;
+	private RolRepository rolRepository;
 
 	@Override
 	public List<UsuarioDTO> findAll() {
@@ -40,13 +52,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		for (Usuario u : listaUsuarios) {
 
 			UsuarioDTO uDTO = UsuarioDTO.convertToDTO(u);
-
-			// Añado los roles al usuario
-			List<UsuarioRol> listaUsuarioRol = usuarioRolRepository.findAllByIdCliente(u.getId());
-			for (UsuarioRol ur : listaUsuarioRol) {
-				UsuarioRolDTO urDTO = UsuarioRolDTO.convertToDTO(ur);
-				uDTO.getListUsuarioRolDTO().add(urDTO);
-			}
 
 			// Añado el usuarioDTO a la lista de UsuariosDTO
 			listaUsuariosDTO.add(uDTO);
@@ -63,16 +68,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		List<UsuarioDTO> ltDTO = new ArrayList<UsuarioDTO>();
 		for (Usuario u : lt) {
-
-			UsuarioDTO uDTO = UsuarioDTO.convertToDTO(u);
-
-			// Añado los roles al usuario
-			List<UsuarioRol> listaUsuarioRol = usuarioRolRepository.findAllByIdCliente(u.getId());
-			for (UsuarioRol ur : listaUsuarioRol) {
-				UsuarioRolDTO urDTO = UsuarioRolDTO.convertToDTO(ur);
-				uDTO.getListUsuarioRolDTO().add(urDTO);
+			// Obtengo sus roles
+			Set<Rol> lr = rolRepository.findAllByIdCliente(u.getId());
+			ArrayList<RolDTO> lrDTO = new ArrayList<RolDTO>();
+			for (Rol r : lr) {
+				lrDTO.add(RolDTO.convertToDTO(r));
 			}
 
+			UsuarioDTO uDTO = UsuarioDTO.convertToDTO(u);
+			uDTO.setListaRolesDTO(lrDTO);
 			// Añado el usuarioDTO a la lista de UsuariosDTO
 			ltDTO.add(uDTO);
 		}
@@ -87,17 +91,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		Optional<Usuario> opUsuario = usuarioRepository.findById(idUsuario);
 		if (opUsuario.isPresent()) {
-			UsuarioDTO usuarioDTO = UsuarioDTO.convertToDTO(opUsuario.get());
-			
-			// Añado los roles al usuario
-			List<UsuarioRol> listaUsuarioRol = usuarioRolRepository.findAllByIdCliente(usuarioDTO.getId());
-			for (UsuarioRol ur : listaUsuarioRol) {
-				UsuarioRolDTO urDTO = UsuarioRolDTO.convertToDTO(ur);
-				usuarioDTO.getListUsuarioRolDTO().add(urDTO);
+			// Obtengo sus roles
+			Set<Rol> lr = rolRepository.findAllByIdCliente(opUsuario.get().getId());
+			ArrayList<RolDTO> lrDTO = new ArrayList<RolDTO>();
+			for (Rol r : lr) {
+				lrDTO.add(RolDTO.convertToDTO(r));
 			}
 
+			UsuarioDTO usuarioDTO = UsuarioDTO.convertToDTO(opUsuario.get());
+			usuarioDTO.setListaRolesDTO(lrDTO);
+
 			return usuarioDTO;
-			
+
 		} else {
 			return null;
 		}
@@ -118,6 +123,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		log.info("UsuarioServiceImpl - save: Guardamos los datos del usuario " + usuarioDTO.getId());
 
 		Usuario usuario = UsuarioDTO.convertToEntity(usuarioDTO);
+		usuario.setPassword(EncriptaPassword.encriptarPassword(usuario.getPassword()));
 		usuarioRepository.save(usuario);
 	}
 
@@ -134,5 +140,27 @@ public class UsuarioServiceImpl implements UsuarioService {
 			return null;
 		}
 
+	}
+
+	// ??????????????????????????????????????????????????????????
+
+	@Override // Username == Correo del usuario
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		log.info("UsuarioServiceImpl - loadUserByUsername: " + username);
+		
+		Usuario usuario = usuarioRepository.findByCorreo(username);
+		
+		if (usuario != null) {
+			List<GrantedAuthority> listaPermisos = new ArrayList<GrantedAuthority>();
+			List<Rol> listaRoles = new ArrayList<Rol>(usuario.getListaRoles());
+			for (Rol rol : listaRoles) {
+				listaPermisos.add(new SimpleGrantedAuthority(rol.getRol()));
+			}
+			
+			return new User(usuario.getCorreo(), usuario.getPassword(), listaPermisos);
+			
+		} else {
+			throw new UsernameNotFoundException(username);
+		}
 	}
 }

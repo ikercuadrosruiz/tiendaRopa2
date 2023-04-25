@@ -21,7 +21,7 @@
                     <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
                     <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
                     <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
-                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMINISTRADOR')"><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
                     <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
                 </ul>
             </div>

@@ -54,7 +54,7 @@
                 
                 <div id="cont2">
                     <p>Tipo</p>
-                    <p th:each="usuarioRolDTO : ${usuarioDTO.listUsuarioRolDTO}" th:text="${usuarioRolDTO.rolDTO.rol}"></p>
+                    <p th:each="rolDTO : ${usuarioDTO.listaRolesDTO}" th:text="${rolDTO.rol}"></p>
                 </div>
                 
                 <div id="cont3">

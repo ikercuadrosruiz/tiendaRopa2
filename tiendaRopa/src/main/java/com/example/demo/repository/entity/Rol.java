@@ -27,12 +27,6 @@ public class Rol {
 	@Column(name = "rol")
 	private String rol;
 	
-	@OneToMany(
-			fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL,
-			mappedBy = "rol")
-	@ToString.Exclude
-	private Set<UsuarioRol> listaUsuarioRol;
 
 	// Equals -----------------
 	@Override

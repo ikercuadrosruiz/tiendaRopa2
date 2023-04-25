@@ -16,11 +16,13 @@ import jakarta.validation.Valid;
 @Repository
 @Transactional
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-
-	@Query(value = "SELECT u FROM Usuario u JOIN u.listaUsuarioRol ur JOIN ur.rol r WHERE r.id = 2")
+	
+	Usuario findByCorreo(String correo);
+	
+	@Query(value = "SELECT DISTINCT u FROM Usuario u JOIN u.listaRoles r WHERE r.id IN (2, 3)")
 	List<Usuario> findAllTrabajadores();
 
-	@Query(value = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.password = :contrasenya ")
+	@Query(value = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.password = :contrasenya")
 	List<Usuario> findByEmailAndPassword(@Param("correo")String correo, @Param("contrasenya")String password);
-	
+
 }

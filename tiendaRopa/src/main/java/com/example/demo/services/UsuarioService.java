@@ -2,6 +2,8 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.example.demo.model.dto.UsuarioDTO;
 
 import jakarta.validation.Valid;

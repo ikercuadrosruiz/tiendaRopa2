@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -60,12 +62,15 @@ public class Usuario {
 	@Column(name = "cp")
 	private String cp;
 	
-	@OneToMany(
-			fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL,
-			mappedBy = "usuario")
-	@ToString.Exclude
-	private Set<UsuarioRol> listaUsuarioRol;
+	@ManyToMany(
+			fetch = FetchType.EAGER,
+			cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "usuariorol",
+			joinColumns = @JoinColumn(name = "idusuario", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "idrol", referencedColumnName = "id")
+			)
+	private Set<Rol> listaRoles;
 	
 	@OneToMany(
 			fetch = FetchType.LAZY,
