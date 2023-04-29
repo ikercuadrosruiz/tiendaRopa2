@@ -1,22 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
+html{
+	scrollbar-width: thin;
+}
+
 /* Header ---------------------------------------*/
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
 }
+
 header {
     font-family: 'Poppins', sans-serif;
-
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 10px 0;
 }
-nav:first-of-type{
+
+nav:first-of-type {
     min-width: 70px;
     padding-left: 35px;
     display: flex;
@@ -25,23 +30,28 @@ nav:first-of-type{
     width: 100%;
     box-sizing: border-box;
 }
-body nav:first-of-type a{
+
+nav:first-of-type a {
     color: black;
 }
 
-body nav:first-of-type div ul{
+nav:first-of-type div ul {
     display: flex;
 }
-body nav:first-of-type div ul li{
+
+nav:first-of-type div ul li {
     margin: 0 10px;
 }
-body nav:first-of-type div ul li:last-of-type{
+
+nav:first-of-type div ul li:last-of-type {
     min-width: 95px;
 }
-body nav:first-of-type div ul li:active a{
-    color:#6161db;
+
+nav:first-of-type div ul li:active a {
+    color: #6161db;
 }
-nav:first-of-type > img:first-of-type{
+
+nav:first-of-type>img:first-of-type {
     display: none;
     cursor: pointer;
     position: absolute;
@@ -49,7 +59,8 @@ nav:first-of-type > img:first-of-type{
     left: 35px;
     width: 35px;
 }
-body nav:first-of-type div ul > img{
+
+nav:first-of-type div ul>img {
     display: none;
     cursor: pointer;
     position: absolute;
@@ -58,15 +69,15 @@ body nav:first-of-type div ul > img{
 }
 
 @media (max-width: 770px) {
-    nav:first-of-type{
+    nav:first-of-type {
         padding: 0;
     }
 
-    nav:first-of-type > img:first-of-type{
+    nav:first-of-type>img:first-of-type {
         display: block;
     }
 
-    body nav:first-of-type div ul{
+    nav:first-of-type div ul {
         position: absolute;
         z-index: 1;
         top: 0;
@@ -77,50 +88,99 @@ body nav:first-of-type div ul > img{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
+
         background-color: #27272ce8;
         backdrop-filter: blur(15px);
         /* width: 0; */
         opacity: 0;
         height: 100vh;
     }
-    
-    body nav:first-of-type div ul > img{
+
+    nav:first-of-type div ul>img {
         display: block;
     }
 
-    body nav:first-of-type div ul li{
+    nav:first-of-type div ul li {
         padding: 25px 0;
         font-size: 1.2em;
     }
 
-    body nav:first-of-type div ul li a{
+    nav:first-of-type div ul li a {
         color: #f2f2f2;
     }
 }
 
 /* Titulo ------------------ */
 header > p {
-    min-width: 120px;
-    text-align: center;
+min-width: 120px;
+text-align: center;
 }
 /* ------------------------------ */
 
 /* Segundo nav ------------------ */
-nav:last-of-type{
+nav:last-of-type {
     padding-right: 35px;
 }
-nav:last-of-type div{
+
+nav:last-of-type > div {
     display: flex;
-    align-items: end;
-    justify-content: right;
+    align-items: flex-end;
+    justify-content: flex-end;
     width: 100%;
     box-sizing: border-box;
 }
-nav:last-of-type div img{
+
+nav:last-of-type > div > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 33%;
+    box-sizing: border-box;
+}
+
+.btnLogin a{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 33%;
+    box-sizing: border-box;
+}
+
+nav:last-of-type > div img {
     cursor: pointer;
     width: 35px;
     height: 35px;
 }
-/* ------------------------------ */
 
+header form{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+
+header form input{
+    display: inline-block;
+    padding: 3px 9px;
+    font-size: 16px;
+    width: 100%;
+    font-weight: bold;
+    color: #dc3546;
+    border: 2px solid #dc3546;
+    background-color: #dc35464b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+header form input:hover{
+    background-color: #dc3546;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header form input{
+    outline: none;
+}

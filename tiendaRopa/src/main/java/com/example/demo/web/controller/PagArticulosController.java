@@ -5,14 +5,19 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.dto.CarritoDTO;
 import com.example.demo.model.dto.CarritoProductoDTO;
 import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ProductoDTO;
+import com.example.demo.model.dto.UsuarioDTO;
+import com.example.demo.services.CarritoService;
 import com.example.demo.services.CategoriaService;
 import com.example.demo.services.ProductoService;
 import com.example.demo.services.UsuarioService;
@@ -27,6 +32,12 @@ public class PagArticulosController {
 	
 	@Autowired
 	private CategoriaService cs;
+	
+	@Autowired
+	private CarritoService cas;
+	
+	@Autowired
+	private UsuarioService us;
 	
 	@GetMapping("/tienda")
 	public ModelAndView inicioTienda() {
@@ -56,17 +67,32 @@ public class PagArticulosController {
 		return mav;
 	}
 	
-	
-	@GetMapping("/tienda/carrito")
-	public ModelAndView verCarrito() {
+	@GetMapping("/tienda/carrito/{idCarrito}/tramite")
+	public ModelAndView verTramitarPedido(@PathVariable Long idCarrito) {
 
-		log.info("PagArticulosController - verCarrito: Pasamos a la página de ver el carrito");
+		log.info("PagArticulosController - verTramitarPedido: Pasamos a la página de tramitar el pedido del carrito " + idCarrito );
+		
+		CarritoDTO cDTO = cas.findById(idCarrito);
 
-		List<ProductoDTO> lpDTO = ps.findAll();
-		
-		ModelAndView mav = new ModelAndView("clientes/vistaCarrito");
-		mav.addObject("listaProductosDTO", lpDTO);
-		
+		ModelAndView mav = new ModelAndView("clientes/tramitarPedido");
+
 		return mav;
 	}
+	
+	@GetMapping("/perfil")
+	public ModelAndView verPerfil() {
+
+		log.info("PagArticulosController - verPerfil: Pasamos a la página de ver el perfil");
+		
+		// Obtener el usuario
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String correo = authentication.getName();
+		UsuarioDTO uDTO = us.findByCorreo(correo);
+
+		ModelAndView mav = new ModelAndView("clientes/datosPersonales");
+		mav.addObject("usuarioDTO", uDTO);
+
+		return mav;
+	}
+	
 }

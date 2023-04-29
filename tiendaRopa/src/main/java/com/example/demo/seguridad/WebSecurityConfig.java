@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.example.demo.configuration.CustomAuthenticationSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -20,18 +22,22 @@ public class WebSecurityConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	@Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests()
-				.requestMatchers("/", "/registro", "/registro/**" ,"/index", "/tienda", "/tienda/producto/{idProducto}", "/css/**", "/images/**", "/js/**").permitAll()
+				.requestMatchers("/", "/registro", "/registro/**", "/usuarios/save", "/trabajadores/usuarios/save" ,"/index", "/tienda", "/tienda/producto/{idProducto}", "/css/**", "/images/**", "/js/**").permitAll()
 				.requestMatchers("/trabajadores" ,"/trabajadores/**").hasRole("TRABAJADOR")
 				.requestMatchers("/trabajadores/trabajadores", "/trabajadores/trabajadores/**").hasRole("ADMINISTRADOR")
 				.anyRequest().authenticated()
 			.and()
 				.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/tienda")
+				//.defaultSuccessUrl("/tienda")
+				.successHandler(customAuthenticationSuccessHandler)
 				.failureUrl("/login?error")
 				.permitAll()
 			.and()

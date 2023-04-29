@@ -8,22 +8,24 @@
 <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/tienda.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
 <title>Frutti di Vestiti</title>
 </head>
 
 <body>
 	<header>
 		<nav>
-			<div>
-				<ul>
-					<li><a th:href="@{/trabajadores}">Inicio</a></li>
-					<li><a href="#">Productos</a></li>
-					<li><a href="#">Mis Pedidos</a></li>
-					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-				</ul>
-			</div>
-			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
-		</nav>
+            <div>
+                <ul>
+                    <li><a th:href="@{/index}">Inicio</a></li>
+                    <li><a th:href="@{/tienda}">Productos</a></li>
+                    <li><a href="#">Mis Pedidos</a></li>
+                    <li><a th:href="@{/perfil}">Mi perfil</a></li>
+                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                </ul>
+            </div>
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+        </nav>
 
 		<p>
 			<b>Frutti di Vestiti</b>
@@ -31,11 +33,6 @@
 
 		<nav>
 			<div>
-				<div id="btnLogin">
-					<a th:href="@{/login}"><img th:src="@{/images/header/user.png}"
-						alt="Imagen login" /></a>
-				</div>
-
 				<div id="favoritos">
 					<a><img th:src="@{/images/header/guardados.png}"
 						alt="Imagen guardados" /></a>
@@ -45,6 +42,17 @@
 					<a th:href="@{/tienda/carrito}"><img
 						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
 				</div>
+				
+				<div class="btnLogin" sec:authorize="isAnonymous()">
+					<a th:href="@{/login}">No está logueado</a>
+				</div>
+				
+				<div class="btnLogin" sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post">
+						<p th:inline="text"><span th:remove="tag" sec:authentication="name"/></p>
+						<input type="submit" value="Logout"/>
+					</form>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -53,31 +61,13 @@
 
 	<main>
 		<div id="div--buscador">
-			<div>
-				<img th:src="@{/images/tienda/imgLupa.png}" alt="Busqueda">
-			</div>
+			<a href="">
+				<i class="fa fa-search"></i>
+			</a>
 			<input type="text" placeholder="Busque un artículo..." />
-
-			<!-- Borrame -------------------------------------- -->
-			<div sec:authorize="isAuthenticated()">
-				<h1 th:inline="text">
-					Hola <span th:remove="tag" sec:authentication="name"> </span>!
-				</h1>
-				<b>Roles:</b> <span sec:authentication="principal.authorities">Roles</span>
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Logout" />
-				</form>
-			</div>
-			<!-- SI NO SE HA AUTENTICADO -->
-			<div sec:authorize="isAnonymous()">
-				<div th:text="'No está logueado.'"></div>
-				<a th:href="@{/login}">Login</a>
-			</div>
-			<!-- ----------------------------------------------- -->
 		</div>
 
 		<div id="div--filtros">
-			<p>Filtros</p>
 			<div>
 				<select name="categorias" id="selec-cat">
 					<option value="" hidden selected disabled>Categorías</option>
@@ -89,6 +79,9 @@
 
 		<div id="div--productos">
 			<p>Productos</p>
+			<div th:if="${param.productoAdd}">
+        		<p>Producto añadido correctamente(Editar estilo de la alerta)</p>
+        	</div>
 			<div id="cont--productos">
 				<div id="cont--producto" th:each="pDTO : ${listaProductosDTO}">
 					<img th:src="@{/images/tienda/heart.png}" alt="like"

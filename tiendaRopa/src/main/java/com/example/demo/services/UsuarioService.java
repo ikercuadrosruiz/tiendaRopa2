@@ -22,4 +22,6 @@ public interface UsuarioService {
 
 	UsuarioDTO findByEmailAndPassword(@Valid UsuarioDTO uDTO);
 
+	UsuarioDTO findByCorreo(String correo);
+
 }

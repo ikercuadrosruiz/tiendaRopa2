@@ -31,7 +31,7 @@ public class CarritoDTO implements Serializable {
 	private Long id;
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date fechageneracion;
-	private String estado;
+	private Integer estado;
 	@ToString.Exclude
 	private UsuarioDTO usuarioDTO;
 	@ToString.Exclude 
@@ -47,6 +47,7 @@ public class CarritoDTO implements Serializable {
 		carritoDTO.setId(carrito.getId());
 		carritoDTO.setFechageneracion(carrito.getFechageneracion());
 		carritoDTO.setEstado(carrito.getEstado());
+		carritoDTO.setUsuarioDTO(UsuarioDTO.convertToDTO(carrito.getUsuario()));
 
 		return carritoDTO;
 	}
@@ -60,7 +61,8 @@ public class CarritoDTO implements Serializable {
 		carrito.setId(carritoDTO.getId());
 		carrito.setFechageneracion(carritoDTO.getFechageneracion());
 		carrito.setEstado(carritoDTO.getEstado());
-
+		carrito.setUsuario(UsuarioDTO.convertToEntity(carritoDTO.getUsuarioDTO()));
+		
 		return carrito;
 	}
 

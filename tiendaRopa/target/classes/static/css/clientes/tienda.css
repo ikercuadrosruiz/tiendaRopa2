@@ -1,32 +1,31 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 img {
-    object-fit: cover;
+	object-fit: cover;
 }
 
 main {
-    min-height: calc(100vh - 96px);
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-family: 'Poppins';
+	min-height: calc(100vh - 96px);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Poppins';
 }
 
 /* div--buscador **************************************/
 #div--buscador {
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
+/*
 #div--buscador div {
     display: flex;
     align-items: center;
@@ -48,7 +47,31 @@ main {
     width: 35px;
     height: 35px;
 }
+*/
+#div--buscador a {
+	display: flex;
+	align-items: center;
+	justify-content: center; border : none; /* sin borde */
+	background-color: #6161DB; /* color de fondo */
+	color: white; /* color de texto */
+	padding: 10px; /* espacio interno */
+	border-radius: 5px; /* borde redondeado */
+	cursor: pointer; /* cursor de ratón */
+	transition: background-color 0.3s ease-in-out;
+	border: none; /* transición de color de fondo */
+	width: 35px;
+    height: 35px;
+}
 
+#div--buscador a:hover {
+	background-color: #4D4DA8; /* color de fondo más oscuro en hover */
+}
+
+#div--buscador a i {
+	font-size: 18px; /* tamaño del icono */
+}
+
+/*
 #div--buscador input {
     width: 100%;
     height: 39px;
@@ -64,184 +87,202 @@ main {
 #div--buscador input:focus {
     outline: none;
 }
+*/
+input[type="text"] {
+	margin-left: 10px; background-color : #F1F1F1;
+	/* un color de fondo gris claro */
+	width: calc(80% - 10px);
+	font-weight: 500;
+	font-size: 15px;
+	border: none; /* sin borde */
+	padding: 10px; /* un poco de espacio interno para que se vea bien */
+	border-radius: 5px; /* borde redondeado */
+	box-shadow: 0px 0px 5px 0px #6161DB;
+	/* sombra con el color en cuestión */
+	transition: box-shadow 0.3s ease-in-out;
+	background-color: #F1F1F1; /* transición para la sombra */
+}
+
+input[type="text"]:focus {
+	outline: none; /* sin el contorno predeterminado del foco */
+	box-shadow: 0px 0px 5px 0px #6161DB, 0px 0px 10px 0px
+		rgba(97, 97, 219, 0.2);
+	/* una sombra más fuerte con un color transparente */
+}
 
 /*div--filtros **************************************/
-
 #div--filtros {
-    width: 90%;
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
+	width: 74%;
+	margin: 30px 0 15px 0;
+	display: flex;
+	flex-direction: column;
 }
 
 #div--filtros>p {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
+	text-align:center;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 25px;
 }
 
 #div--filtros div {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
 
 #div--filtros div>* {
-    font-family: 'Poppins';
-    font-weight: 700;
-    text-align: center;
-    width: 30%;
-    height: 30px;
-
-    background-color: #6161db;
-    border-radius: 5px;
-    color: #f2f2f2;
-    text-decoration: none;
-
-    cursor: pointer;
+	font-family: 'Poppins';
+	font-weight: 700;
+	text-align: center;
+	width: 30%;
+	height: 30px;
+	background-color: #6161db;
+	border-radius: 5px;
+	color: #f2f2f2;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 #div--filtros div>select {
-    border: none;
+	border: none;
 }
+
 #div--filtros option {
-    text-transform: capitalize;
+	text-transform: capitalize;
 }
-
-
 
 #div--filtros div>a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 /*div--productos *************************************/
 #div--productos {
-    width: 90%;
-    padding: 10px 0;
+	width: 90%;
+	padding: 10px 0;
 }
 
 #div--productos>p {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
+	text-align:center;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 25px;
 }
 
 #cont--productos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 #cont--producto {
-    position: relative;
-    margin: 10px 20px;
-    width: 90%;
-    max-width: 250px;
-    height: 325px;
-    overflow: hidden;
-    background: #FFFFFF;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+	position: relative;
+	margin: 10px 20px;
+	width: 90%;
+	max-width: 250px;
+	height: 325px;
+	overflow: hidden;
+	background: #FFFFFF;
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
 }
 
 .dress--icon {
-    width: 100%;
-    height: 45%;
-    border-radius: 20px 20px 0px 0px;
+	width: 100%;
+	height: 45%;
+	border-radius: 20px 20px 0px 0px;
 }
 
 .like--icon {
-    position: absolute;
-    width: 28.45px;
-    height: 25px;
-    right: 15px;
-    top: 15px;
-    z-index: 10;
-    cursor: pointer;
+	position: absolute;
+	width: 28.45px;
+	height: 25px;
+	right: 15px;
+	top: 15px;
+	z-index: 10;
+	cursor: pointer;
 }
 
 #cont--producto>div {
-    padding: 5% 10%;
+	padding: 5% 10%;
 }
 
 #cont--producto>div>p:first-of-type {
 	text-transform: capitalize;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-
-    color: #2D2D2D;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	color: #2D2D2D;
 }
+
 #cont--producto>div>p:nth-of-type(2) {
 	text-transform: capitalize;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-
-    color: #2D2D2D;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	color: #2D2D2D;
 }
 
 #cont--producto>div>div {
-    padding-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	padding-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 #cont--producto>div>div>p {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 28px;
-
-    color: #2D2D2D;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 28px;
+	color: #2D2D2D;
 }
+
 #cont--producto>div>div>p:after {
-    content: "€";
+	content: "€";
 }
 
 .buy--icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 43px;
-    height: 43px;
-    background: #F2F2F2;
-    border: 2px solid #D9D9D9;
-    border-radius: 50%;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 43px;
+	height: 43px;
+	background: #F2F2F2;
+	border: 2px solid #D9D9D9;
+	border-radius: 50%;
+	cursor: pointer;
 }
 
 .buy--icon:hover {
-    background: #D9D9D9;
+	background: #D9D9D9;
 }
 
 .view--icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 43px;
-    height: 43px;
-
-    background: #F2F2F2;
-    border: 2px solid #6161DB;
-    border-radius: 50%;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 43px;
+	height: 43px;
+	background: #F2F2F2;
+	border: 2px solid #6161DB;
+	border-radius: 50%;
+	cursor: pointer;
 }
 
 .view--icon:hover {
-    background: rgba(97, 97, 219, 0.5);
+	background: rgba(97, 97, 219, 0.5);
 }
 
 .buy--icon>img {
-    width: 25px;
-    height: 25px;
+	width: 25px;
+	height: 25px;
 }
 
 .view--icon>img {
-    width: 30px;
-    height: 30px;
+	width: 30px;
+	height: 30px;
 }

@@ -34,7 +34,7 @@ public class Carrito {
 	private Date fechageneracion;
 	
 	@Column(name = "estado")
-	private String estado;
+	private Integer estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "idcliente")

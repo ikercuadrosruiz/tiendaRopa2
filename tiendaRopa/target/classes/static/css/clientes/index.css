@@ -74,6 +74,29 @@ main div article p{
     padding-bottom: 5%;
 }
 
+main div a {
+  display: block;
+  width: 50%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #6161DB;
+  border: 2px solid #6161DB;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+main div a:hover {
+  background-color: #6161DBcc;
+  
+}
+
+/*
 main div button{
     margin: 0 auto;
     margin-bottom: 10px;
@@ -99,7 +122,7 @@ main div button:hover{
 
     box-shadow: 0px 0px 50px #6161DB;
 }
-
+*/
 @media (min-width: 770px) {
     main > div{
         display: grid;

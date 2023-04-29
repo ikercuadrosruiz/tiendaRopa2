@@ -141,6 +141,18 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 		}
 
 	}
+	
+	@Override
+	public UsuarioDTO findByCorreo(String correo) {
+		log.info("UsuarioServiceImpl - findByCorreo: Buscamos el usuario por email");
+
+		Usuario u = usuarioRepository.findByCorreo(correo);
+		
+		if (u!=null) {
+			return UsuarioDTO.convertToDTO(u);
+		}else {return null;}
+		
+	}
 
 	// ??????????????????????????????????????????????????????????
 
@@ -163,4 +175,5 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 			throw new UsernameNotFoundException(username);
 		}
 	}
+	
 }

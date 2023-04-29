@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+img {
+    object-fit: cover;
+}
+
+body {
+    height: 100vh;
+}
+
+main {
+    font-family: 'Poppins';
+    height: calc(100% - 74px);
+
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+}
+
+/********************************************/
+/* Menú izquierdo */
+#div--menuIzq {
+    display: grid;
+    grid-template-rows: 5fr 2fr 3fr;
+
+    background: #2D2D2D;
+    
+    border-radius: 0 20px 0px 0;
+    box-shadow: 8px 8px 15px #ccc;
+    z-index: -1;
+
+}
+
+#div--imgPerfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#div--imgPerfil img {
+    margin: 20px 20px 0 20px;
+    object-fit: cover;
+    width: 50%;
+    height: 50%;
+    min-width: 50px;
+    min-height: 50px;
+    min-width: 300px;
+    min-height: 300px;
+    border-radius: 80px;
+    cursor: pointer;
+}
+#div--imgPerfil img:hover {
+    filter: brightness(0.5);
+}
+
+#div--imgPerfil p {
+    margin-top: 15px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: #f2f2f2;
+}
+
+#div--opDatos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#div--opDatos {
+    cursor: pointer;
+}
+#div--opDatos p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #FFFFFF;
+    border-left: 8px solid #6161DB;
+    height: 30%;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    color: #2D2D2D;
+    user-select: none;
+    box-shadow: -5px 0px 10px #6161DB;
+}
+
+#div--logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#div--logo>img {
+    width: 20%;
+    height: 41%;
+}
+
+/* Datos de usuario *******************/
+#div--datosUsuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#div--datosUsuario > div:first-of-type {
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+
+#div--datosUsuario > div:first-of-type > p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #2D2D2D;
+}
+
+#div--datosUsuario > form {
+    width: 70%;
+    margin-top: 1.5vh;
+}
+
+/* Estilos para los divs que contienen los inputs */
+#div--datosUsuario  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  
+  /* Estilos para los labels de los inputs */
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  #div--email, #div--direccion {
+    grid-column: 1/-1;
+  }
+
+  /* Estilos para los inputs */
+  input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="date"] {
+    border: none;
+    border-bottom: 1px solid #2D2D2D;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #2D2D2D;
+  }
+  
+  /* Estilos para el borde al seleccionar el input */
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, input[type="date"]:focus {
+    border-color: #6161DB;
+    outline: none;
+  }
+  
+  /* Estilos para los divs de los inputs */
+  #div--nombre, #div--apellido1, #div--apellido2, #div--fechaNacimiento, #div--email, #div--nif, #div--poblacion, #div--direccion, #div--cp, #div--password {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+#div--botones {
+	grid-column: 1/-1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#div--botones button{
+    display: inline-block;
+    padding: 7px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161DB;
+    border: 2px solid #6161DB;
+    background-color: #6161DB4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#div--botones button:hover{
+    background-color: #6161DB;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#div--botones button{
+    outline: none;
+}
