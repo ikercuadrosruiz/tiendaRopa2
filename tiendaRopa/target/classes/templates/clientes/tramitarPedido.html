@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/tramitarPedido.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
+<title>Trámite</title>
+</head>
+
+<body>
+	<header>
+		<nav>
+			<div>
+				<ul>
+					<li><a th:href="@{/index}">Inicio</a></li>
+					<li><a th:href="@{/tienda}">Productos</a></li>
+					<li><a href="#">Mis Pedidos</a></li>
+					<li><a th:href="@{/perfil}">Mi perfil</a></li>
+					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+				</ul>
+			</div>
+			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+		</nav>
+
+		<p>
+			<b>Frutti di Vestiti</b>
+		</p>
+
+		<nav>
+			<div>
+				<div id="favoritos">
+					<a><img th:src="@{/images/header/guardados.png}"
+						alt="Imagen guardados" /></a>
+				</div>
+
+				<div id="carrito">
+					<a th:href="@{/tienda/carrito}"><img
+						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+				</div>
+
+				<div class="btnLogin" sec:authorize="isAnonymous()">
+					<a th:href="@{/login}">No está logueado</a>
+				</div>
+
+				<div class="btnLogin" sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post">
+						<p th:inline="text">
+							<span th:remove="tag" sec:authentication="name" />
+						</p>
+						<input type="submit" value="Logout" />
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<div>
+			<div id="div--datosEnvio">
+				<div>
+					<p>Datos personales</p>
+				</div>
+
+				<form class="container" th:action="@{/pasarelaPago}"
+					th:object="${usuarioDTO}" method="POST">
+
+					<input id="input--id" type="text" th:field="*{id}" hidden>
+					<input id="input--idCarrito" type="text" th:field="${carritoDTO.id}" hidden>
+					
+					<input id="input--fechNac" type="date"
+						th:field="*{fechaNacimiento}" hidden> <input
+						id="input--poblacion" type="text" th:field="*{poblacion}" hidden>
+					<input id="input--password" type="password" th:field="*{password}"
+						hidden>
+
+					<div id="div--nombre">
+						<label for="input--nombre">Nombre</label> <input
+							id="input--nombre" type="text" th:field="*{nombre}">
+					</div>
+
+					<div id="div--apellido1">
+						<label for="input--apellido1">Primer apellido</label> <input
+							id="input--apellido1" type="text" th:field="*{apellido1}">
+					</div>
+
+					<div id="div--apellido2">
+						<label for="input--apellido2">Segundo apellido</label> <input
+							id="input--apellido2" type="text" th:field="*{apellido2}">
+					</div>
+
+					<div id="div--email">
+						<label for="input--email">Email</label> <input id="input--email"
+							type="email" th:field="*{correo}">
+					</div>
+
+					<div id="div--nif">
+						<label for="input--nif">Nif</label> <input id="input--nif"
+							type="text" th:field="*{nif}">
+					</div>
+
+					<div id="div--direccion">
+						<label for="input--direccion">Dirección</label> <input
+							id="input--direccion" type="text" th:field="*{direccion}">
+					</div>
+
+					<div id="div--cp">
+						<label for="input--cp">Código Postal</label> <input id="input--cp"
+							type="text" th:field="*{cp}">
+					</div>
+
+					<button type="submit" hidden>Guardar</button>
+
+				</form>
+			</div>
+
+			<div id="div--metodosPago">
+				<p>Método de Pago</p>
+				<div>
+					<div id="div--metodoPago">
+						<img th:src="@{/images/tramite/paypalImg.png}" alt="PayPal img">
+						<p>PayPal</p>
+					</div>
+
+					<div id="div--metodoPago">
+						<img th:src="@{/images/tramite/masterCardImg.png}" alt="MasterCard img">
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- El ticket -------------------------------------- -->
+		<div id="div--ticket">
+			<img th:src="@{/images/header/logoSimple.png}"
+				alt="logo fruttidivestiti">
+			<p>Resumen</p>
+
+			<div id="div--precios">
+				<div>
+					<p>Subtotal:</p>
+					<p th:text="${subtotal}+€">0€</p>
+				</div>
+
+				<div>
+					<p>Gastos de envios:</p>
+					<p th:text="${envio}+€">0€</p>
+				</div>
+
+				<hr>
+
+				<div>
+					<p>Total:</p>
+					<p th:text="${total}+€">0€</p>
+				</div>
+			</div>
+
+			<p th:if="${!#lists.isEmpty(carritoDTO.listaCarritoProductoDTO)}">Comprar</p>
+		</div>
+	</main>
+
+	<!-- ************************* -->
+
+	<footer>
+        <img th:src="@{/images/footer/fondoFooter.png}" alt="">
+
+        <div id="div--footerbox">
+            <div>
+                <img th:src="@{/images/footer/logoComplejo.png}" alt="Imagen del logo">
+            </div>
+
+            <div>
+                <p>"Es tu oportunidad para explorar estilos del pasado y reinventarlos para el presente".</p>
+            </div>
+
+            <div id="div--rrss">
+                <a href="@{https://www.instagram.com/ikerqs8_/}">
+                    <i class="fa fa-instagram"></i><span>ikerqs8_</span>
+                </a>
+
+                <a href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
+                    <i class="fa-brands fa-linkedin"></i><span>Iker Cuadros</span>
+                </a>
+
+                <a href="@{https://twitter.com/ikers890}">
+                    <i class="fa-brands fa-twitter"></i></i><span>ikers890</span>
+                </a>
+
+                
+            </div>
+
+            <img th:src="@{/images/footer/trianguloFooter.png}" alt="">
+        </div>
+
+        <div id="div--finalData">
+            <div id="div--copyright">
+                <p>© 2023 Frutti Di Vestiti Company Inc.</p>
+            </div>
+
+            <div id="div--authory">
+                <p>Website designed by <a th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker Cuadros</b></a></p>
+                <p>Coded by <a href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker Cuadros</b></a></p>
+            </div>
+        </div>
+	</footer>
+</body>
+
+<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
+<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
+</html>

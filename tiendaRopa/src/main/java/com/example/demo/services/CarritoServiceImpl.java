@@ -66,5 +66,14 @@ public class CarritoServiceImpl implements CarritoService {
 			return new CarritoDTO();
 		}
 	}
+
+	@Override
+	public void delete(Long idCarrito) {
+		
+		log.info("CarritoServiceImpl - delete: Borramos carrito por su id " + idCarrito);
+		
+		cr.deleteById(idCarrito);
+		
+	}
 	
 }

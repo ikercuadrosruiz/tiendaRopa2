@@ -46,20 +46,6 @@ public class PedidoDTO implements Serializable {
 		pedidoDTO.setFechaEntrega(pedido.getFechaEntrega());
 		pedidoDTO.setUsuarioDTO(UsuarioDTO.convertToDTO(pedido.getUsuario()));
 
-		Float pt = 0.0f;
-		for (PedidoProducto pp : pedido.getListaPedidoProducto()) {
-
-			PedidoProductoDTO ppDTO = new PedidoProductoDTO();
-
-			ppDTO.setId(pp.getId());
-			ppDTO.setProductoDTO(ProductoDTO.convertToDTO(pp.getProducto()));
-
-			pedidoDTO.getListaPedidoProductoDTO().add(ppDTO);
-
-			pt += pp.getCantidad() * pp.getPedido().getPrecio();
-		}
-		pedidoDTO.setPrecio(pt);
-
 		return pedidoDTO;
 
 	}

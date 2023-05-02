@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" th:href="@{css/clientes/header.css}">
-<link rel="stylesheet" th:href="@{css/clientes/datosPersonales.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/datosPersonales.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
 <title>Datos personales</title>
 </head>
 
@@ -61,9 +62,9 @@
 	<main>
 		<div id="div--menuIzq">
 			<div id="div--imgPerfil">
-				<img th:src="@{/images/productos/IMG_5180.jpeg}" class="img-fluid"
-					alt="">
-				<p>Foto de perfil</p>
+				<img th:src="@{/images/login/imagenPerfil.png}" class="img-fluid"
+					alt=""/>
+				<p>Próximamente: Foto de perfil</p>
 			</div>
 
 			<div id="div--opDatos">
@@ -152,37 +153,46 @@
 	<!-- ************************* -->
 
 	<footer>
-		<img alt="logo" th:src="@{/images/footer/tiendaRopaLogo.png}">
+        <img th:src="@{/images/footer/fondoFooter.png}" alt="">
 
-		<div>
-			<h3>Contáctanos</h3>
-			<p>Tlf +34 666666666</p>
-			<p>correo@sitioweb.com</p>
-			<article>
-				<a href=""><img th:src="@{/images/footer/insta.png}"
-					alt="logo insta" width="20px"></a> <a href=""><img
-					th:src="@{/images/footer/facebooklogo.png}" alt="logo insta"
-					width="20px"></a> <a href=""><img
-					th:src="@{/images/footer/twitterlogo.png}" alt="logo insta"
-					width="25px"></a>
-			</article>
+        <div id="div--footerbox">
+            <div>
+                <img th:src="@{/images/footer/logoComplejo.png}" alt="Imagen del logo">
+            </div>
 
-		</div>
+            <div>
+                <p>"Es tu oportunidad para explorar estilos del pasado y reinventarlos para el presente".</p>
+            </div>
 
+            <div id="div--rrss">
+                <a href="@{https://www.instagram.com/ikerqs8_/}">
+                    <i class="fa fa-instagram"></i><span>ikerqs8_</span>
+                </a>
 
-		<div>
-			<h3>Política</h3>
-			<p>Política de privacidad</p>
-			<p>Métodos de Pago</p>
-			<article>
-				<a href=""><img th:src="@{/images/footer/pay pal.webp}"
-					alt="logo paypal" width="50px"></a> <a href=""><img
-					th:src="@{/images/footer/master card.png}" alt="logo mastercard"
-					width="50px"></a> <a href=""><img
-					th:src="@{/images/footer/VISA.jpg}" alt="logo visa" width="55px"></a>
-			</article>
-		</div>
+                <a href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
+                    <i class="fa-brands fa-linkedin"></i><span>Iker Cuadros</span>
+                </a>
 
+                <a href="@{https://twitter.com/ikers890}">
+                    <i class="fa-brands fa-twitter"></i></i><span>ikers890</span>
+                </a>
+
+                
+            </div>
+
+            <img th:src="@{/images/footer/trianguloFooter.png}" alt="">
+        </div>
+
+        <div id="div--finalData">
+            <div id="div--copyright">
+                <p>© 2023 Frutti Di Vestiti Company Inc.</p>
+            </div>
+
+            <div id="div--authory">
+                <p>Website designed by <a th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker Cuadros</b></a></p>
+                <p>Coded by <a href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker Cuadros</b></a></p>
+            </div>
+        </div>
 	</footer>
 </body>
 

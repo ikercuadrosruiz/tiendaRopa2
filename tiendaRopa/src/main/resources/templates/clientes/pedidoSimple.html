@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/pedidoSimple.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+
+<link rel="stylesheet"
+	th:href="@{/css/clientes/successCancelPayment.css}">
+<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
+<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}"
+	crossorigin="anonymous"></script>
+<title>Mis pedidos</title>
+</head>
+
+<body>
+	<header>
+		<nav>
+			<div>
+				<ul>
+					<li><a th:href="@{/index}">Inicio</a></li>
+					<li><a th:href="@{/tienda}">Productos</a></li>
+					<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+					<li><a th:href="@{/perfil}">Mi perfil</a></li>
+					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+				</ul>
+			</div>
+			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+		</nav>
+
+		<p>
+			<b>Frutti di Vestiti</b>
+		</p>
+
+		<nav>
+			<div>
+				<div id="favoritos">
+					<a><img th:src="@{/images/header/guardados.png}"
+						alt="Imagen guardados" /></a>
+				</div>
+
+				<div id="carrito">
+					<a th:href="@{/tienda/carrito}"><img
+						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+				</div>
+
+				<div class="btnLogin" sec:authorize="isAnonymous()">
+					<a th:href="@{/login}">No está logueado</a>
+				</div>
+
+				<div class="btnLogin" sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post">
+						<p th:inline="text">
+							<span th:remove="tag" sec:authentication="name" />
+						</p>
+						<input type="submit" value="Logout" />
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<!-- ***************************************** -->
+
+	<main>
+		aaa
+	</main>
+
+	<!-- ***************************************** -->
+
+	<footer>
+		<img th:src="@{/images/footer/fondoFooter.png}" alt="">
+
+		<div id="div--footerbox">
+			<div>
+				<img th:src="@{/images/footer/logoComplejo.png}"
+					alt="Imagen del logo">
+			</div>
+
+			<div>
+				<p>"Es tu oportunidad para explorar estilos del pasado y
+					reinventarlos para el presente".</p>
+			</div>
+
+			<div id="div--rrss">
+				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i
+					class="fa fa-instagram"></i><span>ikerqs8_</span>
+				</a> <a
+					href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
+					<i class="fa-brands fa-linkedin"></i><span>Iker Cuadros</span>
+				</a> <a href="@{https://twitter.com/ikers890}"> <i
+					class="fa-brands fa-twitter"></i></i><span>ikers890</span>
+				</a>
+
+
+			</div>
+
+			<img th:src="@{/images/footer/trianguloFooter.png}" alt="">
+		</div>
+
+		<div id="div--finalData">
+			<div id="div--copyright">
+				<p>© 2023 Frutti Di Vestiti Company Inc.</p>
+			</div>
+
+			<div id="div--authory">
+				<p>
+					Website designed by <a
+						th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
+							Cuadros</b></a>
+				</p>
+				<p>
+					Coded by <a href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
+							Cuadros</b></a>
+				</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

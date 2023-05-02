@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+img {
+    object-fit: cover;
+}
+
+body {
+    height: 100vh;
+}
+
+main {
+    font-family: 'Poppins';
+    min-height: calc(100% - 74px);
+
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    align-items: center;
+    justify-items: center;
+}
+
+/*****************************************/
+main>div:first-of-type {
+    width: 65vw;
+}
+
+/* Formulario **********************/
+#div--datosEnvio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#div--datosEnvio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#div--datosEnvio > div:first-of-type {
+    margin-top: 0vh;
+    margin-bottom: 2vh;
+}
+
+#div--datosEnvio > div:first-of-type > p, #div--metodosPago > p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #6161DB;
+}
+
+#div--datosEnvio > form {
+    width: 70%;
+    margin-top: 1.5vh;
+}
+
+/* Estilos para los divs que contienen los inputs */
+#div--datosEnvio  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  
+  /* Estilos para los labels de los inputs */
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  #div--direccion {
+    grid-column: 1/-1;
+  }
+
+  #div--cp {
+    grid-row: 3;
+    grid-column: 2;
+  }
+
+  /* Estilos para los inputs */
+  input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="date"] {
+    border: none;
+    border-bottom: 1px solid #2D2D2D;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #2D2D2D;
+  }
+  
+  /* Estilos para el borde al seleccionar el input */
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, input[type="date"]:focus {
+    border-color: #6161DB;
+    outline: none;
+  }
+  
+  /* Estilos para los divs de los inputs */
+  #div--nombre, #div--apellido1, #div--apellido2, #div--fechaNacimiento, #div--email, #div--nif, #div--poblacion, #div--direccion, #div--cp, #div--password {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+/* Métodos de pago **********************/
+#div--metodosPago {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#div--metodosPago>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#div--metodoPago {
+    margin: 10px 15px;
+    width: 275px;
+    height: 125px;
+    background: #FBFBFB;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s;
+
+    cursor: pointer;
+}
+#div--metodoPago:hover {
+    transform: scale(1.1);
+}
+
+#div--metodoPago p{
+	user-select: none;
+}
+
+
+#div--metodoPago>img {
+    width: 150px;
+    height: 38px;
+    object-fit: contain;
+    user-select: none;
+}
+
+#div--metodoPago:last-of-type {
+    opacity: .3;
+    background-color: grey;
+}
+#div--metodoPago:last-of-type:after {
+    content: "Coming soon...";
+    color: #000;
+}
+
+/* Ticket ********************************/
+#div--ticket {
+    width: 30vw;
+    height: 65vh;
+    margin-right: 2vw;
+
+    background: #FBFBFB;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2% 2.5vw;
+
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#div--ticket>img {
+    width: 100px;
+    height: 100px;
+}
+
+#div--ticket>p:first-of-type {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    color: #2D2D2D;
+}
+
+#div--precios{
+    width: 100%;
+}
+
+#div--precios>div {
+    display: flex;
+    justify-content: space-between;
+    margin: 10% 0;
+}
+
+#div--precios>div>p:first-of-type {
+    margin-right: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #2D2D2D;
+}
+#div--precios>div>p:last-of-type {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #2D2D2D;
+}
+
+#div--precios>div:last-of-type>p:last-of-type {
+    color: #6161DB;
+}
+
+#div--ticket>p:last-of-type {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    color: #2D2D2D;
+    padding: 10px;
+    border: 2px solid #6161DB;
+    user-select: none;
+    cursor: pointer;
+}
+#div--ticket>p:last-of-type:hover {
+    background-color: #6161DB;
+    color: #F2F2F2;
+}
+
+hr {
+    color: #6161DB;
+}

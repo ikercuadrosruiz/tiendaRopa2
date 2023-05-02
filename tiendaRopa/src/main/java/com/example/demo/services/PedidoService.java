@@ -16,4 +16,6 @@ public interface PedidoService {
 
 	void save(PedidoDTO pDTO);
 
+	PedidoDTO findByNumeroFactura(String numeroFactura);
+
 }

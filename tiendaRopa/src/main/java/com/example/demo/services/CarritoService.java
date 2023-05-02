@@ -14,4 +14,6 @@ public interface CarritoService {
 	void saveByCarrito(CarritoDTO cDTO);
 
 	CarritoDTO findById(Long idCarrito);
+
+	void delete(Long idCarrito);
 }

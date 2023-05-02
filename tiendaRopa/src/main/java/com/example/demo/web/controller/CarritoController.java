@@ -74,6 +74,7 @@ private static final Logger log = LoggerFactory.getLogger(IndexController.class)
 			uDTO.getListaCarritosDTO().add(cDTO);
 			
 			caS.save/*ByCarrito*/(cDTO);
+			cDTO = caS.findByIdCliente(uDTO.getId());
 		}else {
 			// Sino, obtenerlo de la base de datos
 			uDTO.getListaCarritosDTO().add(cDTO);

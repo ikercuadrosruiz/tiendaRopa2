@@ -27,6 +27,8 @@ public class PedidoProductoDTO implements Serializable {
 		
 		ppDTO.setId(pp.getId());
 		ppDTO.setCantidad(pp.getCantidad());
+		ppDTO.setPedidoDTO(PedidoDTO.convertToDTO(pp.getPedido()));
+		ppDTO.setProductoDTO(ProductoDTO.convertToDTO(pp.getProducto()));
 		
 		return ppDTO;
 	}
@@ -38,8 +40,8 @@ public class PedidoProductoDTO implements Serializable {
 		
 		pp.setId(ppDTO.getId());
 		pp.setCantidad(ppDTO.getCantidad());
-		pp.getPedido().setId(ppDTO.getPedidoDTO().getId());
-		pp.getProducto().setId(ppDTO.getPedidoDTO().getId());
+		pp.setPedido(PedidoDTO.convertToEntity(ppDTO.getPedidoDTO()));
+		pp.setProducto(ProductoDTO.convertToEntity(ppDTO.getProductoDTO()));
 		
 		return pp;
 	}

@@ -82,6 +82,17 @@ public class PedidoServiceImpl implements PedidoService{
 		
 		pedidoRepository.save(p);
 	}
+
+	@Override
+	public PedidoDTO findByNumeroFactura(String numeroFactura) {
+		
+		log.info("PedidoServiceImpl - findByNumeroFactura: Encontramos el pedido por su numero de factura " + numeroFactura);
+		
+		Pedido p = pedidoRepository.findByNumeroDeFactura(numeroFactura);
+		
+		return PedidoDTO.convertToDTO(p);
+		
+	}
 	
 
 	
