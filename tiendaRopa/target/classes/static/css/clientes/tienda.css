@@ -9,7 +9,7 @@ img {
 }
 
 main {
-	min-height: calc(100vh - 96px);
+	min-height: calc(100vh - 54px);
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -17,141 +17,107 @@ main {
 	font-family: 'Poppins';
 }
 
-/* div--buscador **************************************/
-#div--buscador {
-	width: 90%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-/*
-#div--buscador div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    border-radius: 11px;
-
-    border: 2px solid #6161DB;
-    background-color: #6161db;
-
-    cursor: pointer;
-}
-
-#div--buscador div:hover {
-    background-color: #6161DB;
-}
-
-#div--buscador div img {
-    width: 35px;
-    height: 35px;
-}
-*/
-#div--buscador a {
-	display: flex;
-	align-items: center;
-	justify-content: center; border : none; /* sin borde */
-	background-color: #6161DB; /* color de fondo */
-	color: white; /* color de texto */
-	padding: 10px; /* espacio interno */
-	border-radius: 5px; /* borde redondeado */
-	cursor: pointer; /* cursor de ratón */
-	transition: background-color 0.3s ease-in-out;
-	border: none; /* transición de color de fondo */
-	width: 35px;
-    height: 35px;
-}
-
-#div--buscador a:hover {
-	background-color: #4D4DA8; /* color de fondo más oscuro en hover */
-}
-
-#div--buscador a i {
-	font-size: 18px; /* tamaño del icono */
-}
-
-/*
-#div--buscador input {
-    width: 100%;
-    height: 39px;
-    padding-left: 5px;
-    border-radius: 11px;
-
-    border: 0;
-    background-color: #6161db4f;
-    color: #2c2c2c;
-    font-weight: bold;
-}
-
-#div--buscador input:focus {
-    outline: none;
-}
-*/
-input[type="text"] {
-	margin-left: 10px; background-color : #F1F1F1;
-	/* un color de fondo gris claro */
-	width: calc(80% - 10px);
-	font-weight: 500;
-	font-size: 15px;
-	border: none; /* sin borde */
-	padding: 10px; /* un poco de espacio interno para que se vea bien */
-	border-radius: 5px; /* borde redondeado */
-	box-shadow: 0px 0px 5px 0px #6161DB;
-	/* sombra con el color en cuestión */
-	transition: box-shadow 0.3s ease-in-out;
-	background-color: #F1F1F1; /* transición para la sombra */
-}
-
-input[type="text"]:focus {
-	outline: none; /* sin el contorno predeterminado del foco */
-	box-shadow: 0px 0px 5px 0px #6161DB, 0px 0px 10px 0px
-		rgba(97, 97, 219, 0.2);
-	/* una sombra más fuerte con un color transparente */
-}
-
-/*div--filtros **************************************/
+/* div--filtros **************************************/
 #div--filtros {
-	width: 74%;
-	margin: 30px 0 15px 0;
+	width: 66%;
+	min-width: 330px;
+}
+
+#div--filtros > div {
+	width: 100%;
+}
+
+#div--filtros {
+	margin: 2rem 0 1rem 0;
 	display: flex;
 	flex-direction: column;
+	transition: all 0.5s ease-in-out;
 }
 
-#div--filtros>p {
-	text-align:center;
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 25px;
-}
-
-#div--filtros div {
+#div--filtros > div {
+	transition: all 0.5s ease-in-out;
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 1rem;
 }
 
-#div--filtros div>* {
+#div--filtros > div>a {
 	font-family: 'Poppins';
-	font-weight: 700;
+	font-weight: 500;
 	text-align: center;
 	width: 30%;
-	height: 30px;
-	background-color: #6161db;
+	height: 2.5rem;
+	background-color: #6161DB4b;
+	color: #6161DB;
+    border: 2px solid #6161DB;
 	border-radius: 5px;
-	color: #f2f2f2;
 	text-decoration: none;
 	cursor: pointer;
 }
 
-#div--filtros div>select {
-	border: none;
+#div--filtros > div>a:hover {
+	background-color: #6161db;
+	color: #f2f2f2;
 }
 
-#div--filtros option {
-	text-transform: capitalize;
-}
+.select-wrapper {
+	position: relative;
+	display: inline-block;
+	font-family: 'Poppins';
+	font-weight: 500;
+	text-align: center;
+	width: 30%;
+	height: 2.5rem;
+	background-color: #6161DB4b;
+	color: #6161DB;
+    border: 2px solid #6161DB;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+  .select-selected {
+	padding: 6px 16px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+  }
+  
+  .select-selected:hover {
+	background-color: #6161DB;
+	color: #f2f2f2;
+  }
+  
+  .select-options {
+	width: 100%;
+	display: none;
+	position: absolute;
+	background-color:  #6161DB4b;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .select-option {
+	padding: 8px 16px;
+	cursor: pointer;
+  }
+  
+  .select-option:hover {
+	background-color: #6161DB;
+  }
+  
+  .select-option a {
+  	text-transform: capitalize;
+	color: #6161DB;
+  }
+  
+  .select-option:hover a {
+	color: #f2f2f2;
+  }
+  
 
 #div--filtros div>a {
 	display: flex;
@@ -159,36 +125,69 @@ input[type="text"]:focus {
 	justify-content: center;
 }
 
-/*div--productos *************************************/
+/* div--noProductos *************************************/
+#cont--noProducto {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+  
+#cont--noProducto p {
+	margin: 0;
+	font-size: 1.2rem;
+	text-align: center;
+	padding: 1rem;
+  }
+  
+#cont--noProducto img {
+	max-width: 100%;
+	height: auto;
+	margin-top: 1rem;
+  }
+
+/* div--productos *************************************/
 #div--productos {
-	width: 90%;
-	padding: 10px 0;
+	transition: all 0.5s ease-in-out;
+	width: 100%;
+	padding: 1rem 0;
 }
 
 #div--productos>p {
-	text-align:center;
+	text-align: center;
 	font-family: 'Poppins';
-	font-style: normal;
 	font-weight: 400;
-	font-size: 25px;
+	font-size: 1.5rem;
 }
 
 #cont--productos {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	margin-top: 1rem;
 }
 
 #cont--producto {
+	transition: all 0.5s ease-in-out;
 	position: relative;
-	margin: 10px 20px;
+	margin: 1rem 2rem;
+	min-width: 250px;
 	width: 90%;
 	max-width: 250px;
 	height: 325px;
 	overflow: hidden;
 	background: #FFFFFF;
-	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+	box-shadow: 5px 5px 12.5px rgba(0, 0, 0, 0.25);
 	border-radius: 20px;
+}
+#cont--producto:hover {
+	box-shadow: 8px 8px 15px #6161db5e;
+}
+#cont--producto:hover > div > p:nth-of-type(2){
+	color: #6161DB;
 }
 
 .dress--icon {
@@ -215,8 +214,9 @@ input[type="text"]:focus {
 	text-transform: capitalize;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 12px;
+	font-size: 0.75rem;
 	color: #2D2D2D;
+	margin-bottom: 0.5rem;
 }
 
 #cont--producto>div>p:nth-of-type(2) {
@@ -285,4 +285,32 @@ input[type="text"]:focus {
 .view--icon>img {
 	width: 30px;
 	height: 30px;
+}
+
+@media only screen and (max-width: 620px) {
+	#div--filtros {
+		width: 100%;
+	}
+
+	#div--filtros div {
+		width: 100%;
+	}
+	#div--productos {
+		width: 80%;
+	}
+
+	#cont--producto {
+		max-width: 300px;
+	}
+}
+
+/* Optimization */
+img {
+	will-change: transform;
+}
+
+.buy--icon,
+.view--icon {
+	will-change: background-color;
+	transition: background-color 0.2s ease-in-out;
 }

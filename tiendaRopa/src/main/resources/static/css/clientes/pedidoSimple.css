@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
 * {
 	margin: 0;
 	padding: 0;
@@ -9,12 +11,256 @@ img {
 }
 
 main {
-	min-height: calc(100vh - 74px);
+	height: calc(100vh - 74px);
 	width: 100%;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
+
+	display: grid;
+	grid-template-columns: 4fr 6fr;
+	grid-template-rows: 75px auto;
+	gap: 20px;
+
+	padding: 20px;
+}
+
+body * {
 	font-family: 'Poppins';
 }
 
-/* div--buscador **************************************/
+/* Div Titulo ***************************/
+#div--titulo {
+	grid-column: 1/-1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#div--titulo p {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 27px;
+	text-align: center;
+
+	color: #2D2D2D;
+}
+
+#div--titulo p span {
+	color: #6161DB;
+}
+
+/* Div Datos ***************************/
+#div--datos {
+	min-width: 250px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 33% 33% 33%;
+	gap: 20px;
+
+	overflow: hidden;
+}
+
+#div--datos>div {
+	text-align:center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#div--datos>div>p:first-of-type {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 22px;
+	color: #2D2D2D;
+
+}
+
+#div--datos>div>p:nth-of-type(2) {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	color: #2D2D2D;
+
+}
+
+#div--precio p:nth-of-type(2):after {
+	content: "€";
+}
+
+#div--imagen img {
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+}
+
+
+/* Div Productos ***************************/
+#div--productos {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+	justify-content: center;
+    flex-wrap: wrap;
+	align-items: center;
+
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+#cont--producto {
+	position: relative;
+    width: 400px;
+    min-width: 237px;
+    height: 170px;
+
+    background: #FFFFFF;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin: 10px 20px;
+
+    display: flex;
+    transition: all 0.5s ease-in-out;
+}
+#cont--producto:hover {
+	box-shadow: 8px 8px 15px #6161db5e;
+}
+#cont--producto:hover #div--masDatos > p {
+	color:  #6161db;
+}
+
+
+#cont--producto>a:not(#cont--producto>a:first-of-type) {
+    width: 33%;
+}
+
+#cont--producto>a:first-of-type {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	background-color: #2d2d2d;
+	color: #f2f2f2;
+	border-radius: 50%;
+}
+
+#cont--producto>a:first-of-type > i{
+	transform: translate(1px, -1px);
+	padding:8px;
+	width: 30px;
+	height: 30px;
+}
+
+#cont--producto>img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 20px 0 0 20px;
+}
+
+#div--masDatos {
+    padding: 2% 4%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px 20px;
+	border-radius: 0 0 20px 0;
+}
+
+#div--masDatos>p:first-of-type {
+    grid-column: 1/-1;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    color: #2D2D2D;
+}
+
+#div--masDatos>p:last-of-type {
+	grid-column: 1/-1;
+	text-align: center;
+	display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #6161DB;
+}
+
+#div--masDatos>a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#div--masDatos>a:first-of-type>i {
+    color: #dc3546;
+    text-align: center;
+}
+#div--masDatos>a:last-of-type>i {
+    color: #2d2d2d;
+    text-align: center;
+}
+
+#div--masDatos>div>p:first-of-type {
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    color: #2D2D2D;
+}
+
+#div--masDatos>div>p:nth-of-type(2) {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #2D2D2D;
+}
+
+#div--masDatos input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 25px;
+    width: 75%;
+    border-color: transparent;
+    background-color: transparent;
+
+}
+
+#div--masDatos input::-moz-color-swatch {
+    border: none;
+    border-radius: 20px;
+}
+
+@media (max-width: 1000px) {
+    main {
+		height: auto;
+		min-height: calc(100vh - 74px);
+		grid-template-columns: 1fr;
+		grid-template-rows: 75px 450px auto;
+	}
+
+	#cont--producto {
+        width: 270px;
+        height: 350px;
+    
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #cont--producto>a:nth-of-type(2) {
+        width: 100% !important;
+        height: 53%;
+    }
+
+    #cont--producto>img {
+        border-radius: 20px 20px 0 0;
+        object-fit: cover;
+    }
+
+}
+

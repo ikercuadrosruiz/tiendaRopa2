@@ -16,7 +16,7 @@ body{
 /* Login ---------------------------------------*/
 
 main{
-    height: calc(100vh - 55px);
+    height: calc(100vh - 54px);
     
     display: flex;
     align-items: center;
@@ -37,6 +37,8 @@ main > div:first-of-type > img {
     max-width: 500px;
 
     border-radius: 20px;
+
+    background-color: #272727;
 }
 
 main > div:nth-of-type(2){

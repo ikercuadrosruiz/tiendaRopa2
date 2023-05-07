@@ -132,7 +132,7 @@ public class PayPalController {
 				}
 			}
 			
-			return "trabajadores/index";
+			return "clientes/index";
 			
 			
 		} catch (Exception e) {

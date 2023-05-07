@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/datosPersonales.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
@@ -15,68 +16,38 @@
 <body>
 	<header>
 		<nav>
-            <div>
-                <ul>
-                    <li><a th:href="@{/index}">Inicio</a></li>
-                    <li><a th:href="@{/tienda}">Productos</a></li>
-                    <li><a href="#">Mis Pedidos</a></li>
-                    <li><a th:href="@{/perfil}">Mi perfil</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-                </ul>
-            </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
-        </nav>
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
+		</nav>
 
 		<p>
 			<b>Frutti di Vestiti</b>
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
-				
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
-				
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text"><span th:remove="tag" sec:authentication="name"/></p>
-						<input type="submit" value="Logout"/>
-					</form>
-				</div>
-			</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
+
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
 
 	<!-- ************************* -->
 
 	<main>
-		<div id="div--menuIzq">
-			<div id="div--imgPerfil">
-				<img th:src="@{/images/login/imagenPerfil.png}" class="img-fluid"
-					alt=""/>
-				<p>Próximamente: Foto de perfil</p>
-			</div>
-
-			<div id="div--opDatos">
-				<p>DATOS PERSONALES</p>
-			</div>
-
-			<div id="div--logo">
-				<img th:src="@{/images/header/logoSimple.png}" alt="Logo frutti">
-			</div>
-
-		</div>
-
 		<div id="div--datosUsuario">
 			<div>
 				<p>
@@ -196,4 +167,5 @@
 	</footer>
 </body>
 
-</html>
+<script th:src="@{/js/scriptHeader.js}"></script>
+

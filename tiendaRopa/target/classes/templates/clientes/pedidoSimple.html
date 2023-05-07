@@ -5,31 +5,26 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../../static/css/clientes/header.css">
+<link rel="stylesheet" href="../../static/css/clientes/footer.css">
+<link rel="stylesheet" href="../../static/css/clientes/pedidoSimple.css">
+
 <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/pedidoSimple.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
-
-<link rel="stylesheet"
-	th:href="@{/css/clientes/successCancelPayment.css}">
-<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
-<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}"
-	crossorigin="anonymous"></script>
-<title>Mis pedidos</title>
+<title>Pedido</title>
 </head>
 
 <body>
 	<header>
 		<nav>
-			<div>
-				<ul>
-					<li><a th:href="@{/index}">Inicio</a></li>
-					<li><a th:href="@{/tienda}">Productos</a></li>
-					<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
-					<li><a th:href="@{/perfil}">Mi perfil</a></li>
-					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-				</ul>
-			</div>
-			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
 		</nav>
 
 		<p>
@@ -37,37 +32,89 @@
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
 
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
 
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text">
-							<span th:remove="tag" sec:authentication="name" />
-						</p>
-						<input type="submit" value="Logout" />
-					</form>
-				</div>
-			</div>
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
 
 	<!-- ***************************************** -->
 
 	<main>
-		aaa
+
+		<div id="div--titulo">
+			<p>Pedido Nº: <span th:text="${pedidoDTO.numeroFactura}">12436576861</span></p>
+		</div>
+
+		<div id="div--datos">
+
+			<div id="div--estado">
+				<p>Estado</p>
+				<p th:text="${pedidoDTO.estado}">Entregado - En progreso</p>
+			</div>
+
+			<div id="div--imagen">
+				<img th:src="@{/images/ilustraciones/fotoPedidoSimple2.png}" alt="">
+			</div>
+
+			<div id="div--fEmision">
+				<p>Fecha de Emisión</p>
+				<p th:text="${pedidoDTO.fechaEmision}">dd/MM/yyyy HH:mm:ss</p>
+			</div>
+
+			<div id="div--fEntrega">
+				<p>Fecha de Entrega</p>
+				<p th:text="${pedidoDTO.fechaEntrega}">dd/MM/yyyy HH:mm:ss</p>
+			</div>
+
+			<div id="div--formaPago">
+				<p>Forma de Pago</p>
+				<p>PayPal</p>
+			</div>
+
+			<div id="div--precio">
+				<p>Precio</p>
+				<p th:text="${pedidoDTO.precio}">1000</p>
+			</div>
+		</div>
+
+		<div id="div--productos">
+			<div id="cont--producto" th:each="ppDTO : ${listaPedidoProductoDTO}">
+				<img th:src="@{/images/productos/{imagen} (imagen=${ppDTO.productoDTO.listaImagenesDTO[0].url})}" alt="gorra" />
+				<!--Debería hacerlo grid el div--masDatos-->
+				<div id="div--masDatos">
+					<p th:text=${ppDTO.productoDTO.nombre}>Nombre producto</p>
+
+					<div>
+						<p>Color</p>
+						<input type="color" th:value=${ppDTO.productoDTO.color} disabled />
+					</div>
+
+					<div>
+						<p>Talla</p>
+						<p th:text=${ppDTO.productoDTO.talla}>L</p>
+					</div>
+
+					<div>
+						<p>Cantidad</p>
+						<p th:text=${ppDTO.cantidad}>-</p>
+					</div>
+
+					<p th:text="${ppDTO.productoDTO.precio}+€">19.99€</p>
+				</div>
+			</div>
+
+		</div>
+
 	</main>
 
 	<!-- ***************************************** -->
@@ -77,8 +124,7 @@
 
 		<div id="div--footerbox">
 			<div>
-				<img th:src="@{/images/footer/logoComplejo.png}"
-					alt="Imagen del logo">
+				<img th:src="@{/images/footer/logoComplejo.png}" alt="Imagen del logo">
 			</div>
 
 			<div>
@@ -87,13 +133,11 @@
 			</div>
 
 			<div id="div--rrss">
-				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i
-					class="fa fa-instagram"></i><span>ikerqs8_</span>
-				</a> <a
-					href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
+				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i class="fa fa-instagram"></i><span>ikerqs8_</span>
+				</a> <a href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
 					<i class="fa-brands fa-linkedin"></i><span>Iker Cuadros</span>
 				</a> <a href="@{https://twitter.com/ikers890}"> <i
-					class="fa-brands fa-twitter"></i></i><span>ikers890</span>
+						class="fa-brands fa-twitter"></i></i><span>ikers890</span>
 				</a>
 
 
@@ -109,8 +153,7 @@
 
 			<div id="div--authory">
 				<p>
-					Website designed by <a
-						th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
+					Website designed by <a th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
 							Cuadros</b></a>
 				</p>
 				<p>
@@ -121,4 +164,6 @@
 		</div>
 	</footer>
 </body>
+
+<script th:src="@{/js/scriptHeader.js}"></script>
 </html>

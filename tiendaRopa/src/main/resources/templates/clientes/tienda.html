@@ -2,34 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
-<link rel="stylesheet" th:href="@{/css/clientes/tienda.css}">
-<link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
-
-<link rel="stylesheet"
-	th:href="@{/css/clientes/successCancelPayment.css}">
-<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
-<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}"
-	crossorigin="anonymous"></script>
-<title>Frutti di Vestiti</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+	<link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+	<link rel="stylesheet" th:href="@{/css/clientes/tienda.css}">
+	<link rel="stylesheet" th:href="@{/css/clientes/successCancelPayment.css}">
+	<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
+	<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
+	<title>Frutti di Vestiti</title>
 </head>
 
 <body>
 	<header>
 		<nav>
-			<div>
-				<ul>
-					<li><a th:href="@{/index}">Inicio</a></li>
-					<li><a th:href="@{/tienda}">Productos</a></li>
-					<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
-					<li><a th:href="@{/perfil}">Mi perfil</a></li>
-					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-				</ul>
-			</div>
-			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
 		</nav>
 
 		<p>
@@ -37,89 +31,86 @@
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
 
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
 
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text">
-							<span th:remove="tag" sec:authentication="name" />
-						</p>
-						<input type="submit" value="Logout" />
-					</form>
-				</div>
-			</div>
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
 
 	<!-- ***************************************** -->
 
 	<main>
-		<div id="div--buscador">
-			<a href=""> <i class="fa fa-search"></i>
-			</a> <input type="text" placeholder="Busque un artículo..." />
-		</div>
-
 		<div id="div--filtros">
 			<div>
-				<select name="categorias" id="selec-cat">
-					<option value="" hidden selected disabled>Categorías</option>
-					<option th:each="cDTO : ${listaCategoriasDTO}"
-						th:text=${cDTO.nombre}></option>
-				</select> <a href="">Precio de + a -</a> <a href="">Precio de - a +</a>
+				<div class="select-wrapper">
+                    <div class="select-selected">Categoría</div>
+                    <div class="select-options">
+                        <div class="select-option" th:each="cDTO : ${listaCategoriasDTO}">
+                        	<a th:href="@{/tienda/catergoria/{idCategoria} (idCategoria=${cDTO.id})}" th:text="${cDTO.nombre}"> Opciones</a>
+                        </div>
+                    </div>
+                </div>
+				<a th:href="@{/tienda/1}">Precio de + a -</a> 
+				<a th:href="@{/tienda/2}">Precio de - a +</a>
 			</div>
 		</div>
 
-		<div id="div--productos">
+
+		<div id="cont--noProducto"
+			th:if="${#lists.isEmpty(listaProductosDTO)}">
+			<p>Todavía no hay productos con este filtro</p>
+			<img th:src="@{/images/ilustraciones/imagenNoProductos.png}" alt="">
+		</div>
+		
+		<div id="div--productos" th:if="${!#lists.isEmpty(listaProductosDTO)}">
 			<p>Productos</p>
-			<div th:if="${param.productoAdd}">
-				<p>Producto añadido correctamente(Editar estilo de la alerta)</p>
-			</div>
 			<div id="cont--productos">
 				<div id="cont--producto" th:each="pDTO : ${listaProductosDTO}">
-					<img th:src="@{/images/tienda/heart.png}" alt="like"
-						class="like--icon"> <img
-						th:src="@{/images/productos/{imagen} (imagen=${pDTO.listaImagenesDTO[0].url})}"
-						alt="gorra" class="dress--icon">
+					<img th:src="@{/images/tienda/heart.png}" alt="like" class="like--icon"> <img
+						th:src="@{/images/productos/{imagen} (imagen=${pDTO.listaImagenesDTO[0].url})}" alt="gorra"
+						class="dress--icon">
 					<div>
 						<p th:text=${pDTO.categoria.nombre}>[Tipo categoría]</p>
 						<p th:text=${pDTO.nombre}>Nombre producto</p>
 						<div>
-							<p th:text=${pDTO.precio}>19.99€</p>
+							<p th:text=${pDTO.precio}>19.99</p>
 
-							<!-- Al darle click aqui debe añAadirse al carrito -->
-							<!-- Al darle click aqui debe añAadirse al carrito -->
-							<!-- Al darle click aqui debe añAadirse al carrito -->
-							<!-- Al darle click aqui debe añAadirse al carrito -->
-							<a
-								th:href="@{/tienda/producto/addCarrito/{idProducto} (idProducto=${pDTO.id})}">
+							<a th:href="@{/tienda/producto/addCarrito/{idProducto} (idProducto=${pDTO.id})}">
 								<div class="buy--icon">
-									<img th:src="@{/images/tienda/shopping-bag.png}"
-										alt="Ir al carrito">
+									<img th:src="@{/images/tienda/shopping-bag.png}" alt="Ir al carrito">
 								</div>
-							</a> <a
-								th:href="@{/tienda/producto/{idProducto} (idProducto=${pDTO.id})}">
+							</a> <a th:href="@{/tienda/producto/{idProducto} (idProducto=${pDTO.id})}">
 								<div class="view--icon">
-									<img th:src="@{/images/tienda/ver-producto.png}"
-										alt="Ver producto">
+									<img th:src="@{/images/tienda/ver-producto.png}" alt="Ver producto">
 								</div>
 							</a>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 
+		<!-- PopUps -------------- -->
+		<div id="popup-container" th:if="${param.productoAdd}">
+			<div id="popup-content">
+				<div>
+					<img th:src="@{/images/tramite/check.png}" alt="Perfecto">
+				</div>
+				<div>
+					<p>Producto añadido correctamente</p>
+				</div>
+				<div>
+					<a th:href="@{/tienda}" id="continue-button">Continuar</a>
+				</div>
 			</div>
 		</div>
 
@@ -167,8 +158,7 @@
 
 		<div id="div--footerbox">
 			<div>
-				<img th:src="@{/images/footer/logoComplejo.png}"
-					alt="Imagen del logo">
+				<img th:src="@{/images/footer/logoComplejo.png}" alt="Imagen del logo">
 			</div>
 
 			<div>
@@ -177,13 +167,11 @@
 			</div>
 
 			<div id="div--rrss">
-				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i
-					class="fa fa-instagram"></i><span>ikerqs8_</span>
-				</a> <a
-					href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
+				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i class="fa fa-instagram"></i><span>ikerqs8_</span>
+				</a> <a href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
 					<i class="fa-brands fa-linkedin"></i><span>Iker Cuadros</span>
 				</a> <a href="@{https://twitter.com/ikers890}"> <i
-					class="fa-brands fa-twitter"></i></i><span>ikers890</span>
+						class="fa-brands fa-twitter"></i></i><span>ikers890</span>
 				</a>
 
 
@@ -199,8 +187,7 @@
 
 			<div id="div--authory">
 				<p>
-					Website designed by <a
-						th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
+					Website designed by <a th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
 							Cuadros</b></a>
 				</p>
 				<p>
@@ -213,4 +200,7 @@
 </body>
 
 <script th:src="@{/js/clientes/scriptSuccFailPayment.js}"></script>
+<script th:src="@{/js/scriptHeader.js}"></script>
+<script th:src="@{/js/clientes/tienda.js}"></script>
+
 </html>

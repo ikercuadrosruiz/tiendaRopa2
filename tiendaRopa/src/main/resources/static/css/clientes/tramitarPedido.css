@@ -17,7 +17,7 @@ body {
 
 main {
     font-family: 'Poppins';
-    min-height: calc(100% - 74px);
+    min-height: calc(100vh - 70px);
 
     display: grid;
     grid-template-columns: 4fr 2fr;
@@ -26,9 +26,7 @@ main {
 }
 
 /*****************************************/
-main>div:first-of-type {
-    width: 65vw;
-}
+
 
 /* Formulario **********************/
 #div--datosEnvio {
@@ -36,20 +34,16 @@ main>div:first-of-type {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 65vw;
 }
 
-#div--datosEnvio {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#div--datosEnvio > div:first-of-type {
+#div--datosEnvio>div:first-of-type {
     margin-top: 0vh;
     margin-bottom: 2vh;
 }
 
-#div--datosEnvio > div:first-of-type > p, #div--metodosPago > p{
+#div--datosEnvio>div:first-of-type>p,
+#div--metodosPago>p {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -57,40 +51,45 @@ main>div:first-of-type {
     color: #6161DB;
 }
 
-#div--datosEnvio > form {
+#div--datosEnvio>form {
     width: 70%;
     margin-top: 1.5vh;
 }
 
 /* Estilos para los divs que contienen los inputs */
-#div--datosEnvio  form {
+#div--datosEnvio form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
-  }
-  
-  /* Estilos para los labels de los inputs */
-  label {
+}
+
+/* Estilos para los labels de los inputs */
+label {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-  }
+}
 
-  #div--direccion {
+#div--direccion {
     grid-column: 1/-1;
-  }
+}
 
-  #div--cp {
+#div--cp {
     grid-row: 3;
     grid-column: 2;
-  }
+}
 
-  /* Estilos para los inputs */
-  input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="date"] {
+/* Estilos para los inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="date"] {
     border: none;
     border-bottom: 1px solid #2D2D2D;
     margin-bottom: 15px;
     width: 100%;
+    min-width: 142px;
     padding: 5px;
     box-sizing: border-box;
     transition: border-color 0.3s ease-in-out;
@@ -99,19 +98,32 @@ main>div:first-of-type {
     font-weight: 400;
     font-size: 15px;
     color: #2D2D2D;
-  }
-  
-  /* Estilos para el borde al seleccionar el input */
-  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, input[type="date"]:focus {
+}
+
+/* Estilos para el borde al seleccionar el input */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
     border-color: #6161DB;
     outline: none;
-  }
-  
-  /* Estilos para los divs de los inputs */
-  #div--nombre, #div--apellido1, #div--apellido2, #div--fechaNacimiento, #div--email, #div--nif, #div--poblacion, #div--direccion, #div--cp, #div--password {
+}
+
+/* Estilos para los divs de los inputs */
+#div--nombre,
+#div--apellido1,
+#div--apellido2,
+#div--fechaNacimiento,
+#div--email,
+#div--nif,
+#div--poblacion,
+#div--direccion,
+#div--cp,
+#div--password {
     width: 100%;
     margin-bottom: 20px;
-  }
+}
 
 /* Métodos de pago **********************/
 #div--metodosPago {
@@ -121,7 +133,7 @@ main>div:first-of-type {
     justify-content: center;
 }
 
-#div--metodosPago>div{
+#div--metodosPago>div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,12 +155,13 @@ main>div:first-of-type {
 
     cursor: pointer;
 }
+
 #div--metodoPago:hover {
     transform: scale(1.1);
 }
 
-#div--metodoPago p{
-	user-select: none;
+#div--metodoPago p {
+    user-select: none;
 }
 
 
@@ -157,15 +170,6 @@ main>div:first-of-type {
     height: 38px;
     object-fit: contain;
     user-select: none;
-}
-
-#div--metodoPago:last-of-type {
-    opacity: .3;
-    background-color: grey;
-}
-#div--metodoPago:last-of-type:after {
-    content: "Coming soon...";
-    color: #000;
 }
 
 /* Ticket ********************************/
@@ -198,7 +202,7 @@ main>div:first-of-type {
     color: #2D2D2D;
 }
 
-#div--precios{
+#div--precios {
     width: 100%;
 }
 
@@ -215,6 +219,7 @@ main>div:first-of-type {
     font-size: 18px;
     color: #2D2D2D;
 }
+
 #div--precios>div>p:last-of-type {
     font-style: normal;
     font-weight: 600;
@@ -237,6 +242,7 @@ main>div:first-of-type {
     user-select: none;
     cursor: pointer;
 }
+
 #div--ticket>p:last-of-type:hover {
     background-color: #6161DB;
     color: #F2F2F2;
@@ -244,4 +250,55 @@ main>div:first-of-type {
 
 hr {
     color: #6161DB;
+}
+
+@media (max-width: 986px) {
+    /* Ticket ********************************/
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    #div--datosEnvio {
+        width: 100%;
+    }
+
+    #div--ticket {
+        width: 80% !important;
+        min-width: 275px;
+        height: 70vh !important;
+        margin-right: 0;
+        margin-bottom: 10vh;
+        margin-top: 5vh;
+    }
+
+    main form {
+        
+        min-width: 275px;
+    }
+
+    main form input {
+        min-width: 275px;
+    }
+}
+
+@media (max-width: 600px) {
+    #div--datosEnvio form {
+        grid-template-columns: 1fr;
+    }
+
+    #div--direccion {
+        grid-column: 1/-1;
+    }
+
+    #div--cp {
+        grid-row: 6;
+        grid-column: 1;
+    }
+
+    #div--precios>div {
+        display: flex;
+        justify-content: space-between;
+        margin: 13% 0;
+    }
+
 }

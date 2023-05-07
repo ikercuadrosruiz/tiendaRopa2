@@ -16,7 +16,7 @@ body{
 /* Login ---------------------------------------*/
 
 main{
-    min-height: calc(100vh - 55px);
+    min-height: calc(100vh - 54px);
     display: flex;
     padding: 20px;
 }
@@ -58,6 +58,19 @@ main > div:nth-of-type(2){
     align-items: center;
 }
 
+main > div:nth-of-type(2) form > a {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #2D2D2D;
+    cursor: pointer;
+    grid-column: 1/-1;
+    user-select: none;
+}
+main > div:nth-of-type(2) > form > a:hover {
+    color: #6161DB;
+}
+
 main div form {
     width: 80%;
     min-width: 480px;
@@ -82,8 +95,6 @@ form input {
     padding-left: 5px;
 
     font-size: 1.1em;
-
-    border-radius: 5px;
     border: 2px solid #ccc;
 }
 
@@ -107,35 +118,51 @@ form input {
     grid-column: span 2;
 }
 
-input:focus{
-    border: 2px solid #6161db;
-    outline: none;
-}
-
-form button{
-    grid-column: span 2;
-    min-height: 40px;
-
-    border-radius: 10px;
-    background-color: #6161DB;
-    border: 2px solid #6161DB;
-    color: #f2f2f2;
+ /* Estilos para los inputs */
+ input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="date"] {
+    border: none;
+    border-bottom: 1px solid #2D2D2D;
+    margin-bottom: 15px;
     width: 100%;
-    margin: 10px 0;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #2D2D2D;
+  }
+  
+  /* Estilos para el borde al seleccionar el input */
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, input[type="date"]:focus {
+    border-color: #6161DB;
+    outline: none;
+  }
 
-    font-size: 1.3em;
-
-    transition: background-color 0.5s;
+  form button{
+    grid-column: span 2;
+    display: inline-block;
+    margin: 30px 0;
+    padding: 7px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161DB;
+    border: 2px solid #6161DB;
+    background-color: #6161DB4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 form button:hover{
-    background-color: #272727;
-    cursor: pointer;
-    border: 2px solid #6161DB;
+    background-color: #6161DB;
     color: #f2f2f2;
-    text-shadow: 0px 0px 20px #6161DB;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    box-shadow: 0px 0px 30px #6161DB;
+form button{
+    outline: none;
 }
 
 @media (max-width: 1100px) and (min-width: 770px) {
@@ -174,8 +201,7 @@ form button:hover{
         justify-content: center;
         align-items: center;
     }
-
-    form h3{
+    form h3, main > div:nth-of-type(2) form > p:first-of-type {
         text-align: center;
     }
     
@@ -220,28 +246,55 @@ form button:hover{
         grid-template-columns: 1fr;
     }
 
-    form h3{
+    form h3, main > div:nth-of-type(2) form > p:first-of-type {
         text-align: center;
     }
-    
-    #cont4{
-        grid-column: span 1;
-    }
-    #cont5{
+
+    #cont1 {
         grid-column: 1;
         grid-row: 3;
     }
-    #cont6{
+    #cont2 {
+        grid-column: 1;
+        grid-row: 4;
+    }
+    #cont3 {
+        grid-column: 1;
+        grid-row: 5;
+    }
+    #cont34 {
         grid-column: 1;
         grid-row: 6;
     }
+    #cont4{
+        grid-column: 1;
+        grid-row: 7;
+    }
+    #cont5{
+        grid-column: 1;
+        grid-row: 8;
+    }
+    #cont6{
+        grid-column: 1;
+        grid-row: 9;
+    }
     #cont7{
-        grid-column: span 1;
+        grid-column: 1;
+        grid-row: 10;
+    }
+    #cont8{
+        grid-column: 1;
+        grid-row: 11;
+    }
+    #cont9{
+        grid-column: 1;
+        grid-row: 12;
+    }
+    #cont10{
+        grid-column: 1;
+        grid-row: 13;
     }
     form button{
         grid-column: span 1;
     }
-    #cont10{
-    grid-column: 1;
-	}
 }

@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
     <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/clientes/successCancelPayment.css}">
+    
     <link rel="icon" type="image/x-icon" href="../images/imagenFavicon.png">
     <script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
 
-    <title>LogIn - Iker Cuadros</title>
+    <title>LogIn</title>
 
 </head>
 
@@ -19,71 +22,48 @@
 
     <header>
 		<nav>
-            <div>
-                <ul>
-                    <li><a th:href="@{/index}">Inicio</a></li>
-                    <li><a th:href="@{/tienda}">Productos</a></li>
-                    <li><a href="#">Mis Pedidos</a></li>
-                    <li><a th:href="@{/perfil}">Mi perfil</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-                </ul>
-            </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
-        </nav>
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
+		</nav>
 
 		<p>
 			<b>Frutti di Vestiti</b>
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
-				
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
-				
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text"><span th:remove="tag" sec:authentication="name"/></p>
-						<input type="submit" value="Logout"/>
-					</form>
-				</div>
-			</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
+
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-		<div>
+        <div>
             <img th:src="@{/images/login/imagenLogin.jpg}" alt="Imagen login">
         </div>
 
         <div>
-        	<div th:if="${param.error}">
-        		<p>❌ El login no ha sido correcto (Editar estilo de la alerta)</p>
-        	</div>
-        	
-        	<div th:if="${param.logout}">
-        		<p>✔ Ha cerrado sesión exitosamente (Editar estilo de la alerta)</p>
-        	</div>
-        
-            <form id="formLogIn"
-            		th:action = "@{/login}"
-            		method = "POST">
+            <form id="formLogIn" th:action="@{/login}" method="POST">
                 <h3>LogIn</h3>
 
                 <div>
                     <p>Email</p>
-                    <input type="text" id="email" name="username"/>
+                    <input type="text" id="email" name="username" />
                 </div>
 
                 <div>
@@ -94,14 +74,47 @@
                 <button id="enviarRegistro" type="submit">Acceder</button>
 
                 <p>¿Todavía no se encuentra registrado?</p>
-                <a th:href = "@{/registro}">Registrese aquí</a>
+                <a th:href="@{/registro}">Registrese aquí</a>
             </form>
+
+            <!-- PopUps -------------- -->
+            <div id="popup-container" th:if="${param.error}">
+                <div id="popup-content">
+                    <div>
+                        <img th:src="@{/images/tramite/cancel.png}" alt="Oops">
+                    </div>
+                    <div>
+                        <h3>
+                            <b>Oops</b>
+                        </h3>
+                        <p>El login no ha sido correcto</p>
+                    </div>
+                    <div>
+                        <a th:href="@{/login}" id="continue-button">Continuar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PopUps -------------- -->
+            <div id="popup-container" th:if="${param.logout}">
+                <div id="popup-content">
+                    <div>
+                        <img th:src="@{/images/tramite/check.png}" alt="Perfecto">
+                    </div>
+                    <div>
+                        <p>Ha cerrado sesión exitosamente</p>
+                    </div>
+                    <div>
+                        <a th:href="@{/login}" id="continue-button">Continuar</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
 
     <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->
-   <footer>
+    <footer>
         <img th:src="@{/images/footer/fondoFooter.png}" alt="">
 
         <div id="div--footerbox">
@@ -126,7 +139,7 @@
                     <i class="fa-brands fa-twitter"></i></i><span>ikers890</span>
                 </a>
 
-                
+
             </div>
 
             <img th:src="@{/images/footer/trianguloFooter.png}" alt="">
@@ -142,10 +155,12 @@
                 <p>Coded by <a href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker Cuadros</b></a></p>
             </div>
         </div>
-	</footer>
+    </footer>
 
-	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
+    <script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
     <script th:src="@{/js/scriptHeader.js}"></script>
+    <script th:src="@{/js/clientes/scriptsTramite.js}"></script>
+    <script th:src="@{/js/clientes/scriptSuccFailPayment.js}"></script>
 </body>
 
 </html>

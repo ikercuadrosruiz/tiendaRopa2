@@ -14,4 +14,10 @@ public interface ProductoService {
 
 	void save(ProductoDTO pDTO);
 
+	List<ProductoDTO> findAllODesc();
+
+	List<ProductoDTO> findAllOAsc();
+
+	List<ProductoDTO> findAllByCategoria(Long idCategoria);
+
 }

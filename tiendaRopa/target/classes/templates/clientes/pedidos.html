@@ -2,34 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
-<link rel="stylesheet" th:href="@{/css/clientes/todosPedidos.css}">
-<link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-	th:href="@{/css/clientes/successCancelPayment.css}">
-<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
-<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}"
-	crossorigin="anonymous"></script>
-<title>Mis pedidos</title>
+	<link rel="stylesheet" th:href="@{/css/clientes/header.css}">
+	<link rel="stylesheet" th:href="@{/css/clientes/todosPedidos.css}">
+	<link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+
+	<link rel="stylesheet" th:href="@{/css/clientes/successCancelPayment.css}">
+	<script th:src="@{/js/clientes/scriptsTramite.js}"></script>
+	<script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
+	<title>Mis pedidos</title>
 </head>
 
 <body>
 	<header>
 		<nav>
-			<div>
-				<ul>
-					<li><a th:href="@{/index}">Inicio</a></li>
-					<li><a th:href="@{/tienda}">Productos</a></li>
-					<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
-					<li><a th:href="@{/perfil}">Mi perfil</a></li>
-					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-				</ul>
-			</div>
-			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
 		</nav>
 
 		<p>
@@ -37,30 +33,18 @@
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
 
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
 
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text">
-							<span th:remove="tag" sec:authentication="name" />
-						</p>
-						<input type="submit" value="Logout" />
-					</form>
-				</div>
-			</div>
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
 
@@ -68,27 +52,28 @@
 
 	<main>
 		<div id="div--general">
-            <p>Mis Pedidos</p>
-
+			<p>Mis Pedidos</p>
 			<div id="cont--noPedidos" th:if="${#lists.isEmpty(listaPedidosDTO)}">
 				<p>No hay productos en el carrito</p>
+				<img src="../../static/images/ilustraciones/imagenNoPedido.png" alt="">
 			</div>
 			
-            <div id="cont--pedidos">
+			<div id="cont--pedidos">
 
 				<div th:each="pDTO : ${listaPedidosDTO}" id="cont--pedido">
-                    <div id="div--superior">
-                        <p th:text="${pDTO.estado}">Entregado-En progreso</p>
-                        <p th:text="${pDTO.numeroFactura}">Nº: JQA-5679001</p>
-                    </div>
+					<div id="div--superior">
+						<p th:text="${pDTO.estado}">En progreso</p>
+						<p th:text="${pDTO.numeroFactura}">JQA-5679001</p>
+					</div>
 
 					<div id="div--inferior">
 						<p th:text="${pDTO.precio}">100.99</p>
 						<a th:href="@{/pedidos/{idPedido} (idPedido = ${pDTO.id})}">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
 	</main>
 
 	<!-- ***************************************** -->
@@ -98,8 +83,7 @@
 
 		<div id="div--footerbox">
 			<div>
-				<img th:src="@{/images/footer/logoComplejo.png}"
-					alt="Imagen del logo">
+				<img th:src="@{/images/footer/logoComplejo.png}" alt="Imagen del logo">
 			</div>
 
 			<div>
@@ -108,13 +92,11 @@
 			</div>
 
 			<div id="div--rrss">
-				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i
-					class="fa fa-instagram"></i><span>ikerqs8_</span>
-				</a> <a
-					href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
+				<a href="@{https://www.instagram.com/ikerqs8_/}"> <i class="fa fa-instagram"></i><span>ikerqs8_</span>
+				</a> <a href="@{https://www.linkedin.com/in/iker-cuadros-ruiz-ab6891231/}">
 					<i class="fa-brands fa-linkedin"></i><span>Iker Cuadros</span>
 				</a> <a href="@{https://twitter.com/ikers890}"> <i
-					class="fa-brands fa-twitter"></i></i><span>ikers890</span>
+						class="fa-brands fa-twitter"></i></i><span>ikers890</span>
 				</a>
 
 
@@ -130,8 +112,7 @@
 
 			<div id="div--authory">
 				<p>
-					Website designed by <a
-						th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
+					Website designed by <a th:href="@{https://www.instagram.com/ikerqs8_/}"><b>Iker
 							Cuadros</b></a>
 				</p>
 				<p>
@@ -142,4 +123,7 @@
 		</div>
 	</footer>
 </body>
+
+<script th:src="@{/js/scriptHeader.js}"></script>
+
 </html>

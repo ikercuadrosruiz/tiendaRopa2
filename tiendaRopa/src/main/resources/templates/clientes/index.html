@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
     <link rel="stylesheet" th:href="@{/css/clientes/index.css}">
     <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
     <script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}" crossorigin="anonymous"></script>
 
-    <title>LogIn - Iker Cuadros</title>
+    <title>Inicio</title>
 
 </head>
 
@@ -19,45 +20,32 @@
 
     <header>
 		<nav>
-            <div>
-                <ul>
-                    <li><a th:href="@{/index}">Inicio</a></li>
-                    <li><a th:href="@{/tienda}">Productos</a></li>
-                    <li><a href="#">Mis Pedidos</a></li>
-                    <li><a th:href="@{/perfil}">Mi perfil</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-                </ul>
-            </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
-        </nav>
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
+		</nav>
 
 		<p>
 			<b>Frutti di Vestiti</b>
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
-				
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
-				
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text"><span th:remove="tag" sec:authentication="name"/></p>
-						<input type="submit" value="Logout"/>
-					</form>
-				</div>
-			</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
+
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
@@ -65,22 +53,21 @@
     <main>
         <!-- Imagen de fondo -->
         <img th:src="@{/images/clienteindex/tiendaindex.jpg}" alt="Imagen de Inicio">
-        <div>
-            <article>
-                <h2>Bienvenido a <br> <span>Frutti di Vestiti</span></h2>
-                <p>Nuestra web de ropa es un espacio en línea lleno de estilo y moda.
-                    Ofrecemos una amplia variedad de prendas para hombres, mujeres y niños,
-                    desde ropa casual hasta ropa formal. Contamos con una gran selección de
-                    productos de alta calidad, diseñados con las últimas tendencias en mente.
-                    Además, nuestra página web es fácil de navegar y hacer compras en línea,
-                    con opciones seguras de pago y envíos a todas partes del mundo. Ofrecemos
-                    también un servicio al cliente excepcional y políticas de devolución flexibles.
-                    Si estás buscando ropa de calidad y estilo, ¡Frutti di Vestiti web es el lugar
-                    ideal para ti!</p>
-            </article>
-
-            <a th:href="@{/tienda}">Comprar ahora</a>
-        </div>
+            <div id="div--izq">
+                <article>
+                    <h2>Bienvenido a <br> <span>Frutti di Vestiti</span></h2>
+                    <p>
+                        Estamos encantados de que hayas encontrado nuestro sitio web
+                        y esperamos que disfrutes navegando por nuestra selección única de 
+                        prendas vintage.
+                        Esperamos que disfrutes de tu tiempo en nuestro sitio web y que encuentres la prenda perfecta.
+                        ¡Frutti di Vestiti web es el lugar ideal para ti!</p>
+                </article>
+            </div>
+            
+            <div id="div--der">
+                <a th:href="@{/tienda}">Comprar ahora</a>
+            </div>
     </main>
 
     <!-- --------------------------NO CAMBIAR - ABAJO------------------------------- -->

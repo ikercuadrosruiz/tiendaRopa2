@@ -5,6 +5,10 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../../static/css/clientes/header.css">
+	<link rel="stylesheet" href="../../static/css/clientes/tramitarPedido.css">
+	<link rel="stylesheet" href="../../static/css/clientes/footer.css">
+
 <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/tramitarPedido.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
@@ -15,16 +19,13 @@
 <body>
 	<header>
 		<nav>
-			<div>
-				<ul>
-					<li><a th:href="@{/index}">Inicio</a></li>
-					<li><a th:href="@{/tienda}">Productos</a></li>
-					<li><a href="#">Mis Pedidos</a></li>
-					<li><a th:href="@{/perfil}">Mi perfil</a></li>
-					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-				</ul>
-			</div>
-			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+			<ul>
+				<li><a th:href="@{/index}">Inicio</a></li>
+				<li><a th:href="@{/tienda}">Productos</a></li>
+				<li><a th:href="@{/pedidos}">Mis Pedidos</a></li>
+				<li><a th:href="@{/perfil}">Mi perfil</a></li>
+			</ul>
+			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
 		</nav>
 
 		<p>
@@ -32,32 +33,23 @@
 		</p>
 
 		<nav>
-			<div>
-				<div id="favoritos">
-					<a><img th:src="@{/images/header/guardados.png}"
-						alt="Imagen guardados" /></a>
-				</div>
+			<a><img th:src="@{/images/header/guardados.png}"
+					alt="Imagen guardados" /></a>
 
-				<div id="carrito">
-					<a th:href="@{/tienda/carrito}"><img
-						th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
-				</div>
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
 
-				<div class="btnLogin" sec:authorize="isAnonymous()">
-					<a th:href="@{/login}">No está logueado</a>
-				</div>
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
 
-				<div class="btnLogin" sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="post">
-						<p th:inline="text">
-							<span th:remove="tag" sec:authentication="name" />
-						</p>
-						<input type="submit" value="Logout" />
-					</form>
-				</div>
-			</div>
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
+			</form>
 		</nav>
 	</header>
+
+	<!-- --------------------------------------------------------->
+
 	<main>
 		<div>
 			<div id="div--datosEnvio">
@@ -123,11 +115,6 @@
 					<div id="div--metodoPago">
 						<img th:src="@{/images/tramite/paypalImg.png}" alt="PayPal img">
 						<p>PayPal</p>
-					</div>
-
-					<div id="div--metodoPago">
-						<img th:src="@{/images/tramite/masterCardImg.png}" alt="MasterCard img">
-						<p></p>
 					</div>
 				</div>
 			</div>
@@ -210,4 +197,5 @@
 
 <script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
 <script th:src="@{/js/clientes/scriptsTramite.js}"></script>
+<script th:src="@{/js/scriptHeader.js}"></script>
 </html>

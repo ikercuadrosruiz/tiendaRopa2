@@ -91,3 +91,9 @@
 }
 
 
+@media (max-width: 1200px) {
+  #popup-content {
+    width: 60%;
+    height: 40%;
+  }
+}

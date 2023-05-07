@@ -73,6 +73,54 @@ public class PagArticulosController {
 
 		return mav;
 	}
+	
+	@GetMapping("/tienda/1")
+	public ModelAndView inicioTiendaOrdenadaDesc() {
+		// De + a -
+
+		log.info("PagArticulosController - inicioTiendaOrdenadaDesc: Pasamos a la página con todos los artículos ordenados");
+
+		List<ProductoDTO> lpDTO = ps.findAllODesc();
+		List<CategoriaDTO> lcDTO = cs.findAll();
+
+		ModelAndView mav = new ModelAndView("clientes/tienda");
+		mav.addObject("listaProductosDTO", lpDTO);
+		mav.addObject("listaCategoriasDTO", lcDTO);
+
+		return mav;
+	}
+	
+	@GetMapping("/tienda/2")
+	public ModelAndView inicioTiendaOrdenadaAsc() {
+		// De - a +
+
+		log.info("PagArticulosController - inicioTiendaOrdenadaAsc: Pasamos a la página con todos los artículos ordenados");
+
+		List<ProductoDTO> lpDTO = ps.findAllOAsc();
+		List<CategoriaDTO> lcDTO = cs.findAll();
+
+		ModelAndView mav = new ModelAndView("clientes/tienda");
+		mav.addObject("listaProductosDTO", lpDTO);
+		mav.addObject("listaCategoriasDTO", lcDTO);
+
+		return mav;
+	}
+	
+	@GetMapping("/tienda/catergoria/{idCategoria}")
+	public ModelAndView inicioTiendaXCategoria(@PathVariable Long idCategoria) {
+		// Por categoria
+
+		log.info("PagArticulosController - inicioTiendaOrdenadaAsc: Pasamos a la página con todos los artículos ordenados");
+
+		List<ProductoDTO> lpDTO = ps.findAllByCategoria(idCategoria);
+		List<CategoriaDTO> lcDTO = cs.findAll();
+
+		ModelAndView mav = new ModelAndView("clientes/tienda");
+		mav.addObject("listaProductosDTO", lpDTO);
+		mav.addObject("listaCategoriasDTO", lcDTO);
+
+		return mav;
+	}
 
 	@GetMapping("/tienda/producto/{idProducto}")
 	public ModelAndView verProducto(@PathVariable Long idProducto) {
@@ -240,6 +288,7 @@ public class PagArticulosController {
 
 		ModelAndView mav = new ModelAndView("clientes/pedidoSimple");
 		mav.addObject("pedidoDTO", pDTO);
+		mav.addObject("listaPedidoProductoDTO", lppDTO);
 		
 		return mav;
 	}

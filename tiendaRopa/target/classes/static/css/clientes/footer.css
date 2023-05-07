@@ -1,20 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
+/* Estilos generales del footer */
+
 footer {
     position: relative;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     font-family: 'Poppins';
+    height: 100vh;
 }
 
-footer > img {
+footer>img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    position: absolute;
     z-index: -10;
 }
 
@@ -22,7 +26,6 @@ footer > img {
     position: relative;
     display: grid;
     grid-template-columns: 2fr 3fr 2fr;
-
     margin-top: 5vh;
     background-color: #f2f1ec;
     width: 95%;
@@ -30,7 +33,7 @@ footer > img {
     height: 55vh;
 }
 
-#div--footerbox > img{
+#div--footerbox>img {
     position: absolute;
     width: 45px;
     height: 45px;
@@ -61,7 +64,7 @@ footer > img {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
-    font-size: 40px;
+    font-size: 30px;
     color: #2D2D2D;
 }
 
@@ -73,23 +76,22 @@ footer > img {
     overflow: hidden;
 }
 
-#div--rrss a{
+#div--rrss a {
     display: flex;
     align-items: center;
     justify-content: space-around;
     color: #2c2c2c;
-
     padding: 15px;
 }
 
-#div--rrss i{
+#div--rrss i {
     margin-right: 5px;
-    font-size: 45px;
+    font-size: 20px;
 }
 
-#div--rrss span{
+#div--rrss span {
     margin-right: 5px;
-    font-size: 35px;
+    font-size: 20px;
 }
 
 #div--finalData {
@@ -111,23 +113,87 @@ footer > img {
     color: #f2f1ec;
 }
 
-#div--copyright a,
-#div--authory a,
-#div--copyright a:visited,
-#div--authory a:visited,
-#div--copyright a:active,
-#div--authory a:active,
-#div--rrss a:active,
-#div--rrss a:visited {
-    color: #2c2c2c;
-}
-
-#div--copyright a:hover,
-#div--authory a:hover {
-    color: #f2f1ec;
-}
-
 #div--rrss a:hover {
     color: #6161DB;
     font-weight: 500;
+}
+
+
+@media (max-width: 770px) {
+
+
+    /* Estilos generales del footer */
+    footer {
+        position: relative;
+        font-family: 'Poppins';
+    }
+    #div--footerbox div:first-of-type{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    footer>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        z-index: -10;
+    }
+
+    #div--footerbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    #div--footerbox>div:nth-of-type(2)>p {
+        font-size: 20px;
+    }
+
+    #div--rrss i {
+        margin-right: 5px;
+        font-size: 20px;
+    }
+
+    #div--rrss span {
+        margin-right: 5px;
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width: 584px) {
+    #div--footerbox>div:first-of-type {
+        height: 50%;
+    }
+
+    #div--footerbox>div:first-of-type>img {
+        width: 80%;
+    }
+
+    #div--footerbox>div:nth-of-type(2) {
+        display: none;
+    }
+
+    #div--rrss i {
+        margin-right: 5px;
+        font-size: 20px;
+    }
+
+    #div--rrss span {
+        margin-right: 5px;
+        font-size: 20px;
+    }
+
+    #div--finalData {
+        width: 95%;
+        min-width: 275px;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: space-between;
+        margin: 3vh;
+    }
+
 }

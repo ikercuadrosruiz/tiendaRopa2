@@ -10,24 +10,52 @@ img {
 }
 
 main {
-    min-height: calc(100vh - 55px);
+    height: calc(100vh - 70px);
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 7fr 3fr;
     align-items: center;
+    scrollbar-width: thin;
+    padding: 2.5vw;
 
     font-family: 'Poppins';
 }
 
 /**********************************************/
+#cont--noProducto {
+    width: 100%;
+    height: 100%;
 
-#cont--productos {
-    height: calc(100vh - 96px);
     display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+  
+#cont--noProducto p {
+	margin: 0;
+	font-size: 1.2rem;
+	text-align: center;
+	padding: 1rem;
+  }
+  
+#cont--noProducto img {
+	max-width: 100%;
+	height: auto;
+	margin-top: 1rem;
+  }
+
+/**********************************************/
+#cont--productos {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+	justify-content: center;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    width: 65vw;
+	align-items: center;
+
     overflow-y: scroll;
     scrollbar-width: thin;
 }
@@ -35,6 +63,7 @@ main {
 #cont--producto {
 	position: relative;
     width: 400px;
+    min-width: 237px;
     height: 170px;
 
     background: #FFFFFF;
@@ -43,7 +72,15 @@ main {
     margin: 10px 20px;
 
     display: flex;
+    transition: all 0.5s ease-in-out;
 }
+#cont--producto:hover {
+	box-shadow: 8px 8px 15px #6161db5e;
+}
+#cont--producto:hover #div--masDatos > p {
+	color:  #6161db;
+}
+
 
 #cont--producto>a:not(#cont--producto>a:first-of-type) {
     width: 33%;
@@ -145,11 +182,111 @@ main {
     border-radius: 20px;
 }
 
+@media (max-width: 1388px) {
+    #cont--producto {
+        width: 270px;
+        height: 350px;
+    
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #cont--producto>a:nth-of-type(2) {
+        width: 100% !important;
+        height: 53%;
+    }
+
+    #cont--producto>a>img {
+        border-radius: 20px 20px 0 0;
+        object-fit: cover;
+    }
+
+    #div--ticket {
+        width: 30vw;
+        height: 65vh;
+    
+        background: #FBFBFB;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 2% 2.5vw;
+    
+        overflow-y: scroll;
+        scrollbar-width: none;
+    }
+
+}
+
+@media (max-width: 986px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+
+    #div--ticket {
+        width: 100% !important;
+        height: 35vh !important;
+    
+        background: #FBFBFB;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+    
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 2% 2.5vw;
+    
+        overflow-y: scroll;
+        scrollbar-width: none;
+    }
+    
+    #div--ticket>img {
+        display: none;
+    }
+    
+    #div--ticket>p:first-of-type {
+        font-size: 1.5rem !important;
+    }
+    
+    #div--precios {
+        width: 80% !important;
+        justify-content: start;
+    }
+    
+    #div--precios>div>p:first-of-type {
+        font-size: 1rem !important;
+    }
+    
+    #div--precios>div>p:last-of-type {
+        font-size: 1rem !important;
+    }
+    
+    #div--ticket>a:last-of-type {
+        font-size: 1rem !important;
+    }
+
+    #div--precios>div {
+        display: flex;
+        justify-content: space-between;
+        margin: 4% 0 !important;
+    }
+
+}
+
+@media (max-width: 460px) {
+    #div--precios>div {
+        display: flex;
+        justify-content: space-between;
+        margin: 10% 0 !important;
+    }
+
+}
+
 #div--ticket {
-    background-color: aquamarine;
     width: 30vw;
+    min-width: 179px;
     height: 65vh;
-    margin-right: 2.5vw;
 
     background: #FBFBFB;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
@@ -160,7 +297,7 @@ main {
     padding: 2% 2.5vw;
 
     overflow-y: scroll;
-    scrollbar-width: none;
+    scrollbar-width: thin;
 }
 
 #div--ticket>img {
