@@ -20,4 +20,6 @@ public interface ProductoService {
 
 	List<ProductoDTO> findAllByCategoria(Long idCategoria);
 
+	List<ProductoDTO> findAllWithStock();
+
 }

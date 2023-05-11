@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
     <link rel="stylesheet" th:href="@{/css/trabajadores/gestion.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/gestionPedidos.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
     <title>Gestión de Pedidos</title>
@@ -25,19 +26,27 @@
                     <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
                     <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
                     <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
-                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                    <li><a th:href="@{/trabajadores/trabajadores}" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">Trabajadores</a></li>
                 </ul>
             </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" id="imgAbrir"/>
         </nav>
 
         <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
+
+        <form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <span th:remove="tag" sec:authentication="name">Ikers</span>
+            <input type="submit" value="Logout" />
+        </form>
     </header>
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 th:if="${listaPedidosDTO.isEmpty()}">No hay Pedidos</h2>
+        <div id="cont--tableVoid"
+			th:if="${#lists.isEmpty(listaPedidosDTO)}">
+			<p>Todavía no hay pedidos</p>
+			<img th:src="@{/images/ilustraciones/noTablas.png}" alt="">
+		</div>
 
         <div th:if="${!listaPedidosDTO.isEmpty()}">
             <h2 th:text="${fromUsuarios} ? 'Gestión de Pedidos de '+${usuarioDTO.nombre} : 'Gestión de Pedidos' "></h2>
@@ -59,24 +68,24 @@
 
             <table>
                 <tr>
-                    <th>ID</th>
-                    <th>Numero de Factura</th>
-                    <th>Fecha de Emision</th>
-                    <th>Nombre del cliente</th>
-                    <th>Estado</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th id="titulo--id">ID</th>
+                    <th id="titulo--nf">Numero de Factura</th>
+                    <th id="titulo--fe">Fecha de Emision</th>
+                    <th id="titulo--nom">Nombre del cliente</th>
+                    <th id="titulo--es">Estado</th>
+                    <th id="titulo--ed">Editar</th>
+                    <th id="titulo--del">Eliminar</th>
                 </tr>
                 <tr th:each = "pedidoDTO : ${listaPedidosDTO}">
-                    <td th:text=${pedidoDTO.id}>1</td>
-                    <td th:text=${pedidoDTO.numeroFactura}>2313312</td>
-                    <td th:text=${pedidoDTO.fechaEmision}>2023-12-14 12:23:12</td>
-                    <td th:text=${pedidoDTO.usuarioDTO.nombre}>Diego</td>
-                    <td th:text=${pedidoDTO.estado}>En curso</td>
-                    <td>
+                    <td class="valor--id" th:text=${pedidoDTO.id}>1</td>
+                    <td class="valor--nf" th:text=${pedidoDTO.numeroFactura}>2313312</td>
+                    <td class="valor--fe" th:text=${pedidoDTO.fechaEmision}>2023-12-14 12:23:12</td>
+                    <td class="valor--nom" th:text=${pedidoDTO.usuarioDTO.nombre}>Diego</td>
+                    <td class="valor--es" th:text=${pedidoDTO.estado}>En curso</td>
+                    <td class="valor--ed">
                         <a th:href="@{/trabajadores/pedidos/update/{idPedido} (idPedido=${pedidoDTO.id})}"><img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>
                     </td>
-                    <td>
+                    <td class="valor--del">
                         <a th:href="@{/trabajadores/pedidos/delete/{idPedido} (idPedido=${pedidoDTO.id})}"><img alt="papelera" th:src="@{/images/trabajadores/delete.png}" width="20px"></a>
                     </td>
                 </tr>
@@ -84,7 +93,7 @@
         </div>
 
         <!--Enlaces para volver atrás-->
-        <div>
+        <div id="bottom--buttons">
             <a th:if="${fromUsuarios}" th:href="@{/trabajadores/usuarios}">Volver a los Pedidos</a>
             <a th:href="@{/trabajadores}">Volver al Inicio</a>
         </div>

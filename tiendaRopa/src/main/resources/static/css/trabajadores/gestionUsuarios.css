@@ -1,0 +1,74 @@
+main>h2:first-of-type {
+    text-align: center;
+}
+
+main>div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media (max-width: 940px) {
+
+    #titulo--ap1,
+    .valor--ap1 {
+        display: none;
+    }
+
+}
+
+@media (max-width: 775px) {
+    #titulo--nombre,
+    .valor--nombre {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    #titulo--id,
+    .valor--id {
+        display: none;
+    }
+
+    #titulo--nif{
+        border-radius: 10px 0px 0 0;
+    }
+}
+
+@media (max-width: 600px) {
+    #titulo--nif,
+    .valor--nif {
+        display: none;
+    }
+
+    #titulo--correo{
+        border-radius: 10px 0px 0 0;
+    }
+}
+
+@media (max-width: 500px) {
+    #titulo--pedidos,
+    .valor--pedidos {
+        display: none;
+    }
+}
+
+main div:last-of-type a:first-of-type{
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #27272c;
+    border: 2px solid #27272c;
+    background-color: #27272c4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+main div:last-of-type a:first-of-type:hover {
+    background-color: #27272c;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }

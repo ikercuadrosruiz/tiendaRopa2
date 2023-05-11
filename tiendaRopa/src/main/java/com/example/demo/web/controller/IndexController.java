@@ -87,9 +87,14 @@ public class IndexController {
 
 		log.info("IndexController - RegistrarUsuario: Añadimos el usuario a la BD");
 		
-		usuarioService.save(uDTO);
+		if (result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("registro");
+			return mav;
+		}else {
+			usuarioService.save(uDTO);
 
-		ModelAndView mav = new ModelAndView("redirect:/registro?exito");
-		return mav;
+			ModelAndView mav = new ModelAndView("redirect:/registro?exito");
+			return mav;
+		}
 	}
 }

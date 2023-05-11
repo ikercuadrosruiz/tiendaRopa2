@@ -1,0 +1,51 @@
+
+main {
+    min-width: 357px;
+}
+
+main>h2:first-of-type {
+    text-align: center;
+}
+
+main>div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#bottom--buttons {
+    width: 100% !important;
+}
+
+@media (max-width: 580px) {
+
+    #titulo--id,
+    .valor--id {
+        display: none;
+    }
+
+    #titulo--nom{
+        border-radius: 10px 0px 0 0;
+    }
+
+}
+
+main div:last-of-type a:first-of-type{
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #27272c;
+    border: 2px solid #27272c;
+    background-color: #27272c4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+main div:last-of-type a:first-of-type:hover {
+    background-color: #27272c;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }

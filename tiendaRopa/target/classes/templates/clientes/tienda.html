@@ -54,6 +54,9 @@
 				<div class="select-wrapper">
                     <div class="select-selected">Categoría</div>
                     <div class="select-options">
+                    	<div class="select-option">
+                        	<a th:href="@{/tienda}">Todo</a>
+                        </div>
                         <div class="select-option" th:each="cDTO : ${listaCategoriasDTO}">
                         	<a th:href="@{/tienda/catergoria/{idCategoria} (idCategoria=${cDTO.id})}" th:text="${cDTO.nombre}"> Opciones</a>
                         </div>

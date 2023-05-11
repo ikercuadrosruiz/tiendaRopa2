@@ -2,128 +2,135 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
-    <link rel="stylesheet" th:href="@{/css/trabajadores/usuariosForm.css}">
-    <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
+<link rel="stylesheet" th:href="@{/css/trabajadores/usuariosForm.css}">
+<link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
-    <title>Gestión Usuarios</title>
+<title>Gestión Usuarios</title>
 
 </head>
 
 <body>
 
-    <header>
-        <p><b><a th:href="@{/trabajadores}">FRUTTI DI VESTITI</a></b></p>
+	<header>
+		<p>
+			<b><a th:href="@{/trabajadores}">FRUTTI DI VESTITI</a></b>
+		</p>
 
-        <nav>
-            <div>
-                <ul>
-                    <li><a th:href="@{/trabajadores/usuarios}">Clientes</a></li>
-                    <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
-                    <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
-                    <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
-                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
-                </ul>
-            </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
-        </nav>
+		<nav>
+			<div>
+				<ul>
+					<li><a th:href="@{/trabajadores/usuarios}">Clientes</a></li>
+					<li><a th:href="@{/trabajadores/productos}">Productos</a></li>
+					<li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
+					<li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
+					<li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
+					<img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+				</ul>
+			</div>
+			<img th:src="@{/images/header/menu.png}" alt="Img menu" />
+		</nav>
 
-        <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
-    </header>
-    <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
+		<img th:src="@{/images/header/logoSimple.png}"
+			alt="Imagen Logo Simple">
+	</header>
+	<!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
-    <main>
-        <div id="contenido">
-            <h2 th:text="${mod} ? 'Modificar Cliente' : 'Visualizar Cliente'"></h2>
-        </div>
+	<main>
+		<div id="contenido">
+			<h2 th:text="${mod} ? 'Modificar Cliente' : 'Visualizar Cliente'"></h2>
+		</div>
 
-        <form th:action = "@{/trabajadores/usuarios/save}"
-        		th:object = "${usuarioDTO}"
-        		method = "POST">
-            <h3>Datos del Cliente</h3>
+		<form th:action="@{/trabajadores/usuarios/save}"
+			th:object="${usuarioDTO}" method="POST">
+			<h3>Datos del Cliente</h3>
 
-            <div>
-                <div id="cont1">
-                    <p>Id</p>
-                    <input th:field="*{id}" type="text" readonly/>
-                </div>
-                
-                <div id="cont2">
-                    <p>Correo</p>
-                    <input th:field="*{correo}" type="email" name="correo"/>
-                    <p id="errCorreo" class="err"></p>
-                </div>
-                
-                <div id="cont23">
-                    <p>Nif</p>
-                    <input th:field="*{nif}" type="text" name="nif"/>
-                    <p id="errNif" class="err"></p>
-                </div>
-                
-                <div id="cont24">
-                    <p>Password</p>
-                    <input th:field="*{password}" type="text" name="password"/>
-                    <p id="errPassword" class="err"></p>
-                </div>
+			<div>
+				<div id="cont1">
+					<p>Id</p>
+					<input th:field="*{id}" type="text" readonly />
+				</div>
 
-                <div id="cont3">
-                    <p>Nombre</p>
-                    <input th:field="*{nombre}" type="text" name="nombre"/>
-                    <p id="errNombre" class="err"></p>
-                </div>
+				<div id="cont2">
+					<p>Correo</p>
+					<input th:field="*{correo}" type="email" name="correo" />
+					<p id="errCorreo" class="err"></p>
+				</div>
 
-                <div id="cont4">
-                    <p>Fecha de Nacimiento</p>
-                    <input th:field="*{fechaNacimiento}" type="date" name="fecha"/>
-                    <p id="errFecha" class="err"></p>
-                </div>
+				<div id="cont23">
+					<p>Nif</p>
+					<input th:field="*{nif}" type="text" name="nif" />
+					<p id="errNif" class="err"></p>
+				</div>
 
-                <div id="cont5">
-                    <p>Primer apellido</p>
-                    <input th:field="*{apellido1}" type="text" name="ap1"/>
-                    <p id="errAp1" class="err"></p>
-                </div>
+				<div id="cont24">
+					<p>Password</p>
+					<input th:field="*{password}" type="text" name="password" />
+					<p id="errPassword" class="err"></p>
+				</div>
 
-                <div id="cont6">
-                    <p>Segundo apellido</p>
-                    <input th:field="*{apellido2}" type="text" name="ap2"/>
-                    <p id="errAp2" class="err"></p>
-                </div>
+				<div id="cont3">
+					<p>Nombre</p>
+					<input th:field="*{nombre}" type="text" name="nombre" />
+					<p id="errNombre" class="err"></p>
+				</div>
 
-                <div id="cont7">
-                    <p>Dirección</p>
-                    <input th:field="*{direccion}" type="text" name="direccion"/>
-                    <p id="errDireccion" class="err"></p>
-                </div>
+				<div id="cont4">
+					<p>Fecha de Nacimiento</p>
+					<input th:field="*{fechaNacimiento}" type="date" name="fecha" />
+					<p id="errFecha" class="err"></p>
+				</div>
 
-                <div id="cont8">
-                    <p>Población</p>
-                    <input th:field="*{poblacion}" type="text" name="poblacion"/>
-                    <p id="errPoblacion" class="err"></p>
-                </div>
+				<div id="cont5">
+					<p>Primer apellido</p>
+					<input th:field="*{apellido1}" type="text" name="ap1" />
+					<p id="errAp1" class="err"></p>
+				</div>
 
-                <div id="cont9">
-                    <p>Código Postal</p>
-                    <input th:field="*{cp}"type="number" name="cp"/>
-                    <p id="errCp" class="err"></p>
-                </div>
-                
-            </div>
+				<div id="cont6">
+					<p>Segundo apellido</p>
+					<input th:field="*{apellido2}" type="text" name="ap2" />
+					<p id="errAp2" class="err"></p>
+				</div>
 
-            <!--Enlaces para volver atrás-->
-            <div>
-                <a th:href="@{/trabajadores/usuarios}">Volver a Usuarios</a>
-                <button th:if="${mod}">Modificar</button>
-            </div>
-        </form>
-    </main>
+				<div id="cont7">
+					<p>Dirección</p>
+					<input th:field="*{direccion}" type="text" name="direccion" />
+					<p id="errDireccion" class="err"></p>
+				</div>
+
+				<div id="cont8">
+					<p>Población</p>
+					<input th:field="*{poblacion}" type="text" name="poblacion" />
+					<p id="errPoblacion" class="err"></p>
+				</div>
+
+				<div id="cont9">
+					<p>Código Postal</p>
+					<input th:field="*{cp}" type="number" name="cp" />
+					<p id="errCp" class="err"></p>
+				</div>
+
+				<div id="cont10">
+					<p>Roles</p>
+					<input th:each = "r : ${listaRolesDTO}" type="checkbox" name="roles" th:text="${r.rol}" th:value="${r.rol}">rol</input>
+				</div>
+
+			</div>
+
+			<!--Enlaces para volver atrás-->
+			<div>
+				<a th:href="@{/trabajadores/usuarios}">Volver a Usuarios</a>
+				<button th:if="${mod}">Modificar</button>
+			</div>
+		</form>
+	</main>
 
 	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
-    <script th:src="@{/js/scriptHeader.js}"></script>
+	<script th:src="@{/js/scriptHeader.js}"></script>
 </body>
 
 </html>

@@ -82,13 +82,14 @@
 
                 <div id="cont6">
                     <p>Productos del pedido</p>
-                    <table th:if="*{listaPedidoProductoDTO.size() > 0}">
+                    <p th:if="${listaPedidoProductoDTO.size() <= 0}">Este pedido no tiene Productos</p>
+                    <table th:if="${listaPedidoProductoDTO.size() > 0}">
                     	<tr>
 		                    <th>ID</th>
 		                    <th>Numero de Producto</th>
 		                    <th>Nombre</th>
                 		</tr>
-		                <tr th:each = "pedidoProductoDTO : *{listaPedidoProductoDTO}">
+		                <tr th:each = "pedidoProductoDTO : ${listaPedidoProductoDTO}">
 		                    <td th:text=${pedidoProductoDTO.productoDTO.id}></td>
 		                    <td th:text=${pedidoProductoDTO.productoDTO.numeroProducto}></td>
 		                    <td th:text=${pedidoProductoDTO.productoDTO.nombre}></td>

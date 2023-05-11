@@ -1,5 +1,9 @@
 package com.example.demo.web.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ImagenDTO;
 import com.example.demo.model.dto.ProductoDTO;
+import com.example.demo.repository.entity.Imagen;
 import com.example.demo.services.CategoriaService;
 import com.example.demo.services.ImagenService;
 import com.example.demo.services.ProductoService;
@@ -93,9 +99,38 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/trabajadores/productos/save")
-	public ModelAndView save(@Valid @ModelAttribute("productoDTO") ProductoDTO pDTO, BindingResult result) {
+	public ModelAndView save(@Valid @ModelAttribute("productoDTO") ProductoDTO pDTO, @RequestParam("file") MultipartFile img ,BindingResult result) {
 		
 		log.info("ProductoController - save: Guardamos el producto");
+		
+		if (!img.isEmpty()) {
+			Path directorioImagenes = Paths.get("src/main/resources/static/images/productos");
+			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+			
+			try {
+				
+				byte[] byteImg = img.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + img.getOriginalFilename());
+				Files.write(rutaCompleta, byteImg);
+				
+				//Guardamos la imagen en la base y la adjuntamos al producto
+				// -------------------- Hacer -------------------------------
+				// -------------------- Hacer -------------------------------
+				// -------------------- Hacer -------------------------------
+				
+				// List<ImagenDTO> nuevaImagen = imagenService.findAllImagesByProducto(pDTO.getId());
+						
+				ImagenDTO iDTO = new ImagenDTO();
+				iDTO.setNombre(img.getOriginalFilename());
+				iDTO.setUrl(img.getOriginalFilename());
+				
+				pDTO.getListaImagenesDTO().add(iDTO);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+ 		}
 		
 		ModelAndView mav;
 		if (result.hasErrors()) {

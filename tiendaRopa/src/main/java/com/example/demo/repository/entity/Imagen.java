@@ -28,7 +28,7 @@ public class Imagen {
 		@Column(name = "url")
 		private String url;
 		
-		@ManyToMany(cascade = { CascadeType.ALL }, mappedBy = "listaImagenes")
+		@ManyToMany(mappedBy = "listaImagenes")
 		@ToString.Exclude
 		private Set<Producto> listaProductos;
 

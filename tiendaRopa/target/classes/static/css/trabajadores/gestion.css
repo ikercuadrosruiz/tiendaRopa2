@@ -7,21 +7,50 @@ main{
  display: flex;
  align-items: center;
  flex-direction: column;
- min-height: calc(100vh - 96px);
+ height: calc(100vh - 96px);
+ min-width: 360px;
 }
 main div h2{
     text-align: center;
 }
 
+
+/**********************************************/
+#cont--tableVoid {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+  
+#cont--tableVoid p {
+	margin: 0;
+	font-size: 1.2rem;
+	text-align: center;
+	padding: 1rem;
+  }
+  
+#cont--tableVoid img {
+	max-width: 100%;
+    max-height: 60vh !important;
+	height: auto;
+	margin-top: 1rem;
+  }
+
+/**********************************************/
+
 /* Filtros */
-main div:first-of-type form{
+main div form{
     margin: 20px 0;
 
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
-main div:first-of-type form select{
+main div form select{
     width: 15%;
 
     font-family: Poppins;
@@ -32,7 +61,7 @@ main div:first-of-type form select{
     border-radius: 10px;
     border: 0;
 }
-main div:first-of-type form input{
+main div form input{
     width: 35%;
     background-color: #27272c34;
     font-weight: bold;
@@ -42,20 +71,25 @@ main div:first-of-type form input{
     border-radius: 3px 10px 3px 3px;
     border: 0;
 }
-main div:first-of-type form button{
-    font-family: Poppins;
-    
-    background-color: #6161DB;
-    color: white;
-    padding: 8px 24px;
-
+main div form button, main div:last-of-type a{
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161DB;
     border: 2px solid #6161DB;
-    border-radius: 15px;
-}
-main div:first-of-type form button:hover{
-    background-color: #27272c;
-    color: white;
-}
+    background-color: #6161DB4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  main div form button:hover, main div:last-of-type a:hover {
+    background-color: #6161DB;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
 
 table{
     display: flex;
@@ -68,6 +102,7 @@ table tr th{
     padding: 10px 20px;
     background-color: #27272c;
     color: #ffffff;
+    cursor: pointer;
 }
 table tr:nth-of-type(2n + 1){
     background-color: #c8c8c8;
@@ -101,18 +136,6 @@ main div:last-of-type{
     align-items: center;
     justify-content: space-evenly;
 }
-main div:last-of-type a{
-    background-color: #6161DB;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 15px;
-}
-main div:last-of-type a:hover{
-    background-color: #27272c;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 15px;
-}
 a{
 	text-decoration: none;
 }
@@ -126,16 +149,6 @@ td > p {
 	border: 2px solid #6161db;
 }
 
-@media (max-width: 1000px) {
-
-    main {
-        display: block;
-        margin: 15px;
-    }
-
-    table{
-        display: block;
-        overflow: scroll;
-        scrollbar-width: none;
-    }
+#bottom--buttons:hover a{
+    cursor: pointer;
 }

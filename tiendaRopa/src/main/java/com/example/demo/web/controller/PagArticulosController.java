@@ -64,11 +64,11 @@ public class PagArticulosController {
 
 		log.info("PagArticulosController - inicioTienda: Pasamos a la página con todos los artículos");
 
-		List<ProductoDTO> lpDTO = ps.findAll();
+		List<ProductoDTO> lpdispDTO = ps.findAllWithStock();
 		List<CategoriaDTO> lcDTO = cs.findAll();
 
 		ModelAndView mav = new ModelAndView("clientes/tienda");
-		mav.addObject("listaProductosDTO", lpDTO);
+		mav.addObject("listaProductosDTO", lpdispDTO);
 		mav.addObject("listaCategoriasDTO", lcDTO);
 
 		return mav;

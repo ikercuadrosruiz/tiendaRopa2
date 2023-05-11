@@ -1,57 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
-body{
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body>*{
+body>* {
     font-family: 'Poppins', sans-serif;
 }
 
-main{
+main {
     height: calc(100vh - 96px);
     width: 100%;
 
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
-main > div:first-of-type{
+main>div:first-of-type {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-main form{
+
+main form {
     width: 80%;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
+
 }
-main form > div:first-of-type{
+
+main form>div:first-of-type {
     width: 90%;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
-#cont7{
+
+#cont7 {
     grid-column: 1/-1;
 }
-#cont7 input{
+
+#cont7 input {
     width: 100%;
 }
 
-main form input{
-	font-family: 'Poppins', sans-serif;
-	padding: 0px 0px 0px 10px;
-	
+main form input {
+    font-family: 'Poppins', sans-serif;
+    padding: 0px 0px 0px 10px;
+
     width: 100%;
     height: 30px;
 
@@ -60,12 +64,12 @@ main form input{
     border: 0;
 }
 
-.err{
+.err {
     color: red;
     font-size: .9em;
 }
 
-form > div:last-of-type{
+form>div:last-of-type {
     margin: 50px 0;
     width: 39%;
 
@@ -73,15 +77,30 @@ form > div:last-of-type{
     align-items: center;
     justify-content: space-between;
 }
-form > div:last-of-type > a{
+
+form>div:last-of-type>a {
     text-decoration: none;
 }
-form > div:last-of-type button{
-	background-color: #6161DB;
+
+form>div:last-of-type button {
+    background-color: #6161DB;
     color: white;
     padding: 5px 15px;
     border-radius: 5px;
     border: 0px;
-    
+
     cursor: pointer;
+}
+
+@media (max-width: 564px) {
+
+    main form {
+        width: 90%;
+
+    }
+
+    main form>div:first-of-type {
+        grid-template-columns: 1fr;
+    }
+
 }

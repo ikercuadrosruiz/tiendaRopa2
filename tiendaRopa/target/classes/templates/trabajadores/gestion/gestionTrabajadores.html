@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
     <link rel="stylesheet" th:href="@{/css/trabajadores/gestion.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/gestionTrabajadores.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
     <title>Gestión de Trabajadores</title>
@@ -25,19 +26,27 @@
                     <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
                     <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
                     <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
-                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                    <li><a th:href="@{/trabajadores/trabajadores}" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">Trabajadores</a></li>
                 </ul>
             </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" id="imgAbrir"/>
         </nav>
 
         <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
+
+        <form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <span th:remove="tag" sec:authentication="name">Ikers</span>
+            <input type="submit" value="Logout" />
+        </form>
     </header>
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 th:if="${listaUsuariosDTO.isEmpty()}">No hay Trabajadores</h2>
+        <div id="cont--tableVoid"
+			th:if="${#lists.isEmpty(listaUsuariosDTO)}">
+			<p>Todavía no hay trabajadores</p>
+			<img th:src="@{/images/ilustraciones/noTablas.png}" alt="">
+		</div>
 
         <div th:if="${!listaUsuariosDTO.isEmpty()}">
             <h2>Gestión de Trabajadores</h2>
@@ -56,30 +65,30 @@
                 <button>Buscar</button>
             </form>
 
-            <table>
+            <table id="tabla--trabajadores">
                 <tr>
-                    <th>ID</th>
-                    <th>Nif</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Correo</th>
-                    <th>Tipo</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th id="titulo--id">ID</th>
+                    <th id="titulo--nif">Nif</th>
+                    <th id="titulo--nombre">Nombre</th>
+                    <th id="titulo--ap1">Apellidos</th>
+                    <th id="titulo--correo">Correo</th>
+                    <th id="titulo--roles">Tipo</th>
+                    <th id="titulo--editar">Editar</th>
+                    <th id="titulo--eliminar">Eliminar</th>
                 </tr>
                 <tr th:each = "usuarioDTO : ${listaUsuariosDTO}">
-                    <td th:text=${usuarioDTO.id}></td>
-                    <td th:text=${usuarioDTO.nif}></td>
-                    <td th:text=${usuarioDTO.nombre}></td>
-                    <td th:text="${usuarioDTO.apellido1} + ' ' + ${usuarioDTO.apellido2}"></td>
-                    <td th:text=${usuarioDTO.correo}></td>
-                    <td>
-                    	<p th:each="rolDTO : ${usuarioDTO.listaRolesDTO}" th:text="${rolDTO.rol}"></p>
+                    <td class="valor--id" th:text=${usuarioDTO.id}>1</td>
+                    <td class="valor--nif" th:text=${usuarioDTO.nif}>1343242d</td>
+                    <td class="valor--nombre" th:text=${usuarioDTO.nombre}>vxcz</td>
+                    <td class="valor--ap1" th:text="${usuarioDTO.apellido1} + ' ' + ${usuarioDTO.apellido2}">grefv vefd</td>
+                    <td class="valor--correo" th:text=${usuarioDTO.correo}>vc gfc f</td>
+                    <td class="valor--roles">
+                    	<p th:each="rolDTO : ${usuarioDTO.listaRolesDTO}" th:text="${rolDTO.rol}">ffff</p>
                     </td>
-                    <td>
+                    <td class="valor--editar">
                         <a th:href="@{/trabajadores/trabajadores/{idUsuario}/update (idUsuario=${usuarioDTO.id})}"><img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>
                     </td>
-                    <td>
+                    <td class="valor--eliminar">
                         <a th:href="@{/trabajadores/trabajadores/delete/{idUsuario} (idUsuario=${usuarioDTO.id})}"><img alt="papelera" th:src="@{/images/trabajadores/delete.png}" width="20px"></a>
                     </td>
                 </tr>

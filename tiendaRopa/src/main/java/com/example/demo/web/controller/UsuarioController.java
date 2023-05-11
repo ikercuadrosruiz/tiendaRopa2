@@ -1,5 +1,6 @@
 package com.example.demo.web.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.dto.RolDTO;
 import com.example.demo.model.dto.UsuarioDTO;
+import com.example.demo.services.RolService;
 import com.example.demo.services.UsuarioService;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -24,65 +28,71 @@ import jakarta.validation.constraints.Pattern;
 public class UsuarioController {
 
 	private static final Logger log = LoggerFactory.getLogger(UsuarioController.class);
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
+	@Autowired
+	private RolService rs;
+
 	@GetMapping("/trabajadores/usuarios")
 	public ModelAndView findAll() {
-		
+
 		log.info("UsuarioController - FindAll: Encontramos todos los clientes");
-		
+
 		List<UsuarioDTO> listaUsuariosDTO = usuarioService.findAll();
-		
+
 		ModelAndView mav = new ModelAndView("trabajadores/gestion/gestionUsuarios");
 		mav.addObject("listaUsuariosDTO", listaUsuariosDTO);
-		
+
 		return mav;
 	}
-	
+
 	@GetMapping("/trabajadores/usuarios/delete/{idUsuario}")
-	public ModelAndView delete(@PathVariable Long idUsuario){
-		 
+	public ModelAndView delete(@PathVariable Long idUsuario) {
+
 		log.info("UsuarioController - delete: Borramos el usuario " + idUsuario);
-		
+
 		usuarioService.deleteById(idUsuario);
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/trabajadores/usuarios");
 		return mav;
-		
+
 	}
-	
+
 	@GetMapping("/trabajadores/usuarios/update/{idUsuario}")
 	public ModelAndView update(@PathVariable Long idUsuario) {
-		
+
 		log.info("UsuarioController - update: Actualizamos el usuario");
-		
+
 		UsuarioDTO usuarioDTO = usuarioService.findById(idUsuario);
-		
+		List<RolDTO> lrDTO = rs.findAll();
+
 		ModelAndView mav = new ModelAndView("trabajadores/form/usuariosForm");
 		mav.addObject("usuarioDTO", usuarioDTO);
+		mav.addObject("listaRolesDTO", lrDTO);
 		mav.addObject("mod", true);
-		
+
 		return mav;
 	}
-	
+
 	@PostMapping("/trabajadores/usuarios/save")
-	public ModelAndView save(@ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO) {
-		
+	public ModelAndView save(@ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, @RequestParam String[] roles) {
+
 		log.info("UsuarioController - save: Guardamos el usuario");
-		
+
 		String nif = usuarioDTO.getNif();
-		 String nombre = usuarioDTO.getNombre();
-		 String apellido1 = usuarioDTO.getApellido1();
-		 String apellido2 = usuarioDTO.getApellido2();
-		 Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
-		 String direccion = usuarioDTO.getDireccion();
-		 String poblacion = usuarioDTO.getPoblacion();
-		 String correo = usuarioDTO.getCorreo();
-		 String password = usuarioDTO.getPassword();
-		 String cp = usuarioDTO.getCp();
-		
+		String nombre = usuarioDTO.getNombre();
+		String apellido1 = usuarioDTO.getApellido1();
+		String apellido2 = usuarioDTO.getApellido2();
+		Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
+		String direccion = usuarioDTO.getDireccion();
+		String poblacion = usuarioDTO.getPoblacion();
+		String correo = usuarioDTO.getCorreo();
+		String password = usuarioDTO.getPassword();
+		String cp = usuarioDTO.getCp();
+		ArrayList<RolDTO> lrDTO = new ArrayList<RolDTO>();
+
 		usuarioDTO = usuarioService.findById(usuarioDTO.getId());
 		usuarioDTO.setNif(nif);
 		usuarioDTO.setNombre(nombre);
@@ -95,28 +105,35 @@ public class UsuarioController {
 		usuarioDTO.setPassword(password);
 		usuarioDTO.setCp(cp);
 		
-		usuarioService.save(usuarioDTO);
+		for (String r : roles) {
+			RolDTO rDTO = rs.findByRol(r);
+			lrDTO.add(rDTO);
+		}
 		
+		usuarioDTO.setListaRolesDTO(lrDTO);
+
+		usuarioService.save(usuarioDTO);
+
 		ModelAndView mav = new ModelAndView("redirect:/trabajadores/usuarios");
 		return mav;
 	}
-	
+
 	@PostMapping("/usuarios/save")
 	public ModelAndView saveDesdeCliente(@ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO) {
-		
+
 		log.info("UsuarioController - saveDesdeCliente: Guardamos el usuario");
-		
+
 		String nif = usuarioDTO.getNif();
-		 String nombre = usuarioDTO.getNombre();
-		 String apellido1 = usuarioDTO.getApellido1();
-		 String apellido2 = usuarioDTO.getApellido2();
-		 Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
-		 String direccion = usuarioDTO.getDireccion();
-		 String poblacion = usuarioDTO.getPoblacion();
-		 String correo = usuarioDTO.getCorreo();
-		 String password = usuarioDTO.getPassword();
-		 String cp = usuarioDTO.getCp();
-		
+		String nombre = usuarioDTO.getNombre();
+		String apellido1 = usuarioDTO.getApellido1();
+		String apellido2 = usuarioDTO.getApellido2();
+		Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
+		String direccion = usuarioDTO.getDireccion();
+		String poblacion = usuarioDTO.getPoblacion();
+		String correo = usuarioDTO.getCorreo();
+		String password = usuarioDTO.getPassword();
+		String cp = usuarioDTO.getCp();
+
 		usuarioDTO = usuarioService.findById(usuarioDTO.getId());
 		usuarioDTO.setNif(nif);
 		usuarioDTO.setNombre(nombre);
@@ -128,9 +145,9 @@ public class UsuarioController {
 		usuarioDTO.setCorreo(correo);
 		usuarioDTO.setPassword(password);
 		usuarioDTO.setCp(cp);
-				
+
 		usuarioService.save(usuarioDTO);
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/perfil");
 		return mav;
 	}

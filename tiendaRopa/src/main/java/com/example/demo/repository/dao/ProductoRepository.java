@@ -15,13 +15,16 @@ import jakarta.transaction.Transactional;
 @Transactional
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-	@Query(value = "SELECT p FROM Producto p ORDER BY p.precio DESC")
+	@Query(value = "SELECT p FROM Producto p WHERE p.stock > 0 ORDER BY p.precio DESC")
 	List<Producto> findAllODesc();
 
-	@Query(value = "SELECT p FROM Producto p ORDER BY p.precio ASC")
+	@Query(value = "SELECT p FROM Producto p WHERE p.stock > 0 ORDER BY p.precio ASC")
 	List<Producto> findAllOAsc();
 
-	@Query(value = "SELECT p FROM Producto p WHERE p.categoria.id = :idCategoria")
+	@Query(value = "SELECT p FROM Producto p WHERE p.categoria.id = :idCategoria AND p.stock > 0")
 	List<Producto> findAllByCategoria(@Param("idCategoria") Long idCategoria);
+
+	@Query(value = "SELECT p FROM Producto p WHERE p.stock > 0")
+	List<Producto> findAllWithStock();
 
 }

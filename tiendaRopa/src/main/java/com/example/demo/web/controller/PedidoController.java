@@ -1,5 +1,6 @@
 package com.example.demo.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.PedidoDTO;
+import com.example.demo.model.dto.PedidoProductoDTO;
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.model.dto.UsuarioDTO;
+import com.example.demo.services.PedidoProductoService;
 import com.example.demo.services.PedidoService;
 import com.example.demo.services.UsuarioService;
 
@@ -25,6 +28,9 @@ public class PedidoController {
 	
 	@Autowired
 	private PedidoService pedidoService;
+	
+	@Autowired
+	private PedidoProductoService pps;
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -76,9 +82,11 @@ public class PedidoController {
 		log.info("PedidoController - update: Procedemos a modificar el pedido " + idPedido);
 		
 		PedidoDTO pDTO = pedidoService.findById(idPedido);
+		ArrayList<PedidoProductoDTO> lppDTO = pps.findAllByIdPedido(idPedido);
 		
 		ModelAndView mav = new ModelAndView("trabajadores/form/pedidosForm");
 		mav.addObject("pedidoDTO", pDTO);
+		mav.addObject("listaPedidoProductoDTO", lppDTO);
 		mav.addObject("mod", true);
 		
 		return mav;

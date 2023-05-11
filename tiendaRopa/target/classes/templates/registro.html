@@ -34,7 +34,7 @@
 		</p>
 
 		<nav>
-			<a><img src="../../static/images/header/guardados.png" th:src="@{/images/header/guardados.png}"
+			<a><img th:src="@{/images/header/guardados.png}"
 					alt="Imagen guardados" /></a>
 
 			<a th:href="@{/tienda/carrito}"><img src="../../static/images/header/carrito.png"
@@ -98,7 +98,7 @@
                 <div id="cont5">
                     <p>Fecha de Nacimiento</p>
                     <input th:field="*{fechaNacimiento}" type="date" name="fecNacimiento" />
-                    <p class="err" id="errFecNacimiento"></p>
+                    <p class="err" id="errFecNacimiento" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
                 </div>
 
                 <div id="cont6">

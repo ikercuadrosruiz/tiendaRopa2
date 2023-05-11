@@ -19,7 +19,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	Usuario findByCorreo(String correo);
 	
-	@Query(value = "SELECT DISTINCT u FROM Usuario u JOIN u.listaRoles r WHERE r.id IN (2, 3)")
+	@Query(value = "SELECT DISTINCT u FROM Usuario u JOIN u.listaRoles r WHERE r.id IN (5, 6)")
 	List<Usuario> findAllTrabajadores();
 
 	@Query(value = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.password = :contrasenya")

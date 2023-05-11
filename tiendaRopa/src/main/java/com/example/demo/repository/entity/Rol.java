@@ -1,5 +1,6 @@
 package com.example.demo.repository.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -26,6 +28,9 @@ public class Rol {
 	
 	@Column(name = "rol")
 	private String rol;
+	
+	@ManyToMany(mappedBy = "listaRoles")
+	private Set<Usuario> listaUsuarios;
 	
 
 	// Equals -----------------
@@ -45,6 +50,12 @@ public class Rol {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+	public Rol() {
+		this.listaUsuarios = new HashSet<Usuario>();
+	}
+	
+	// -------------------------
 	
 	
 	

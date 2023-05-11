@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
     <link rel="stylesheet" th:href="@{/css/trabajadores/gestion.css}">
+    <link rel="stylesheet" th:href="@{/css/trabajadores/gestionProductos.css}">
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
     <title>Gestión de Productos</title>
@@ -25,19 +26,27 @@
                     <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
                     <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
                     <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
-                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                    <li><a th:href="@{/trabajadores/trabajadores}" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">Trabajadores</a></li>
                 </ul>
             </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" id="imgAbrir"/>
         </nav>
 
         <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
+
+        <form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <span th:remove="tag" sec:authentication="name">Ikers</span>
+            <input type="submit" value="Logout" />
+        </form>
     </header>
     <!-- --------------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
     <main>
-        <h2 th:if="${listaProductosDTO.isEmpty()}">No hay Productos</h2>
+        <div id="cont--tableVoid"
+			th:if="${#lists.isEmpty(listaProductosDTO)}">
+			<p>Todavía no hay productos</p>
+			<img th:src="@{/images/ilustraciones/noTablas.png}" alt="">
+		</div>
 
         <div th:if="${!listaProductosDTO.isEmpty()}">
             <h2>Gestión de Productos</h2>
@@ -57,27 +66,25 @@
             </form>
             <table>
                 <tr>
-                    <th>ID</th>
-                    <th>Nº Producto</th>
-                    <th>Nombre</th>
-                    <!-- <th>Categoria</th> -->
-                    <th>Stock</th>
-                    <th>Precio</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th id="titulo--id">ID</th>
+                    <th id="titulo--np">Nº Producto</th>
+                    <th id="titulo--nom">Nombre</th>
+                    <th id="titulo--st">Stock</th>
+                    <th id="titulo--pr">Precio</th>
+                    <th id="titulo--ed">Editar</th>
+                    <th id="titulo--del">Eliminar</th>
                 </tr>
                 <tr th:each = "pDTO : ${listaProductosDTO}">
-                    <td th:text="${pDTO.id}"></td>
-                    <td th:text="${pDTO.numeroProducto}"></td>
-                    <td th:text="${pDTO.nombre}"></td>
-                    <!-- <td th:text="${pDTO.categoria.nombre}"></td> -->
-                    <td th:text="${pDTO.stock}"></td>
-                    <td th:text="${pDTO.precio}"></td>
-                    <td>
+                    <td class="valor--id" th:text="${pDTO.id}"></td>
+                    <td class="valor--np" th:text="${pDTO.numeroProducto}"></td>
+                    <td class="valor--nom" th:text="${pDTO.nombre}"></td>
+                    <td class="valor--st" th:text="${pDTO.stock}"></td>
+                    <td class="valor--pr" th:text="${pDTO.precio}"></td>
+                    <td class="valor--ed">
                         <a th:href = "@{/trabajadores/productos/update/{idProducto} (idProducto=${pDTO.id})}">
                         	<img alt="lapiz" th:src="@{/images/trabajadores/edit.png}" width="20px"></a>
                     </td>
-                    <td>
+                    <td class="valor--del">
                         <a th:href = "@{/trabajadores/productos/delete/{idProducto} (idProducto=${pDTO.id})}">
                         	<img alt="papelera" th:src="@{/images/trabajadores/delete.png}" width="20px"></a>
                     </td>
@@ -86,7 +93,7 @@
         </div>
 
         <!--Enlaces para volver atrás-->
-        <div>
+        <div id="bottom--buttons">
             <a th:href="@{/trabajadores}">Volver al inicio</a>
             <a th:href="@{/trabajadores/productos/add}">Alta producto</a>
         </div>

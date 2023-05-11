@@ -62,9 +62,7 @@ public class Usuario {
 	@Column(name = "cp")
 	private String cp;
 	
-	@ManyToMany(
-			fetch = FetchType.EAGER,
-			cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "usuariorol",
 			joinColumns = @JoinColumn(name = "idusuario", referencedColumnName = "id"),

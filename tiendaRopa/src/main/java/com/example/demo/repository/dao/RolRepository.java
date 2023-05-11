@@ -18,4 +18,7 @@ public interface RolRepository extends JpaRepository<Rol, Long> {
 
 	@Query(value = "SELECT r FROM Usuario u JOIN u.listaRoles r WHERE u.id = :idCli")
 	Set<Rol> findAllByIdCliente(@Param("idCli") Long idCliente);
+
+	@Query(value = "SELECT r FROM Rol r WHERE rol = :rol")
+	Rol findByRol(@Param("rol") String r);
 }

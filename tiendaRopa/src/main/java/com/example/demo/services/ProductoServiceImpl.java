@@ -112,4 +112,18 @@ public class ProductoServiceImpl implements ProductoService {
 		return lpDTO;
 	}
 
+	@Override
+	public List<ProductoDTO> findAllWithStock() {
+		log.info("ProductoServiceImpl - findAllWithStock: Encontramos todos los Productos que tengan stock disponible");
+
+		List<Producto> lp = productoRepository.findAllWithStock();
+
+		List<ProductoDTO> lpDTO = new ArrayList<ProductoDTO>();
+		for (Producto p : lp) {
+			lpDTO.add(ProductoDTO.convertToDTO(p));
+		}
+
+		return lpDTO;
+	}
+
 }

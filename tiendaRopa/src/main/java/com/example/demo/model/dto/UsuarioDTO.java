@@ -2,6 +2,7 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +46,7 @@ public class UsuarioDTO implements Serializable{
 	private String apellido2;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "El campo no puede ser vacío")
 	private Date fechaNacimiento;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")
@@ -116,6 +118,12 @@ public class UsuarioDTO implements Serializable{
 		usuario.setCorreo(usuarioDTO.getCorreo());
 		usuario.setPassword(usuarioDTO.getPassword());
 		usuario.setCp(usuarioDTO.getCp());
+		
+		usuario.setListaRoles(new HashSet<Rol>());
+		for (RolDTO rDTO : usuarioDTO.getListaRolesDTO()) {
+			Rol r = RolDTO.convertToEntity(rDTO);
+			usuario.getListaRoles().add(r);
+		}
 		
 		return usuario;
 	}

@@ -2,6 +2,7 @@ package com.example.demo.repository.entity;
 
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class PedidoProducto {
 	@Column(name = "cantidad")
 	private int cantidad;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idproducto")
 	@ToString.Exclude
 	private Producto producto;

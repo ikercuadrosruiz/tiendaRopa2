@@ -1,0 +1,52 @@
+
+main form {
+    min-width: 250px;
+}
+
+#bottom--buttons {
+    width: 90%;
+}
+
+#bottom--buttons > a{
+    min-width: 200px;
+    padding: 5px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #27272c;
+    border: 2px solid #27272c;
+    background-color: #27272c4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    text-align: center;
+  }
+  
+  #bottom--buttons a:hover{
+    background-color: #27272c;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  #bottom--buttons > button{
+    min-width: 200px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161DB;
+    border: 2px solid #6161DB;
+    background-color: #6161DB4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    text-align: center;
+  }
+  
+  #bottom--buttons button:hover{
+    background-color: #6161DB;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }

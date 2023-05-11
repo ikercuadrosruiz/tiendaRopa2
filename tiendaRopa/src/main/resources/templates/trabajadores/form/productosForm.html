@@ -43,6 +43,7 @@
 
         <form th:action = "@{/trabajadores/productos/save}"
         		th:object = "${productoDTO}"
+        		enctype="multipart/form-data"
         		method = "POST">
 
             <div>
@@ -110,12 +111,15 @@
                     <div class="contenedor_imagenes">
                     	<div class="imagen" th:each="imagen : *{listaImagenesDTO}">
                     		<input type="file" th:name="imagen" hidden/>
-                    		<input type="hidden" th:name="'listaImagenesDTO[' + (${imagen.id}-1) + '].id'" th:value="${imagen.id}" />
-                    		<input type="hidden" th:name="'listaImagenesDTO[' + (${imagen.id}-1) + '].nombre'" th:value="${imagen.nombre}" />
-                    		<input type="hidden" th:name="'listaImagenesDTO[' + (${imagen.id}-1) + '].url'" th:value="${imagen.url}" />
+                    		<input type="hidden" th:name="'listaImagenesDTO[0].id'" th:value="${imagen.id}" />
+                    		<input type="hidden" th:name="'listaImagenesDTO[0].nombre'" th:value="${imagen.nombre}" />
+                    		<input type="hidden" th:name="'listaImagenesDTO[0].url'" th:value="${imagen.url}" />
                     		<img alt="Imagen" th:src="@{'/images/productos/' + ${imagen.url}}" />
                     	</div>
                     </div>
+                    <div>
+        				<input th:if=${!mod} type="file" name="file"/>
+    				</div>
                 </div>
             </div>
 
