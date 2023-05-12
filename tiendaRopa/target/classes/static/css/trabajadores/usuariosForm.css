@@ -11,7 +11,7 @@ body>* {
 }
 
 main {
-    height: calc(100vh - 96px);
+    height: calc(100vh - 80px);
     width: 100%;
 
     display: flex;
@@ -52,6 +52,52 @@ main form>div:first-of-type {
     width: 100%;
 }
 
+/* Estilo para checkboxes */
+#cont10 {
+    margin-bottom: 10px;
+
+}
+
+#cont10 p{
+    margin-bottom: 10px;
+}
+
+#cont10 label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#cont10 input[type="checkbox"] {
+    display: none;
+}
+
+#cont10 input[type="checkbox"]+span {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+#cont10 input[type="checkbox"]+span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #6161DB;
+    border-radius: 3px;
+}
+
+#cont10 input[type="checkbox"]:checked+span::before {
+    background-color: #6161DB;
+}
+
+#cont10 span {
+    margin-left: 5px;
+}
+/* *****************************************/
+
 main form input {
     font-family: 'Poppins', sans-serif;
     padding: 0px 0px 0px 10px;
@@ -71,26 +117,51 @@ main form input {
 
 form>div:last-of-type {
     margin: 50px 0;
-    width: 39%;
+    width: 80%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-form>div:last-of-type>a {
-    text-decoration: none;
-}
+#btns>a{
+    min-width: 60px;
+    padding:8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #27272c;
+    border: 2px solid #27272c;
+    background-color: #27272c4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  #btns>a:hover {
+    background-color: #27272c;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
-form>div:last-of-type button {
-    background-color: #6161DB;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 0px;
-
-    cursor: pointer;
-}
+  #btns>button{
+    font-family: 'Poppins', sans-serif;
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161db;
+    border: 2px solid #6161db;
+    background-color: #6161db4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  #btns>button:hover {
+    background-color: #6161db;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
 @media (max-width: 564px) {
 
@@ -103,4 +174,11 @@ form>div:last-of-type button {
         grid-template-columns: 1fr;
     }
 
+    #btns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
 }

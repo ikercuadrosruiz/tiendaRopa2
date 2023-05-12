@@ -112,19 +112,12 @@ public class ProductoController {
 				byte[] byteImg = img.getBytes();
 				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + img.getOriginalFilename());
 				Files.write(rutaCompleta, byteImg);
-				
-				//Guardamos la imagen en la base y la adjuntamos al producto
-				// -------------------- Hacer -------------------------------
-				// -------------------- Hacer -------------------------------
-				// -------------------- Hacer -------------------------------
-				
-				// List<ImagenDTO> nuevaImagen = imagenService.findAllImagesByProducto(pDTO.getId());
 						
 				ImagenDTO iDTO = new ImagenDTO();
 				iDTO.setNombre(img.getOriginalFilename());
 				iDTO.setUrl(img.getOriginalFilename());
 				
-				pDTO.getListaImagenesDTO().add(iDTO);
+				pDTO.getListaImagenesDTO().set(0, iDTO);
 				
 			} catch (IOException e) {
 				e.printStackTrace();

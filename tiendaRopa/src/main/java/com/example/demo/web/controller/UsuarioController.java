@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.services.RolService;
 import com.example.demo.services.UsuarioService;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
@@ -72,83 +74,106 @@ public class UsuarioController {
 		mav.addObject("usuarioDTO", usuarioDTO);
 		mav.addObject("listaRolesDTO", lrDTO);
 		mav.addObject("mod", true);
+		mav.addObject("isFirstIteration", true);
 
 		return mav;
 	}
 
 	@PostMapping("/trabajadores/usuarios/save")
-	public ModelAndView save(@ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, @RequestParam String[] roles) {
+	public ModelAndView save(@Valid @ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult result, @RequestParam(value="roles") String[] roles, @RequestParam(value = "password", required = false) String pswd) {
 
 		log.info("UsuarioController - save: Guardamos el usuario");
-
-		String nif = usuarioDTO.getNif();
-		String nombre = usuarioDTO.getNombre();
-		String apellido1 = usuarioDTO.getApellido1();
-		String apellido2 = usuarioDTO.getApellido2();
-		Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
-		String direccion = usuarioDTO.getDireccion();
-		String poblacion = usuarioDTO.getPoblacion();
-		String correo = usuarioDTO.getCorreo();
-		String password = usuarioDTO.getPassword();
-		String cp = usuarioDTO.getCp();
-		ArrayList<RolDTO> lrDTO = new ArrayList<RolDTO>();
-
-		usuarioDTO = usuarioService.findById(usuarioDTO.getId());
-		usuarioDTO.setNif(nif);
-		usuarioDTO.setNombre(nombre);
-		usuarioDTO.setApellido1(apellido1);
-		usuarioDTO.setNombre(apellido2);
-		usuarioDTO.setFechaNacimiento(fechaNacimiento);
-		usuarioDTO.setDireccion(direccion);
-		usuarioDTO.setPoblacion(poblacion);
-		usuarioDTO.setCorreo(correo);
-		usuarioDTO.setPassword(password);
-		usuarioDTO.setCp(cp);
 		
-		for (String r : roles) {
-			RolDTO rDTO = rs.findByRol(r);
-			lrDTO.add(rDTO);
+		if (result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("trabajadores/form/usuariosForm");
+			List<RolDTO> lrDTO = rs.findAll();
+			mav.addObject("mod", true);
+			mav.addObject("listaRolesDTO", lrDTO);
+			mav.addObject("isFirstIteration", true);
+			return mav;
+		}else {
+			
+			// Comprobar formulario
+			String nif = usuarioDTO.getNif();
+			String nombre = usuarioDTO.getNombre();
+			String apellido1 = usuarioDTO.getApellido1();
+			String apellido2 = usuarioDTO.getApellido2();
+			Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
+			String direccion = usuarioDTO.getDireccion();
+			String poblacion = usuarioDTO.getPoblacion();
+			String correo = usuarioDTO.getCorreo();
+			String password = pswd;
+			String cp = usuarioDTO.getCp();
+			ArrayList<RolDTO> lrDTO = new ArrayList<RolDTO>();
+
+			usuarioDTO = usuarioService.findById(usuarioDTO.getId());
+			usuarioDTO.setNif(nif);
+			usuarioDTO.setNombre(nombre);
+			usuarioDTO.setApellido1(apellido1);
+			usuarioDTO.setNombre(apellido2);
+			usuarioDTO.setFechaNacimiento(fechaNacimiento);
+			usuarioDTO.setDireccion(direccion);
+			usuarioDTO.setPoblacion(poblacion);
+			usuarioDTO.setCorreo(correo);
+			usuarioDTO.setPassword(password);
+			usuarioDTO.setCp(cp);
+			
+			for (String r : roles) {
+				RolDTO rDTO = rs.findByRol(r);
+				lrDTO.add(rDTO);
+			}
+			
+			usuarioDTO.setListaRolesDTO(lrDTO);
+
+			usuarioService.save(usuarioDTO);
+
+			ModelAndView mav = new ModelAndView("redirect:/trabajadores/usuarios");
+			return mav;
+			
 		}
 		
-		usuarioDTO.setListaRolesDTO(lrDTO);
-
-		usuarioService.save(usuarioDTO);
-
-		ModelAndView mav = new ModelAndView("redirect:/trabajadores/usuarios");
-		return mav;
 	}
 
 	@PostMapping("/usuarios/save")
-	public ModelAndView saveDesdeCliente(@ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO) {
+	public ModelAndView saveDesdeCliente(@Valid @ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult result,  @RequestParam(value = "password", required = false) String pswd) {
 
 		log.info("UsuarioController - saveDesdeCliente: Guardamos el usuario");
+		
+		if (result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("clientes/datosPersonales");
+			return mav;
+		}else {
+			
+			String nif = usuarioDTO.getNif();
+			String nombre = usuarioDTO.getNombre();
+			String apellido1 = usuarioDTO.getApellido1();
+			String apellido2 = usuarioDTO.getApellido2();
+			Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
+			String direccion = usuarioDTO.getDireccion();
+			String poblacion = usuarioDTO.getPoblacion();
+			String correo = usuarioDTO.getCorreo();
+			String password = pswd;
+			String cp = usuarioDTO.getCp();
 
-		String nif = usuarioDTO.getNif();
-		String nombre = usuarioDTO.getNombre();
-		String apellido1 = usuarioDTO.getApellido1();
-		String apellido2 = usuarioDTO.getApellido2();
-		Date fechaNacimiento = usuarioDTO.getFechaNacimiento();
-		String direccion = usuarioDTO.getDireccion();
-		String poblacion = usuarioDTO.getPoblacion();
-		String correo = usuarioDTO.getCorreo();
-		String password = usuarioDTO.getPassword();
-		String cp = usuarioDTO.getCp();
+			usuarioDTO = usuarioService.findById(usuarioDTO.getId());
+			usuarioDTO.setNif(nif);
+			usuarioDTO.setNombre(nombre);
+			usuarioDTO.setApellido1(apellido1);
+			usuarioDTO.setNombre(apellido2);
+			usuarioDTO.setFechaNacimiento(fechaNacimiento);
+			usuarioDTO.setDireccion(direccion);
+			usuarioDTO.setPoblacion(poblacion);
+			usuarioDTO.setCorreo(correo);
+			usuarioDTO.setPassword(password);
+			usuarioDTO.setCp(cp);
 
-		usuarioDTO = usuarioService.findById(usuarioDTO.getId());
-		usuarioDTO.setNif(nif);
-		usuarioDTO.setNombre(nombre);
-		usuarioDTO.setApellido1(apellido1);
-		usuarioDTO.setNombre(apellido2);
-		usuarioDTO.setFechaNacimiento(fechaNacimiento);
-		usuarioDTO.setDireccion(direccion);
-		usuarioDTO.setPoblacion(poblacion);
-		usuarioDTO.setCorreo(correo);
-		usuarioDTO.setPassword(password);
-		usuarioDTO.setCp(cp);
+			usuarioService.save(usuarioDTO);
 
-		usuarioService.save(usuarioDTO);
-
-		ModelAndView mav = new ModelAndView("redirect:/perfil");
-		return mav;
+			ModelAndView mav = new ModelAndView("redirect:/perfil");
+			return mav;
+			
+		}
+		
+		
 	}
 }

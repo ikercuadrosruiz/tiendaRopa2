@@ -30,7 +30,7 @@ public class UsuarioDTO implements Serializable{
 	private Long id;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")
-	@Pattern(regexp = "^[A-HJNPW-Z0-9]{1}[0-9]{8}[A-HJNPW-Z0-9]{1}$", message = "El nif no tiene el formato correcto. Ej: 12345678A")
+	@Pattern(regexp = "[0-9]{8}[A-Z0-9]{1}$", message = "El nif no tiene el formato correcto. Ej: 12345678A")
 	private String nif;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")

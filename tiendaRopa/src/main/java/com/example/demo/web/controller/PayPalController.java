@@ -7,6 +7,8 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -86,40 +88,6 @@ public class PayPalController {
 		total = envio + subtotal;
 		
 		// ===========================================
-		// Transformación de CarritoDTO a PedidoDTO
-		// ===========================================
-		PedidoDTO pDTO = new PedidoDTO();
-		String numeroFactura = generarNumeroFactura();
-		pDTO.setNumeroFactura(numeroFactura);
-		pDTO.setPrecio(total.floatValue());
-		pDTO.setEstado("en curso");
-		pDTO.setFechaEmision(new java.util.Date());
-		pDTO.setFechaEntrega(new java.util.Date());
-		pDTO.setUsuarioDTO(uDTO);
-		pDTO.setListaPedidoProductoDTO(new ArrayList<PedidoProductoDTO>());
-		pes.save(pDTO);
-		
-		PedidoDTO pDTO2 = pes.findByNumeroFactura(pDTO.getNumeroFactura());
-		
-		ArrayList<PedidoProductoDTO> listaPedidoProductoDTO = new ArrayList<PedidoProductoDTO>();
-		for (CarritoProductoDTO cpDTO : cDTO.getListaCarritoProductoDTO()) {
-			PedidoProductoDTO ppDTO = new PedidoProductoDTO();
-			ppDTO.setCantidad(cpDTO.getCantidad());
-			ppDTO.setProductoDTO(cpDTO.getProductoDTO());
-			ppDTO.setPedidoDTO(pDTO2);
-			listaPedidoProductoDTO.add(ppDTO);
-				
-			//Guardamos el PedidoProductoDTO
-			pepos.save(ppDTO);
-		}
-		
-		pDTO2.setListaPedidoProductoDTO(listaPedidoProductoDTO);
-
-		// Borramos el carrito
-		cs.delete(cDTO.getId());
-		
-		
-		// ===========================================
 		// Realizar el pago
 		// ===========================================
 		try {
@@ -157,6 +125,64 @@ public class PayPalController {
 			System.out.println(payment.toJSON());
 			
 			if (payment.getState().equals("approved")) {
+				
+				// Transformamos el carrito a pedido
+				Double total = 0.0;
+				
+				// ===========================================
+				// Obtención de USUARIO, CARRITO y total
+				// ===========================================
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				String correo = authentication.getName();
+				UsuarioDTO uDTO = us.findByCorreo(correo); 
+				
+				// Obtengo el carrito del cliente al completo
+				CarritoDTO cDTO = cs.findByIdCliente(uDTO.getId());
+				ArrayList<CarritoProductoDTO> lcpDTO = caprs.findAllByIdCarrito(cDTO.getId());
+				cDTO.setListaCarritoProductoDTO(lcpDTO);
+				
+				// Calculo el total
+				Double envio = 2.99;
+				Double subtotal = 0.0;
+				for (CarritoProductoDTO cpDTO : lcpDTO) {
+					subtotal = subtotal + (cpDTO.getProductoDTO().getPrecio() * cpDTO.getCantidad());
+				}
+				total = envio + subtotal;
+				
+				// ===========================================
+				// Transformación de CarritoDTO a PedidoDTO
+				// ===========================================
+				PedidoDTO pDTO = new PedidoDTO();
+				String numeroFactura = generarNumeroFactura();
+				pDTO.setNumeroFactura(numeroFactura);
+				pDTO.setPrecio(total.floatValue());
+				pDTO.setEstado("en curso");
+				pDTO.setFechaEmision(new java.util.Date());
+				pDTO.setFechaEntrega(new java.util.Date());
+				pDTO.setUsuarioDTO(uDTO);
+				pDTO.setListaPedidoProductoDTO(new ArrayList<PedidoProductoDTO>());
+				pes.save(pDTO);
+				
+				PedidoDTO pDTO2 = pes.findByNumeroFactura(pDTO.getNumeroFactura());
+				
+				ArrayList<PedidoProductoDTO> listaPedidoProductoDTO = new ArrayList<PedidoProductoDTO>();
+				for (CarritoProductoDTO cpDTO : cDTO.getListaCarritoProductoDTO()) {
+					PedidoProductoDTO ppDTO = new PedidoProductoDTO();
+					ppDTO.setCantidad(cpDTO.getCantidad());
+					ppDTO.setProductoDTO(cpDTO.getProductoDTO());
+					ppDTO.setPedidoDTO(pDTO2);
+					listaPedidoProductoDTO.add(ppDTO);
+						
+					//Guardamos el PedidoProductoDTO
+					pepos.save(ppDTO);
+				}
+				
+				pDTO2.setListaPedidoProductoDTO(listaPedidoProductoDTO);
+
+				// Borramos el carrito
+				cs.delete(cDTO.getId());
+				
+				// Informamos al usuario del éxito en el pago
 				return new ModelAndView("redirect:/tienda?successPayment");
 			}
 			

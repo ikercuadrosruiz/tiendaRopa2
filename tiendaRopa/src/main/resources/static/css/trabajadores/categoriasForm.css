@@ -11,7 +11,7 @@ body>*{
 }
 
 main{
-    height: calc(100vh - 96px);
+    height: calc(100vh - 80px);
     width: 100%;
 
     display: flex;
@@ -59,32 +59,69 @@ main form input{
     font-size: .9em;
 }
 
-form > div:last-of-type{
-    margin: 50px 0;
-    width: 100%;
-
+form>div:last-of-type {
+    margin: 40px;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-form > div:last-of-type > a{
-    text-decoration: none;
 
-    background-color: #6161DB;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 0px;
-    
-    cursor: pointer;
-
+#btns>a {
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #27272c;
+    border: 2px solid #27272c;
+    background-color: #27272c4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
-form > div:last-of-type button{
-	background-color: #6161DB;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 0px;
-    
-    cursor: pointer;
+
+#btns>a:hover {
+    background-color: #27272c;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#btns>button {
+    font-family: 'Poppins', sans-serif;
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161db;
+    border: 2px solid #6161db;
+    background-color: #6161db4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#btns>button:hover {
+    background-color: #6161db;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+
+    main form {
+        width: 90%;
+
+    }
+
+    main form>div:first-of-type {
+        grid-template-columns: 1fr;
+    }
+
+    #btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 }

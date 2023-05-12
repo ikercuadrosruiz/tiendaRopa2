@@ -1,40 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
-body{
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body>*{
+body>* {
     font-family: 'Poppins', sans-serif;
 }
 
-main{
-    min-height: calc(100vh - 96px);
+main {
+    min-height: calc(100vh - 80px);
     width: 100%;
 
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
 }
 
-main > div:first-of-type{
+main>div:first-of-type {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-main form{
+
+main form {
     width: 80%;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
+
 }
-main form > div:first-of-type{
+
+main form>div:first-of-type {
     width: 90%;
 
     display: grid;
@@ -42,7 +44,7 @@ main form > div:first-of-type{
     gap: 15px;
 }
 
-#cont1 select{
+#cont1 select {
     width: 100%;
     padding-left: 1.5em;
     height: 30px;
@@ -51,29 +53,31 @@ main form > div:first-of-type{
     border: 0;
 }
 
-#cont5{
-	grid-column: 1/-1;
+#cont5 {
+    grid-column: 1/-1;
 }
-#cont5 table{
+
+#cont5 table {
     width: 100%;
 }
 
-#cont6{
+#cont6 {
     grid-column: 1/-1;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-#cont6 table{
+
+#cont6 table {
     width: 100%;
 }
 
-main form input{
-	font-family: 'Poppins', sans-serif;
-	padding: 0px 0px 0px 10px;
-	
+main form input {
+    font-family: 'Poppins', sans-serif;
+    padding: 0px 0px 0px 10px;
+
     width: 100%;
     height: 30px;
 
@@ -82,30 +86,74 @@ main form input{
     border: 0;
 }
 
-.err{
+.err {
     color: red;
     font-size: .9em;
 }
 
-form > div:last-of-type{
-    margin: 50px 0;
-    width: 100%;
-
+form>div:last-of-type {
+    margin: 40px;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-form > div:last-of-type > a{
-    text-decoration: none;
-    
-    
+
+#btns>a {
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #27272c;
+    border: 2px solid #27272c;
+    background-color: #27272c4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
-form > div:last-of-type button{
-	background-color: #6161DB;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 0px;
-    
-    cursor: pointer;
+
+#btns>a:hover {
+    background-color: #27272c;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#btns>button {
+    font-family: 'Poppins', sans-serif;
+    min-width: 60px;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6161db;
+    border: 2px solid #6161db;
+    background-color: #6161db4b;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+#btns>button:hover {
+    background-color: #6161db;
+    color: #f2f2f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+
+    main form {
+        width: 90%;
+
+    }
+
+    main form>div:first-of-type {
+        grid-template-columns: 1fr;
+    }
+
+    #btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 }

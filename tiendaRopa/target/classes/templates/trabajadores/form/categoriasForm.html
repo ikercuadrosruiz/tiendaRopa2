@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/trabajadores/header.css}">
     <link rel="stylesheet" th:href="@{/css/trabajadores/categoriasForm.css}">
+    
     <link rel="icon" type="image/x-icon" href="images/imagenFavicon.png">
 
     <title>Gestión Categorias</title>
@@ -25,14 +26,18 @@
                     <li><a th:href="@{/trabajadores/productos}">Productos</a></li>
                     <li><a th:href="@{/trabajadores/pedidos}">Pedidos</a></li>
                     <li><a th:href="@{/trabajadores/categorias}">Categorias</a></li>
-                    <li><a th:href="@{/trabajadores/trabajadores}">Trabajadores</a></li>
-                    <img th:src="@{/images/header/cerrar.png}" alt="Img menu" />
+                    <li><a th:href="@{/trabajadores/trabajadores}" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">Trabajadores</a></li>
                 </ul>
             </div>
-            <img th:src="@{/images/header/menu.png}" alt="Img menu" />
+            <img th:src="@{/images/header/menu.png}" alt="Img menu" id="imgAbrir"/>
         </nav>
 
         <img th:src="@{/images/header/logoSimple.png}" alt="Imagen Logo Simple">
+
+        <form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <span th:remove="tag" sec:authentication="name">Ikers</span>
+            <input type="submit" value="Logout" />
+        </form>
     </header>
     <!-- ---------------------NO CAMBIAR - ARRIBA------------------------------ -->
 
@@ -60,7 +65,7 @@
             </div>
 
             <!--Enlaces para volver atrás-->
-            <div>
+            <div id="btns">
                 <a th:href="@{/trabajadores/categorias}">Volver a Categorias</a>
                 <button th:if="${mod}">Modificar</button>
                 <button th:if="${add}">Añadir</button>

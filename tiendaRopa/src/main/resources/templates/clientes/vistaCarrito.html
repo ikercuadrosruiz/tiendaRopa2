@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/clientes/header.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/carrito.css}">
 <link rel="stylesheet" th:href="@{/css/clientes/footer.css}">
+<link rel="stylesheet" th:href="@{/css/clientes/successCancelPayment.css}">
 <script th:src="@{https://kit.fontawesome.com/ddbdd94323.js}"
 	crossorigin="anonymous"></script>
 <title>Carrito</title>
@@ -126,6 +127,24 @@
 			<a th:if="${!#lists.isEmpty(listaCarritoProductosDTO)}"
 				th:href="@{/tienda/carrito/{idCarrito}/tramite (idCarrito=${listaCarritoProductosDTO[0].carritoDTO.id})}">Comprar</a>
 		</div>
+		
+		<!-- PopUps ------------------------------------------------ -->
+		<div id="popup-container" th:if="${param.outOfStock}">
+			<div id="popup-content">
+				<div>
+					<img th:src="@{/images/tramite/cancel.png}" alt="Perfecto">
+				</div>
+				<div>
+					<h3>
+						<b>No hay Stock</b>
+					</h3>
+					<p>Lo sentimos, no quedan artículos de este tipo</p>
+				</div>
+				<div>
+					<a th:href="@{/tienda/carrito}" id="continue-button">Continuar</a>
+				</div>
+			</div>
+		</div>
 	</main>
 
 	<!-- ***************************************** -->
@@ -180,4 +199,5 @@
 </body>
 
 <script th:src="@{/js/scriptHeader.js}"></script>
+<script th:src="@{/js/clientes/scriptSuccFailPayment.js}"></script>
 </html>
