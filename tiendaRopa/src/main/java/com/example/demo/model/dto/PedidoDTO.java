@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.PedidoProducto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
@@ -22,12 +23,17 @@ public class PedidoDTO implements Serializable {
 	private String numeroFactura;
 	private Float precio;
 	private String estado;
+	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Date fechaEmision;
+	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@NotNull(message = "El campo no puede ser vacío")
 	private Date fechaEntrega;
+	
 	@ToString.Exclude
 	private UsuarioDTO usuarioDTO;
+	
 	@ToString.Exclude
 	private ArrayList<PedidoProductoDTO> listaPedidoProductoDTO;
 

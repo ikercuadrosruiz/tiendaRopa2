@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ProductoDTO;
+import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.services.CategoriaService;
 import com.example.demo.services.ProductoService;
 
@@ -87,6 +89,9 @@ public class CategoriaController {
 		ModelAndView mav;
 		if (result.hasErrors()) {
 			mav = new ModelAndView("trabajadores/form/categoriasForm");
+			mav.addObject("categoriaDTO", cDTO);
+			mav.addObject("mod", true);
+			
 		}else {
 			categoriaService.save(cDTO);
 			mav = new ModelAndView("redirect:/trabajadores/categorias");
@@ -94,5 +99,17 @@ public class CategoriaController {
 		return mav;
 	}
 	
+	@GetMapping("/trabajadores/categorias/search")
+	public ModelAndView buscarCategorias(@RequestParam("term") String searchTerm) {
+		
+		log.info("CategoriasController - buscarCategorias: Encontramos todas las categorais segun parametro");
+
+		List<CategoriaDTO> listaCategoriasDTO = categoriaService.findAllByTerm(searchTerm);
+
+		ModelAndView mav = new ModelAndView("trabajadores/gestion/gestionCategorias");
+		mav.addObject("listaCategoriasDTO", listaCategoriasDTO);
+		
+		return mav;
+	}
 	
 }

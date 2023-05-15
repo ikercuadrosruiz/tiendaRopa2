@@ -25,4 +25,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	@Query(value = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.password = :contrasenya")
 	List<Usuario> findByEmailAndPassword(@Param("correo")String correo, @Param("contrasenya")String password);
 
+	@Query(value = "SELECT u FROM Usuario u WHERE u.correo LIKE %:correo%")
+	List<Usuario> findAllByTerm(@Param("correo")String searchTerm);
+
+	@Query(value = "SELECT DISTINCT u FROM Usuario u JOIN u.listaRoles r WHERE r.id IN (5, 6) AND u.correo LIKE %:correo%")
+	List<Usuario> findAllTrabajadoresByTerm(@Param("correo")String searchTerm);
+
 }

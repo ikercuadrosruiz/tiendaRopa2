@@ -51,19 +51,12 @@
         <div th:if="${!listaProductosDTO.isEmpty()}">
             <h2>Gestión de Productos</h2>
 
-            <form>
-                <select name="opcionesProductos">
-                    <option value="" selected hidden disabled>Atributos del producto</option>
-                    <!-- Seria poner la busqueda por campos del producto-->
-                    <option value="id">Id</option>
-                    <option value="numeroProducto">Número de Productod</option>
-                    <option value="nombre">Nombre</option>
-                </select>
+			<div id="div--busqueda">
+                <input id="searchInput" type="text" placeholder="Buscar..." />
 
-                <input type="text" placeholder="Buscar..." />
+                <button id="searchButton">Buscar</button>
+            </div>            
 
-                <button>Buscar</button>
-            </form>
             <table>
                 <tr>
                     <th id="titulo--id">ID</th>
@@ -102,6 +95,7 @@
 
 	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
     <script th:src="@{/js/scriptHeader.js}"></script>
+    <script th:src="@{/js/trabajadores/scriptBusquedaProductos.js}"></script>
 </body>
 
 </html>

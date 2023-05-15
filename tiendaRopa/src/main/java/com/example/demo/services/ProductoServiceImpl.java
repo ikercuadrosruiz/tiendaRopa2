@@ -126,4 +126,18 @@ public class ProductoServiceImpl implements ProductoService {
 		return lpDTO;
 	}
 
+	@Override
+	public List<ProductoDTO> findAllByTerm(String searchTerm) {
+		log.info("ProductoServiceImpl - FindAll: Encontramos todos los Productos");
+
+		List<Producto> lp = productoRepository.findAllByTerm(searchTerm);
+
+		List<ProductoDTO> lpDTO = new ArrayList<ProductoDTO>();
+		for (Producto p : lp) {
+			lpDTO.add(ProductoDTO.convertToDTO(p));
+		}
+
+		return lpDTO;
+	}
+
 }

@@ -65,32 +65,31 @@
                 
                 <div id="cont3">
                     <p>Nombre</p>
-                    <input th:field="*{nombre}" type="text" name="nombre" id="nombre"/>
-                    <p id="errNombre" class="err" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+                    <input th:field="*{nombre}" type="text" id="nombre"/>
+                    <p class="err" id="errNombre" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
                 </div>
                 
                 <div id="cont4">
                     <p>Talla</p>
-                    <input th:field="*{talla}" type="text" name="talla"/>
-                    <p id="errTalla" class="err"></p>
+                    <input th:field="*{talla}" type="text"/>
+                    <p class="err" id="errTalla" th:if="${#fields.hasErrors('talla')}" th:errors="*{talla}"></p>
                 </div>
                 
                 <div id="cont5">
                     <p>Stock</p>
-                    <input th:field="*{stock}" type="text" name="stock"/>
-                    <p id="errStock" class="err"></p>
+                    <input th:field="*{stock}" type="text"/>
+                    <p class="err" id="errStock" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
                 </div>
 
                 <div id="cont6">
                     <p>Color</p>
                     <input th:field="*{color}" type="color" name="color"/>
-                    <p id="errColor" class="err"></p>
                 </div>
                 
                 <div id="cont7">
                     <p>Precio</p>
-                    <input th:field="*{precio}" type="number" name="precio"/>
-                    <p id="errPrecio" class="err"></p>
+                    <input th:field="*{precio}" type="text"/>
+                    <p class="err" id="errPrecio" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p>
                 </div>
 
                 <div id="cont8">
@@ -102,13 +101,11 @@
                     			th:value = "${c.id}"
                     			th:text = "${c.nombre}"/>
                     </select>
-                    <p id="errCategoria" class="err"></p>
                 </div>
                 
                 <div id="cont9">
                     <p>Descripcion</p>
                     <input th:field="*{descripcion}" type="text" name="descripcion"/>
-                    <p id="errDescripcion" class="err"></p>
                 </div>
                 
                 <div id="cont10">

@@ -22,4 +22,6 @@ public interface ProductoService {
 
 	List<ProductoDTO> findAllWithStock();
 
+	List<ProductoDTO> findAllByTerm(String searchTerm);
+
 }

@@ -59,37 +59,37 @@
                 <div id="cont2">
                     <p>Fecha de Nacimiento</p>
                     <input th:field="*{fechaNacimiento}" type="date" name="fecha"/>
-                    <p id="errFecha" class="err"></p>
+                    <p class="err" id="errFecNacimiento" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
                 </div>
                 
                 <div id="cont3">
                     <p>Correo</p>
                     <input th:field="*{correo}" type="email" name="correo"/>
-                    <p id="errCorreo" class="err"></p>
+                    <p class="err" id="errEmail" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
                 </div>
                 
                 <div id="cont4">
                     <p>Nif</p>
                     <input th:field="*{nif}" type="text" name="nif"/>
-                    <p id="errNif" class="err"></p>
+                    <p class="err" id="errEmail" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
                 </div>
                 
                 <div id="cont5">
                     <p>Nombre</p>
                     <input th:field="*{nombre}" type="text" name="nombre"/>
-                    <p id="errNombre" class="err"></p>
+                    <p class="err" id="errNombre" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
                 </div>
 
                 <div id="cont6">
                     <p>Primer apellido</p>
                     <input th:field="*{apellido1}" type="text" name="apellido1"/>
-                    <p id="errApellido" class="err"></p>
+                    <p class="err" id="errAp1" th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></p>
                 </div>
                 
                 <div id="cont7">
                     <p>Segundo apellido</p>
                     <input th:field="*{apellido2}" type="text" name="apellido2"/>
-                    <p id="errApellido" class="err"></p>
+                    <p class="err" id="errAp2" th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}"></p>
                 </div>
 
                 <div id="cont8">

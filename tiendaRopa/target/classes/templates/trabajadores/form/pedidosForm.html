@@ -63,8 +63,7 @@
                 
                 <div id="cont2">
                     <p>Número de Pedido</p>
-                    <input th:field="*{numeroFactura}" type="text" name="numPedido"/>
-                    <p id="errNumPedido" class="err"></p>
+                    <input th:field="*{numeroFactura}" type="text" name="numPedido" readonly/>
                 </div>
                 
                 <div id="cont3">
@@ -76,13 +75,12 @@
                 <div id="cont4">
                     <p>Fecha de Entrega Prevista</p>
                     <input th:field="*{fechaEntrega}" th:value="${#dates.format(fechaEntrega, 'dd/MM/yyyy')}" type="datetime" name="fechaEntrega"/>
-                    <p id="errFechaEntrega" class="err"></p>
+                    <p class="err" id="errFecEntrega" th:if="${#fields.hasErrors('fechaEntrega')}" th:errors="*{fechaEntrega}"></p>
                 </div>
 
                 <div id="cont5">
                     <p>Precio total</p>
                     <input th:field="*{precio}" type="number" name="precio" readonly/>
-                    <p id="errPrecio" class="err"></p>
                 </div>
 
                 <div id="cont6">

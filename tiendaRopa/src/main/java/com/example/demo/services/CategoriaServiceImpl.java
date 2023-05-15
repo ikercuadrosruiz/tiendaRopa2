@@ -72,4 +72,20 @@ public class CategoriaServiceImpl implements CategoriaService {
 		categoriaRepository.save(CategoriaDTO.convertToEntity(cDTO));
 	}
 
+	@Override
+	public List<CategoriaDTO> findAllByTerm(String searchTerm) {
+		log.info("CategoriaServiceImpl - FindAll: Encontramos todas las categorias");
+
+		List<Categoria> listaCategorias = categoriaRepository.findAllByTerm(searchTerm);
+
+		List<CategoriaDTO> listaCategoriasDTO = new ArrayList<CategoriaDTO>();
+		for (Categoria c : listaCategorias) {
+			listaCategoriasDTO.add(CategoriaDTO.convertToDTO(c));
+		}
+
+		return listaCategoriasDTO;
+	}
+	
+	
+
 }

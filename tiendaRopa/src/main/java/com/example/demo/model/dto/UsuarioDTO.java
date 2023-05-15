@@ -26,7 +26,7 @@ import lombok.ToString;
 public class UsuarioDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	/**/
+	
 	private Long id;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")
@@ -34,15 +34,15 @@ public class UsuarioDTO implements Serializable{
 	private String nif;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")
-	@Pattern(regexp = "^[A-Za-z]+$", message = "El nombre solo puede contener letras")
+	@Pattern(regexp = "^[A-Za-z\\s]+$", message = "El nombre sólo puede contener letras")
 	private String nombre;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")
-	@Pattern(regexp = "^[A-Za-z]+$", message = "El apellido solo puede contener letras")
+	@Pattern(regexp = "^[A-Za-z]+$", message = "El apellido sólo puede contener letras")
 	private String apellido1;
 	
 	@NotEmpty(message = "El campo no puede ser vacío")
-	@Pattern(regexp = "^[A-Za-z]+$", message = "El apellido solo puede contener letras")
+	@Pattern(regexp = "^[A-Za-z]+$", message = "El apellido sólo puede contener letras")
 	private String apellido2;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

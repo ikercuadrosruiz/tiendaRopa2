@@ -27,4 +27,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 	@Query(value = "SELECT p FROM Producto p WHERE p.stock > 0")
 	List<Producto> findAllWithStock();
 
+	@Query(value = "SELECT p FROM Producto p WHERE p.nombre LIKE %:nombre%")
+	List<Producto> findAllByTerm(@Param("nombre") String searchTerm);
+
 }

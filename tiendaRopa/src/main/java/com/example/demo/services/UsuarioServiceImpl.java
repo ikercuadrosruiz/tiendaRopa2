@@ -175,5 +175,48 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 			throw new UsernameNotFoundException(username);
 		}
 	}
+
+	@Override
+	public List<UsuarioDTO> findAllByTerm(String searchTerm) {
+		
+		log.info("UsuarioServiceImpl - findAllByTerm: Encontramos todos los Usuario");
+
+		List<Usuario> listaUsuarios = usuarioRepository.findAllByTerm(searchTerm);
+
+		List<UsuarioDTO> listaUsuariosDTO = new ArrayList<UsuarioDTO>();
+		for (Usuario u : listaUsuarios) {
+
+			UsuarioDTO uDTO = UsuarioDTO.convertToDTO(u);
+
+			// Añado el usuarioDTO a la lista de UsuariosDTO
+			listaUsuariosDTO.add(uDTO);
+		}
+
+		return listaUsuariosDTO;
+	}
+
+	@Override
+	public List<UsuarioDTO> findAllTrabajadoresByTerm(String searchTerm) {
+		log.info("UsuarioServiceImpl - findAllByTerm: Encontramos todos los Usuario");
+
+		List<Usuario> lt = usuarioRepository.findAllTrabajadoresByTerm(searchTerm);
+
+		List<UsuarioDTO> ltDTO = new ArrayList<UsuarioDTO>();
+		for (Usuario u : lt) {
+			// Obtengo sus roles
+			Set<Rol> lr = rolRepository.findAllByIdCliente(u.getId());
+			ArrayList<RolDTO> lrDTO = new ArrayList<RolDTO>();
+			for (Rol r : lr) {
+				lrDTO.add(RolDTO.convertToDTO(r));
+			}
+
+			UsuarioDTO uDTO = UsuarioDTO.convertToDTO(u);
+			uDTO.setListaRolesDTO(lrDTO);
+			// Añado el usuarioDTO a la lista de UsuariosDTO
+			ltDTO.add(uDTO);
+		}
+
+		return ltDTO;
+	}
 	
 }

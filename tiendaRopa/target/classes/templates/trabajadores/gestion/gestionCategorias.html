@@ -48,17 +48,11 @@
         <div th:if="${!listaCategoriasDTO.isEmpty()}">
             <h2>Gestión de Categorias</h2>
 
-            <form>
-                <select name="opcionesCategorias">
-                    <option value="" selected hidden disabled>Atributos de Categoria</option>
-                    <option value="id">Id</option>
-                    <option value="nombre">Nombre</option>
-                </select>
+            <div id="div--busqueda">
+                <input id="searchInput" type="text" placeholder="Buscar..." />
 
-                <input type="text" placeholder="Buscar..." />
-
-                <button>Buscar</button>
-            </form>
+                <button id="searchButton">Buscar</button>
+            </div>
 
             <table>
                 <tr>
@@ -90,6 +84,7 @@
 
 	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
     <script th:src="@{/js/scriptHeader.js}"></script>
+    <script th:src="@{/js/trabajadores/scriptBusquedaCategorias.js}"></script>
 </body>
 
 </html>

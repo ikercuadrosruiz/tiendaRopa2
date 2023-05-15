@@ -8,7 +8,11 @@ import com.example.demo.repository.entity.Categoria;
 import com.example.demo.repository.entity.Imagen;
 import com.example.demo.repository.entity.Producto;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.ToString;
 
@@ -18,16 +22,32 @@ public class ProductoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	@NotEmpty(message="El campo numero de Producto no puede estar vacío")
+	
+	@NotEmpty(message="El Número de Producto no puede estar vacío")
 	private String numeroProducto;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-Za-z\\s]+$", message = "El nombre sólo puede contener letras")
 	private String nombre;
-	private int stock;
+	
+	@NotNull(message = "El campo no puede ser nulo")
+	@Min(value = 0, message = "El stock del producto debe ser igual o mayor que 0")
+	private Integer stock;
+	
+	@NotNull(message = "El campo no puede ser vacío")
+	@DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que 0")
 	private Float precio;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^(XS|S|M|L|XL|XXL|XXXL)$", message = "Selecciona una talla existente: XS|S|M|L|XL|XXL|XXXL")
 	private String talla;
+	
 	private String color;
 	private String descripcion;
+	
 	@ToString.Exclude
 	private Categoria categoria;
+	
 	@ToString.Exclude
 	private List<ImagenDTO> listaImagenesDTO;
 	

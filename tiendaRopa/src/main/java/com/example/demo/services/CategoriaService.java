@@ -17,4 +17,6 @@ public interface CategoriaService {
 
 	void save(@Valid CategoriaDTO cDTO);
 
+	List<CategoriaDTO> findAllByTerm(String searchTerm);
+
 }

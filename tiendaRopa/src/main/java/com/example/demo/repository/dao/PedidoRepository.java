@@ -20,6 +20,9 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
 	@Query(value = "SELECT p FROM Pedido p WHERE p.numeroFactura = :nFac")
 	Pedido findByNumeroDeFactura(@Param("nFac") String numeroFactura);
+
+	@Query(value = "SELECT p FROM Pedido p WHERE p.numeroFactura LIKE %:numFac%")
+	List<Pedido> findAllByTerm(@Param("numFac")String searchTerm);
 	
 	
 

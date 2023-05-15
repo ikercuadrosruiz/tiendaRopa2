@@ -18,4 +18,6 @@ public interface PedidoService {
 
 	PedidoDTO findByNumeroFactura(String numeroFactura);
 
+	List<PedidoDTO> findAllByTerm(String searchTerm);
+
 }

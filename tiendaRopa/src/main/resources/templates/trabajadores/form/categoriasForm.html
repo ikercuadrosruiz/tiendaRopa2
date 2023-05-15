@@ -60,7 +60,7 @@
                 <div id="cont2">
                     <p>Nombre</p>
                     <input th:field="*{nombre}" type="text" name="nombre"/>
-                    <p id="errNombre" class="err"></p>
+                    <p class="err" id="errNombre" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
                 </div>
             </div>
 

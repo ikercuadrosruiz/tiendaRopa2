@@ -7,19 +7,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.model.dto.PedidoProductoDTO;
 import com.example.demo.model.dto.ProductoDTO;
+import com.example.demo.model.dto.RolDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.services.PedidoProductoService;
 import com.example.demo.services.PedidoService;
 import com.example.demo.services.UsuarioService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class PedidoController {
@@ -93,20 +98,46 @@ public class PedidoController {
 	}
 	
 	@PostMapping("/trabajadores/pedidos/save")
-	public ModelAndView save(@ModelAttribute PedidoDTO pedidoDTO) {
+	public ModelAndView save(@Valid @ModelAttribute PedidoDTO pedidoDTO, BindingResult result) {
 		
 		log.info("PedidoController - save: Procedemos a guardar el pedido añadido/modificado " + pedidoDTO.getId());
 		
-		PedidoDTO pDTO = pedidoService.findById(pedidoDTO.getId());
-		pDTO.setNumeroFactura(pedidoDTO.getNumeroFactura());
-		pDTO.setFechaEmision(pedidoDTO.getFechaEmision());
-		pDTO.setFechaEntrega(pedidoDTO.getFechaEntrega());
-		pDTO.setPrecio(pedidoDTO.getPrecio());
-		pDTO.setEstado(pedidoDTO.getEstado());
+		if (result.hasErrors()) {
+			PedidoDTO p = pedidoService.findById(pedidoDTO.getId());
+			pedidoDTO.setListaPedidoProductoDTO(p.getListaPedidoProductoDTO());
+			
+			ModelAndView mav = new ModelAndView("trabajadores/form/pedidosForm");
+			mav.addObject("pedidoDTO", pedidoDTO);
+			mav.addObject("mod", true);
+			return mav;
+			
+		}else {
+			
+			PedidoDTO pDTO = pedidoService.findById(pedidoDTO.getId());
+			pDTO.setNumeroFactura(pedidoDTO.getNumeroFactura());
+			pDTO.setFechaEmision(pedidoDTO.getFechaEmision());
+			pDTO.setFechaEntrega(pedidoDTO.getFechaEntrega());
+			pDTO.setPrecio(pedidoDTO.getPrecio());
+			pDTO.setEstado(pedidoDTO.getEstado());
+			
+			pedidoService.save(pDTO);
+			
+			ModelAndView mav = new ModelAndView("redirect:/trabajadores/pedidos");
+			return mav;
+			
+		}
+	}
+	
+	@GetMapping("/trabajadores/pedidos/search")
+	public ModelAndView buscarClientes(@RequestParam("term") String searchTerm) {
 		
-		pedidoService.save(pDTO);
+		log.info("PedidosController - buscarClientes: Encontramos todos los pedidos");
+
+		List<PedidoDTO> listaPedidosDTO = pedidoService.findAllByTerm(searchTerm);
+
+		ModelAndView mav = new ModelAndView("trabajadores/gestion/gestionPedidos");
+		mav.addObject("listaPedidosDTO", listaPedidosDTO);
 		
-		ModelAndView mav = new ModelAndView("redirect:/trabajadores/pedidos");
 		return mav;
 	}
 }

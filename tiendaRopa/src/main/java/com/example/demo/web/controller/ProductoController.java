@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.PseudoColumnUsage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.dto.CategoriaDTO;
 import com.example.demo.model.dto.ImagenDTO;
 import com.example.demo.model.dto.ProductoDTO;
+import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.repository.entity.Imagen;
 import com.example.demo.services.CategoriaService;
 import com.example.demo.services.ImagenService;
@@ -99,39 +101,114 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/trabajadores/productos/save")
-	public ModelAndView save(@Valid @ModelAttribute("productoDTO") ProductoDTO pDTO, @RequestParam("file") MultipartFile img ,BindingResult result) {
+	public ModelAndView save(@Valid @ModelAttribute("productoDTO") ProductoDTO pDTO, BindingResult result, @RequestParam("file") MultipartFile img) {
 		
 		log.info("ProductoController - save: Guardamos el producto");
 		
-		if (!img.isEmpty()) {
-			Path directorioImagenes = Paths.get("src/main/resources/static/images/productos");
-			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+		if (result.hasErrors()) {
 			
-			try {
+			if (pDTO.getId() != null) {
+				ProductoDTO p = productoService.findById(pDTO.getId());
+				pDTO.setListaImagenesDTO(p.getListaImagenesDTO());
 				
-				byte[] byteImg = img.getBytes();
-				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + img.getOriginalFilename());
-				Files.write(rutaCompleta, byteImg);
-						
-				ImagenDTO iDTO = new ImagenDTO();
-				iDTO.setNombre(img.getOriginalFilename());
-				iDTO.setUrl(img.getOriginalFilename());
+				List<CategoriaDTO> listaCategoriasDTO = categoriaService.findAll();
 				
-				pDTO.getListaImagenesDTO().set(0, iDTO);
+				ModelAndView mav = new ModelAndView("trabajadores/form/productosForm");
+				mav.addObject("listaCategoriasDTO", listaCategoriasDTO);
+				mav.addObject("productoDTO", pDTO);
+				mav.addObject("mod", true);
 				
-			} catch (IOException e) {
-				e.printStackTrace();
+				return mav;
+				
+			}else {
+				List<CategoriaDTO> listaCategoriasDTO = categoriaService.findAll();
+				
+				ModelAndView mav = new ModelAndView("trabajadores/form/productosForm");
+				mav.addObject("listaCategoriasDTO", listaCategoriasDTO);
+				mav.addObject("productoDTO", pDTO);
+				mav.addObject("mod", false);
+				
+				return mav;
 			}
 			
- 		}
-		
-		ModelAndView mav;
-		if (result.hasErrors()) {
-			mav = new ModelAndView("trabajadores/form/productosForm");
-		}else {
-			productoService.save(pDTO);
-			mav = new ModelAndView("redirect:/trabajadores/productos");
+			
+		} else{
+			
+			if (!img.isEmpty()) {
+				Path directorioImagenes = Paths.get("src/main/resources/static/images/productos");
+				String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+				
+				try {
+					
+					byte[] byteImg = img.getBytes();
+					Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + img.getOriginalFilename());
+					Files.write(rutaCompleta, byteImg);
+							
+					ImagenDTO iDTO = new ImagenDTO();
+					iDTO.setNombre(img.getOriginalFilename());
+					iDTO.setUrl(img.getOriginalFilename());
+					
+					if (pDTO.getId() != null) {
+						ProductoDTO p = productoService.findById(pDTO.getId());
+						pDTO.setListaImagenesDTO(p.getListaImagenesDTO());
+						
+						if (pDTO.getListaImagenesDTO().size() < 1) {
+							pDTO.getListaImagenesDTO().add(iDTO);
+						}else {
+							pDTO.getListaImagenesDTO().set(0, iDTO);
+						}
+						
+					} else{
+						pDTO.setListaImagenesDTO(new ArrayList<ImagenDTO>());
+						pDTO.getListaImagenesDTO().add(iDTO);
+						
+					}
+					
+					
+					productoService.save(pDTO);
+					
+					ModelAndView mav = new ModelAndView("redirect:/trabajadores/productos");
+					return mav;
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+	 		}else {
+	 			
+	 			if (pDTO.getId() != null) {
+	 				ProductoDTO p = productoService.findById(pDTO.getId());
+					pDTO.setListaImagenesDTO(p.getListaImagenesDTO());
+					productoService.save(pDTO);
+					
+					ModelAndView mav = new ModelAndView("redirect:/trabajadores/productos");
+					return mav;
+					
+	 			} else{
+					productoService.save(pDTO);
+					
+					ModelAndView mav = new ModelAndView("redirect:/trabajadores/productos");
+					return mav;
+	 				
+	 			}
+	 			
+				
+	 		}
 		}
+		
+		return null;
+	}
+	
+	@GetMapping("/trabajadores/productos/search")
+	public ModelAndView buscarProductos(@RequestParam("term") String searchTerm) {
+		
+		log.info("ProductoController - buscarProductos: Encontramos todos los productos");
+
+		List<ProductoDTO> listaProductosDTO = productoService.findAllByTerm(searchTerm);
+
+		ModelAndView mav = new ModelAndView("trabajadores/gestion/gestionProductos");
+		mav.addObject("listaProductosDTO", listaProductosDTO);
+		
 		return mav;
 	}
 	

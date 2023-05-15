@@ -51,19 +51,11 @@
         <div th:if="${!listaUsuariosDTO.isEmpty()}">
             <h2>Gestión de Trabajadores</h2>
 
-            <form>
-                <select name="opcionesClientes">
-                    <option value="" selected hidden disabled>Atributos del trabajador</option>
-                    <option value="id">Id</option>
-                    <option value="nif">NIF</option>
-                    <option value="nombre">Nombre</option>
-                    <option value="correo">Correo</option>
-                </select>
+            <div id="div--busqueda">
+                <input id="searchInput" type="text" placeholder="Buscar..." />
 
-                <input type="text" placeholder="Buscar..." />
-
-                <button>Buscar</button>
-            </form>
+                <button id="searchButton">Buscar</button>
+            </div>
 
             <table id="tabla--trabajadores">
                 <tr>
@@ -103,6 +95,7 @@
 
 	<script th:src="@{/js/jquery/jquery-3.6.3.min.js}"></script>
     <script th:src="@{/js/scriptHeader.js}"></script>
+    <script th:src="@{/js/trabajadores/scriptBusquedaTrabajador.js}"></script>
 </body>
 
 </html>

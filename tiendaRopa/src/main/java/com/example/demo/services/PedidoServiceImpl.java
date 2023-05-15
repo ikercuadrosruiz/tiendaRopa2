@@ -93,6 +93,20 @@ public class PedidoServiceImpl implements PedidoService{
 		return PedidoDTO.convertToDTO(p);
 		
 	}
+
+	@Override
+	public List<PedidoDTO> findAllByTerm(String searchTerm) {
+		log.info("PedidoServiceImpl - findAll: Buscamos pedidos");
+		
+		List<Pedido> listaPedidos = pedidoRepository.findAllByTerm(searchTerm);
+		
+		List<PedidoDTO> listaPedidosDTO = new ArrayList<PedidoDTO>();
+		for (Pedido p : listaPedidos) {
+			listaPedidosDTO.add(PedidoDTO.convertToDTO(p));
+		}
+		
+		return listaPedidosDTO;
+	}
 	
 
 	

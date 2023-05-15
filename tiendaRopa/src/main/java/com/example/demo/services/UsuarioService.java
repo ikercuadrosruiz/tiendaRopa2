@@ -24,4 +24,8 @@ public interface UsuarioService {
 
 	UsuarioDTO findByCorreo(String correo);
 
+	List<UsuarioDTO> findAllByTerm(String searchTerm);
+
+	List<UsuarioDTO> findAllTrabajadoresByTerm(String searchTerm);
+
 }

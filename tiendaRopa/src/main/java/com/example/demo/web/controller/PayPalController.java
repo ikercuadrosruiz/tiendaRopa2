@@ -2,6 +2,7 @@ package com.example.demo.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,7 @@ import com.example.demo.model.dto.CarritoDTO;
 import com.example.demo.model.dto.CarritoProductoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.model.dto.PedidoProductoDTO;
+import com.example.demo.model.dto.RolDTO;
 import com.example.demo.model.dto.UsuarioDTO;
 import com.example.demo.services.CarritoProductoService;
 import com.example.demo.services.CarritoService;
@@ -29,6 +32,8 @@ import com.example.demo.services.PedidoService;
 import com.example.demo.services.UsuarioService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class PayPalController {
@@ -57,57 +62,84 @@ public class PayPalController {
 	private CarritoProductoService caprs;
 	
 	@PostMapping("/pasarelaPago")
-	public String payment(@ModelAttribute("usuarioDTO") UsuarioDTO uDTO) {
+	public ModelAndView payment(@Valid @ModelAttribute("usuarioDTO") UsuarioDTO uDTO, BindingResult result, @ModelAttribute(value="carritoDTO") CarritoDTO carritoDTO) {
 		
 		log.info("PayPalController - payment:Se procede al pago");
 		
-		Double total = 0.0;
-		String currency = "EUR";
-		String method = "paypal";
-		String intent = "sale";
-		String description = "This is a description";
-		
-		
-		// ===========================================
-		// Obtención de USUARIO, CARRITO y total
-		// ===========================================
-		// Obtengo el cliente al completo
-		uDTO = us.findById(uDTO.getId());
-		
-		// Obtengo el carrito del cliente al completo
-		CarritoDTO cDTO = cs.findByIdCliente(uDTO.getId());
-		ArrayList<CarritoProductoDTO> lcpDTO = caprs.findAllByIdCarrito(cDTO.getId());
-		cDTO.setListaCarritoProductoDTO(lcpDTO);
-		
-		// Calculo el total
-		Double envio = 2.99;
-		Double subtotal = 0.0;
-		for (CarritoProductoDTO cpDTO : lcpDTO) {
-			subtotal = subtotal + (cpDTO.getProductoDTO().getPrecio() * cpDTO.getCantidad());
-		}
-		total = envio + subtotal;
-		
-		// ===========================================
-		// Realizar el pago
-		// ===========================================
-		try {
-			//Realizar el pago
-			Payment payment = pps.createPayment(total, currency, method, intent, description, "http://localhost:8888/fruttidivestiti/"+CANCEL_URL, "http://localhost:8888/fruttidivestiti/"+SUCCESS_URL);
+		if (result.hasErrors()) {
 			
-			for (Links link : payment.getLinks()) {
-				if (link.getRel().equals("approval_url")) {
-					return "redirect:" + link.getHref();
+			uDTO = us.findById(uDTO.getId());
+			
+			// Obtengo el carrito
+			CarritoDTO cDTO = cs.findByIdCliente(uDTO.getId());
+			ArrayList<CarritoProductoDTO> lcpDTO = caprs.findAllByIdCarrito(cDTO.getId());
+			cDTO.setListaCarritoProductoDTO(lcpDTO);
+			
+			Double subtotal = 0.0;
+			for (CarritoProductoDTO cpDTO : lcpDTO) {
+				subtotal = subtotal + (cpDTO.getProductoDTO().getPrecio() * cpDTO.getCantidad());
+			}
+			Double envio = 2.99;
+			
+			ModelAndView mav = new ModelAndView("clientes/tramitarPedido");
+			mav.addObject("carritoDTO", cDTO);
+			mav.addObject("subtotal", subtotal);
+			mav.addObject("envio", envio);
+			mav.addObject("total", subtotal+envio);
+			
+			return mav;
+			
+		}else {
+			
+			Double total = 0.0;
+			String currency = "EUR";
+			String method = "paypal";
+			String intent = "sale";
+			String description = "This is a description";
+			
+			
+			// ===========================================
+			// Obtención de USUARIO, CARRITO y total
+			// ===========================================
+			// Obtengo el cliente al completo
+			uDTO = us.findById(uDTO.getId());
+			
+			// Obtengo el carrito del cliente al completo
+			CarritoDTO cDTO = cs.findByIdCliente(uDTO.getId());
+			ArrayList<CarritoProductoDTO> lcpDTO = caprs.findAllByIdCarrito(cDTO.getId());
+			cDTO.setListaCarritoProductoDTO(lcpDTO);
+			
+			// Calculo el total
+			Double envio = 2.99;
+			Double subtotal = 0.0;
+			for (CarritoProductoDTO cpDTO : lcpDTO) {
+				subtotal = subtotal + (cpDTO.getProductoDTO().getPrecio() * cpDTO.getCantidad());
+			}
+			total = envio + subtotal;
+			
+			// ===========================================
+			// Realizar el pago
+			// ===========================================
+			try {
+				//Realizar el pago
+				Payment payment = pps.createPayment(total, currency, method, intent, description, "http://localhost:8888/fruttidivestiti/"+CANCEL_URL, "http://localhost:8888/fruttidivestiti/"+SUCCESS_URL);
+				
+				for (Links link : payment.getLinks()) {
+					if (link.getRel().equals("approval_url")) {
+						return new ModelAndView("redirect:" + link.getHref());
+					}
 				}
+				
+				return new ModelAndView("clientes/index");
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 			
-			return "clientes/index";
+			return new ModelAndView("clientes/index");
 			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
-		
-		return "clientes/index";
 	}
 	
 	@GetMapping(value = CANCEL_URL)

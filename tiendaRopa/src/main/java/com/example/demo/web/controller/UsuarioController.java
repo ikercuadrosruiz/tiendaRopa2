@@ -173,7 +173,18 @@ public class UsuarioController {
 			return mav;
 			
 		}
+	}
+	
+	@GetMapping("/trabajadores/usuarios/search")
+	public ModelAndView buscarClientes(@RequestParam("term") String searchTerm) {
 		
+		log.info("UsuarioController - buscarClientes: Encontramos todos los clientes");
+
+		List<UsuarioDTO> listaUsuariosDTO = usuarioService.findAllByTerm(searchTerm);
+
+		ModelAndView mav = new ModelAndView("trabajadores/gestion/gestionUsuarios");
+		mav.addObject("listaUsuariosDTO", listaUsuariosDTO);
 		
+		return mav;
 	}
 }

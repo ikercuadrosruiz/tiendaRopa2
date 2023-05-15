@@ -25,6 +25,12 @@ main {
     justify-items: center;
 }
 
+
+.err{
+    color: red;
+    font-size: .9em;
+}
+
 /*****************************************/
 
 

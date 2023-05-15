@@ -8,6 +8,8 @@ import java.util.Set;
 import com.example.demo.repository.entity.Categoria;
 import com.example.demo.repository.entity.Producto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -16,6 +18,9 @@ public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@NotEmpty(message = "El campo no puede ser vacío")
+	@Pattern(regexp = "^[A-Za-z]+$", message = "El nombre de la categoría sólo puede contener letras")
 	private String nombre;
 	
 	// Convert to DTO

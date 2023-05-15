@@ -62,46 +62,50 @@
 
 					<input id="input--id" type="text" th:field="*{id}" hidden>
 					<input id="input--idCarrito" type="text" th:field="${carritoDTO.id}" hidden>
-					
-					<input id="input--fechNac" type="date"
-						th:field="*{fechaNacimiento}" hidden> <input
-						id="input--poblacion" type="text" th:field="*{poblacion}" hidden>
-					<input id="input--password" type="password" th:field="*{password}"
-						hidden>
+	 				<input id="input--fechNac" type="date" th:field="*{fechaNacimiento}" hidden> 
+	 				<input id="input--poblacion" type="text" th:field="*{poblacion}" hidden>
+					<input id="input--password" type="text" th:field="*{password}" hidden>
 
 					<div id="div--nombre">
-						<label for="input--nombre">Nombre</label> <input
-							id="input--nombre" type="text" th:field="*{nombre}">
+						<label for="input--nombre">Nombre</label> 
+						<input id="input--nombre" type="text" th:field="*{nombre}">
+						<p class="err" id="errNombre" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
 					</div>
 
 					<div id="div--apellido1">
-						<label for="input--apellido1">Primer apellido</label> <input
-							id="input--apellido1" type="text" th:field="*{apellido1}">
+						<label for="input--apellido1">Primer apellido</label> 
+						<input id="input--apellido1" type="text" th:field="*{apellido1}">
+						<p class="err" id="errAp1" th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></p>
 					</div>
 
 					<div id="div--apellido2">
-						<label for="input--apellido2">Segundo apellido</label> <input
-							id="input--apellido2" type="text" th:field="*{apellido2}">
+						<label for="input--apellido2">Segundo apellido</label> 
+						<input id="input--apellido2" type="text" th:field="*{apellido2}">
+						<p class="err" id="errAp2" th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}"></p>
 					</div>
 
 					<div id="div--email">
-						<label for="input--email">Email</label> <input id="input--email"
-							type="email" th:field="*{correo}">
+						<label for="input--email">Email</label> 
+						<input id="input--email" type="email" th:field="*{correo}">
+						<p class="err" id="errEmail" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
 					</div>
 
 					<div id="div--nif">
-						<label for="input--nif">Nif</label> <input id="input--nif"
-							type="text" th:field="*{nif}">
+						<label for="input--nif">Nif</label> 
+						<input id="input--nif" type="text" th:field="*{nif}">
+						<p class="err" id="errNif" th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}"></p>
 					</div>
 
 					<div id="div--direccion">
-						<label for="input--direccion">Dirección</label> <input
-							id="input--direccion" type="text" th:field="*{direccion}">
+						<label for="input--direccion">Dirección</label>
+						<input id="input--direccion" type="text" th:field="*{direccion}">
+						<p id="errDireccion" class="err" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></p>
 					</div>
 
 					<div id="div--cp">
-						<label for="input--cp">Código Postal</label> <input id="input--cp"
-							type="text" th:field="*{cp}">
+						<label for="input--cp">Código Postal</label> 
+						<input id="input--cp" type="text" th:field="*{cp}">
+						<p id="errCp" class="err" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></p>
 					</div>
 
 					<button type="submit" hidden>Guardar</button>
