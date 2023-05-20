@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Adentrarse en la carpeta tiendaRopa
+        run: cd tiendaRopa
+
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
