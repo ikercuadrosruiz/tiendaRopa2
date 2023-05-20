@@ -15,8 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: ./tiendaRopa
 
       - name: Set up Java version
         uses: actions/setup-java@v1
