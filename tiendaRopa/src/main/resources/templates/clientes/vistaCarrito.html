@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<header>
+	 <header>
 		<nav>
 			<ul>
 				<li><a th:href="@{/index}">Inicio</a></li>
@@ -26,21 +26,20 @@
 			<img id="imgAbrir" th:src="@{/images/header/menu.png}" alt="Abrir" />
 		</nav>
 
-		<p>
-			<b>Frutti di Vestiti</b>
-		</p>
+		<img id="imgLogo" th:src="@{/images/header/logoSimple.png}" alt="LogoFrutti"  />
 
 		<nav>
 			<a><img th:src="@{/images/header/guardados.png}"
-				alt="Imagen guardados" /></a> <a th:href="@{/tienda/carrito}"> <img
-				th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a> <a
-				class="btnLogin" id="bt--login" sec:authorize="isAnonymous()"
-				th:href="@{/login}">LogIn</a>
+					alt="Imagen guardados" /></a>
 
-			<form class="btnLogin" sec:authorize="isAuthenticated()"
-				th:action="@{/logout}" method="post">
-				<span th:remove="tag" sec:authentication="name">Ikers</span> <input
-					type="submit" value="Logout" />
+			<a th:href="@{/tienda/carrito}">
+			<img th:src="@{/images/header/carrito.png}" alt="Imagen carrito" /></a>
+
+			<a class="btnLogin" id="bt--login" sec:authorize="isAnonymous()" th:href="@{/login}">LogIn</a>
+
+			<form class="btnLogin" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<span th:remove="tag" sec:authentication="name">Ikers</span>
+				<input type="submit" value="Logout" />
 			</form>
 		</nav>
 	</header>

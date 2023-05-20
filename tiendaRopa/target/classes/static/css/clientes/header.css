@@ -70,6 +70,10 @@ nav:first-of-type ul li:active a {
   right: 15px;
 }
 
+#imgLogo {
+	object-fit: cover;
+	height: 54px;
+}
 
 
 @media (max-width: 900px) {
