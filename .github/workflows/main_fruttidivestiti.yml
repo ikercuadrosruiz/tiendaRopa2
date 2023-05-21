@@ -18,11 +18,15 @@ jobs:
 
       - name: Adentrarse en la carpeta tiendaRopa
         run: cd tiendaRopa
-
-      - name: Set up Java version
-        uses: actions/setup-java@v3
+        
+      - uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: '17'
+          cache: 'maven'
+          
+      - name: Build with Maven
+        run: mvn -B package --file ../tiendaRopa/pom.xml
 
       - name: Build with Maven
         run: mvn clean install
