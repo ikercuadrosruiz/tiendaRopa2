@@ -26,6 +26,9 @@ jobs:
           cache: 'maven'
           
       - name: Build with Maven
+        run: mvn clean package -DskipTests
+          
+      - name: Build with Maven
         run: mvn -B package --file tiendaRopa/pom.xml
 
       - name: Build with Maven
