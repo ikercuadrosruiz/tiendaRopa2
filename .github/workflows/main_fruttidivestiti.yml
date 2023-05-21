@@ -25,9 +25,6 @@ jobs:
       - name: Build with Maven - Crear y Evitar tests
         run: mvn -B package --file tiendaRopa/pom.xml -DskipTests
 
-      - name: Build with Maven
-        run: mvn clean install
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
