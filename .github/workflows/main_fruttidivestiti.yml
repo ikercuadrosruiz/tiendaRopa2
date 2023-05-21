@@ -26,7 +26,7 @@ jobs:
         run: mvn -B package --file tiendaRopa/pom.xml -DskipTests
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: java-app
           path: '${{ github.workspace }}/tiendaRopa/target/*.jar'
@@ -40,7 +40,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: java-app
 
@@ -51,4 +51,4 @@ jobs:
           app-name: 'fruttidivestiti'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AD645786C0CE4D9B9E27FA2D0E279A47 }}
-          path: '${{ github.workspace }}/tiendaRopa/target/*.jar'
+          package: '${{ github.workspace }}/tiendaRopa/target/*.jar'
