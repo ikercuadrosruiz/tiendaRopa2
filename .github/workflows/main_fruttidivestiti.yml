@@ -15,9 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Adentrarse en la carpeta tiendaRopa
-        run: cd tiendaRopa
         
       - uses: actions/setup-java@v3
         with:
@@ -26,10 +23,10 @@ jobs:
           cache: 'maven'
           
       - name: Build with Maven
-        run: mvn clean package -DskipTests
-          
-      - name: Build with Maven
         run: mvn -B package --file tiendaRopa/pom.xml
+        
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
 
       - name: Build with Maven
         run: mvn clean install
