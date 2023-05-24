@@ -51,4 +51,4 @@ jobs:
           app-name: 'fruttidivestiti'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AD645786C0CE4D9B9E27FA2D0E279A47 }}
-          package: '${{ github.workspace }}/tiendaRopa/target/*.jar'
+          path: '${{ github.workspace }}/tiendaRopa/target/*.jar'
